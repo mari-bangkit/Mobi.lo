@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/login_page.dart';
 import 'package:yuk_mancing/main.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -26,12 +27,13 @@ class SplashScreen extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Container(
-                  margin: EdgeInsets.all(10),
-                  padding: EdgeInsets.all(5),
+                  width: MediaQuery.of(context).size.width / 1.3,
+                  margin: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(5),
                   child: const Text(
                     "Jika engkau menginginkan kebahagiaan selama satu hari, pergilah memancing.",
                     style: TextStyle(
-                      fontFamily: "Monsterat",
+                      fontFamily: "Monstserrat",
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
                       color: kWhite,
@@ -54,8 +56,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const MyHomePage(title: "flutter capstone"),
+                          builder: (context) => const Loginpage(),
                         ),
                       );
                     },
@@ -72,7 +73,7 @@ class SplashScreen extends StatelessWidget {
                       'Get started',
                       style: TextStyle(
                         fontSize: 25,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                         color: kBlack,
                       ),
                     ),
