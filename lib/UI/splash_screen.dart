@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
-import 'package:yuk_mancing/main.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -56,7 +55,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const Loginpage(),
+                          builder: (context) => Loginpage(),
                         ),
                       );
                     },
