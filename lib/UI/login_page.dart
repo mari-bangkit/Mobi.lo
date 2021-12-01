@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/home_page.dart';
 
 class Loginpage extends StatefulWidget {
+  const Loginpage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -163,7 +166,14 @@ class _LoginPageState extends State<Loginpage> {
                             height: 44,
                             width: MediaQuery.of(context).size.height,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              },
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(10),
                                 minimumSize: Size.fromWidth(
@@ -214,7 +224,7 @@ class _LoginPageState extends State<Loginpage> {
                               ),
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 5,
                           ),
                           Row(
