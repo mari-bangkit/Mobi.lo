@@ -51,7 +51,17 @@ class HomePage extends StatelessWidget {
               ),
               const UsernameText(),
               const Category(),
-              const ListPlace(),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(top: 10),
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return const ListPlace();
+                  },
+                ),
+              ),
             ],
           ),
         ),
