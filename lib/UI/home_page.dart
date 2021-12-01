@@ -5,6 +5,7 @@ import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/category_widget.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
+import 'package:yuk_mancing/UI/details_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,7 +59,17 @@ class HomePage extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: 4,
                   itemBuilder: (context, index) {
-                    return const ListPlace();
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DetailsPage(),
+                          ),
+                        );
+                      },
+                      child: const ListPlace(),
+                    );
                   },
                 ),
               ),

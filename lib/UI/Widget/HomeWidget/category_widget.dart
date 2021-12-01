@@ -40,7 +40,7 @@ class Category extends StatelessWidget {
                   child: Text(
                     e.name,
                     style: const TextStyle(
-                      fontSize: 15,
+                      fontSize: 20,
                       fontFamily: "Monstserrat",
                     ),
                   ),

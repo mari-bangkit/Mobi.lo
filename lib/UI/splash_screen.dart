@@ -55,7 +55,7 @@ class SplashScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => Loginpage(),
+                          builder: (context) => const Loginpage(),
                         ),
                       );
                     },
@@ -64,7 +64,7 @@ class SplashScreen extends StatelessWidget {
                       minimumSize:
                           Size.fromWidth(MediaQuery.of(context).size.width / 3),
                       primary: kBlack,
-                      backgroundColor: kSecondary,
+                      backgroundColor: kPrimary,
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(20))),
                     ),
