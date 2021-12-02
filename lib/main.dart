@@ -2,6 +2,7 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/history_page.dart';
 import 'package:yuk_mancing/UI/home_page.dart';
 import 'package:yuk_mancing/UI/search_page.dart';
@@ -37,7 +38,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   ShapeBorder? bottomBarShape = const RoundedRectangleBorder(
-    borderRadius: BorderRadius.all(Radius.circular(25)),
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(15),
+      topRight: Radius.circular(15),
+    ),
   );
 
   int _selectedItemPosition = 0;
@@ -54,16 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Gradient unselectedGradient =
       const LinearGradient(colors: [Colors.red, Colors.blueGrey]);
 
-  Color? containerColor;
-  List<Color> containerColors = [
-    const Color(0xFFFEEEEE).withOpacity(0),
-    const Color(0xFFE4EDF5).withOpacity(0),
-    const Color(0xFFE7EEED).withOpacity(0),
-    const Color(0xFFF4E4CE).withOpacity(0),
-  ];
-
-  get kPrimary => null;
-
   Widget _getWidget() {
     if (_selectedItemPosition == 1) {
       return const SearchPage();
@@ -79,21 +73,25 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      resizeToAvoidBottomInset: true,
-      extendBody: true,
       body: _getWidget(),
       bottomNavigationBar: SnakeNavigationBar.color(
         // height: 80,
+        backgroundColor: kPrimary,
         behaviour: SnakeBarBehaviour.pinned,
         snakeShape: snakeShape = SnakeShape.circle,
-        shape: bottomBarShape,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(15),
+            topRight: Radius.circular(15),
+          ),
+        ),
         padding: EdgeInsets.zero,
 
         ///configuration for SnakeNavigationBar.color
-        snakeViewColor: kPrimary,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
+        snakeViewColor: kSecondary,
+
+        selectedItemColor: kBlack,
+        unselectedItemColor: kWhite,
 
         ///configuration for SnakeNavigationBar.gradient
         // snakeViewGradient: selectedGradient,
