@@ -18,11 +18,11 @@ class ListPlace extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
             offset: const Offset(
-              5.0,
-              5.0,
+              2.0,
+              2.0,
             ),
             blurRadius: 5.0,
-            spreadRadius: 0.0,
+            spreadRadius: 1.0,
           ), //BoxShadow
         ],
       ),

@@ -8,7 +8,7 @@ class Category extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 50,
       margin: const EdgeInsets.only(
         top: 22,
       ),

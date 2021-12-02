@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/UI/home_page.dart';
 import 'package:readmore/readmore.dart';
 import 'package:yuk_mancing/main.dart';
 
