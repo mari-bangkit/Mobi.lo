@@ -15,7 +15,7 @@ class DetailsPage extends StatelessWidget {
         floatingActionButton: Container(
           height: 50,
           width: MediaQuery.of(context).size.width,
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
             left: 10,
             right: 10,
           ),

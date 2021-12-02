@@ -1,12 +1,16 @@
 // ignore_for_file: avoid_print
 
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/UI/home_page.dart';
+import 'package:yuk_mancing/UI/forgotpass_page.dart';
+import 'package:yuk_mancing/UI/signup_page.dart';
+import 'package:yuk_mancing/main.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -26,8 +30,7 @@ class _LoginPageState extends State<Loginpage> {
         child: SizedBox(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
               children: [
                 Align(
                   alignment: Alignment.topRight,
@@ -143,8 +146,17 @@ class _LoginPageState extends State<Loginpage> {
                           margin: const EdgeInsets.only(right: 15, top: 3),
                           alignment: Alignment.bottomRight,
                           child: TextButton(
+                            style: TextButton.styleFrom(
+                              primary: kWhite,
+                            ),
                             onPressed: () {
                               print("dialihkan ke forgot password");
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const ForgotPass(),
+                                ),
+                              );
                             },
                             child: const Text(
                               "Forgot Password ?",
@@ -171,7 +183,7 @@ class _LoginPageState extends State<Loginpage> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
+                                  builder: (context) => const MyHomePage(),
                                 ),
                               );
                             },
@@ -210,8 +222,17 @@ class _LoginPageState extends State<Loginpage> {
                               height: 40,
                               alignment: Alignment.topCenter,
                               child: TextButton(
+                                style: TextButton.styleFrom(
+                                  primary: kWhite,
+                                ),
                                 onPressed: () {
-                                  print("dialihkan ke forgot password");
+                                  print("dialihkan ke create account");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const SignUp(),
+                                    ),
+                                  );
                                 },
                                 child: const Text(
                                   "Sign up",
