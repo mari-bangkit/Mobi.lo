@@ -1,7 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuk_mancing/UI/history_page.dart';
+import 'package:yuk_mancing/UI/home_page.dart';
+import 'package:yuk_mancing/UI/search_page.dart';
+import 'package:yuk_mancing/UI/setting_page.dart';
 import 'package:yuk_mancing/UI/splash_screen.dart';
+import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,76 +27,95 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const MyHomePage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  ShapeBorder? bottomBarShape = const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(25)),
+  );
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  int _selectedItemPosition = 0;
+  SnakeShape snakeShape = SnakeShape.circle;
+
+  bool showSelectedLabels = false;
+  bool showUnselectedLabels = false;
+
+  Color selectedColor = Colors.black;
+  Gradient selectedGradient =
+      const LinearGradient(colors: [Colors.red, Colors.amber]);
+
+  Color unselectedColor = Colors.grey;
+  Gradient unselectedGradient =
+      const LinearGradient(colors: [Colors.red, Colors.blueGrey]);
+
+  Color? containerColor;
+  List<Color> containerColors = [
+    const Color(0xFFFEEEEE).withOpacity(0),
+    const Color(0xFFE4EDF5).withOpacity(0),
+    const Color(0xFFE7EEED).withOpacity(0),
+    const Color(0xFFF4E4CE).withOpacity(0),
+  ];
+
+  get kPrimary => null;
+
+  Widget _getWidget() {
+    if (_selectedItemPosition == 1) {
+      return const SearchPage();
+    } else if (_selectedItemPosition == 2) {
+      return const HistoryPage();
+    } else if (_selectedItemPosition == 3) {
+      return const SettingPage();
+    }
+
+    return const HomePage();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+      extendBodyBehindAppBar: true,
+      resizeToAvoidBottomInset: true,
+      extendBody: true,
+      body: _getWidget(),
+      bottomNavigationBar: SnakeNavigationBar.color(
+        // height: 80,
+        behaviour: SnakeBarBehaviour.pinned,
+        snakeShape: snakeShape = SnakeShape.circle,
+        shape: bottomBarShape,
+        padding: EdgeInsets.zero,
+
+        ///configuration for SnakeNavigationBar.color
+        snakeViewColor: kPrimary,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+
+        ///configuration for SnakeNavigationBar.gradient
+        // snakeViewGradient: selectedGradient,
+        // selectedItemGradient: snakeShape == SnakeShape.indicator ? selectedGradient : null,
+        // unselectedItemGradient: unselectedGradient,
+
+        showSelectedLabels: showSelectedLabels = false,
+        showUnselectedLabels: showUnselectedLabels = false,
+        currentIndex: _selectedItemPosition,
+        onTap: (index) => setState(() => _selectedItemPosition = index),
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.home), label: 'home'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.search), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+          BottomNavigationBarItem(
+              icon: Icon(CupertinoIcons.settings), label: 'search')
+        ],
+        selectedLabelStyle: const TextStyle(fontSize: 14),
+        unselectedLabelStyle: const TextStyle(fontSize: 10),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
