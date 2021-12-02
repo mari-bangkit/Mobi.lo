@@ -4,6 +4,7 @@ import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/home_page.dart';
 import 'package:readmore/readmore.dart';
+import 'package:yuk_mancing/main.dart';
 
 class DetailsPage extends StatelessWidget {
   const DetailsPage({Key? key}) : super(key: key);
@@ -67,7 +68,7 @@ class DetailsPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const HomePage(),
+                                    builder: (context) => const MyHomePage(),
                                   ),
                                 );
                               },
