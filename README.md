@@ -1,6 +1,8 @@
 # yuk_mancing
 
-A new Flutter project.
+this projects for capstone dicoding at kampus merdeka 
+
+This our design app (https://www.figma.com/file/2qKjV89j5jGLPjwMq60wDL/Ui-kuy-mancing?fuid=894805675517878148)
 
 ## Getting Started
 
