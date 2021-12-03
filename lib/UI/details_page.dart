@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:readmore/readmore.dart';
+import 'package:yuk_mancing/UI/booking_page.dart';
 import 'package:yuk_mancing/main.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -22,6 +23,12 @@ class DetailsPage extends StatelessWidget {
           child: FloatingActionButton(
             onPressed: () {
               print("Dipesan");
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const BookingPage(),
+                ),
+              );
             },
             child: const Text(
               "Booking",
@@ -101,6 +108,7 @@ class DetailsPage extends StatelessWidget {
                           child: Container(
                             margin: const EdgeInsets.only(
                               left: 10,
+                              right: 5,
                             ),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -202,29 +210,34 @@ class DetailsPage extends StatelessWidget {
                                 const SizedBox(
                                   height: 10,
                                 ),
-                                const ReadMoreText(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Maecenas accumsan lacus vel facilisis volutpat est velit. Nisl purus in mollis nunc. Ornare arcu dui vivamus arcu felis bibendum ut. At quis risus sed vulputate odio ut.",
-                                  trimLines: 3,
-                                  textAlign: TextAlign.justify,
-                                  trimMode: TrimMode.Line,
-                                  trimCollapsedText: "Show more",
-                                  trimExpandedText: "Show less",
-                                  lessStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Colors.green,
+                                Container(
+                                  padding: EdgeInsets.only(
+                                    right: 5,
                                   ),
-                                  moreStyle: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 15,
-                                    color: Colors.green,
-                                  ),
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: kLightGray,
-                                    fontWeight: FontWeight.normal,
-                                    letterSpacing: 1,
-                                    height: 2,
+                                  child: const ReadMoreText(
+                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Maecenas accumsan lacus vel facilisis volutpat est velit. Nisl purus in mollis nunc. Ornare arcu dui vivamus arcu felis bibendum ut. At quis risus sed vulputate odio ut.",
+                                    trimLines: 3,
+                                    textAlign: TextAlign.justify,
+                                    trimMode: TrimMode.Line,
+                                    trimCollapsedText: "Show more",
+                                    trimExpandedText: "Show less",
+                                    lessStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.green,
+                                    ),
+                                    moreStyle: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.green,
+                                    ),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: kLightGray,
+                                      fontWeight: FontWeight.normal,
+                                      letterSpacing: 1,
+                                      height: 2,
+                                    ),
                                   ),
                                 ),
                               ],

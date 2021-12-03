@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 
 class SignUp extends StatelessWidget {
@@ -19,35 +20,10 @@ class SignUp extends StatelessWidget {
           ),
           child: ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Loginpage(),
-                        ),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: kBlack,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  const Text(
-                    "Create Account",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              const AppbarCostum(
+                leftIcon: Icons.arrow_back,
+                nameappbar: "Create Account",
+                leftCallback: Loginpage(),
               ),
               const SizedBox(
                 height: 50,

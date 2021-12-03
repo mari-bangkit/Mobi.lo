@@ -1,10 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 
-class ForgotPass extends StatelessWidget {
+class ForgotPass extends StatefulWidget {
   const ForgotPass({Key? key}) : super(key: key);
+
+  @override
+  State<ForgotPass> createState() => _ForgotPassState();
+}
+
+class _ForgotPassState extends State<ForgotPass> {
+  final TextEditingController myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -20,35 +28,10 @@ class ForgotPass extends StatelessWidget {
           ),
           child: ListView(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Loginpage(),
-                        ),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.arrow_back,
-                      size: 30,
-                      color: kBlack,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  const Text(
-                    "Forgot Password",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
+              const AppbarCostum(
+                leftIcon: Icons.arrow_back,
+                nameappbar: "Forgot Password",
+                leftCallback: Loginpage(),
               ),
               const SizedBox(
                 height: 100,
@@ -75,11 +58,13 @@ class ForgotPass extends StatelessWidget {
                     Radius.circular(10),
                   ),
                 ),
-                child: const TextField(
-                  decoration: InputDecoration(
+                child: TextField(
+                  controller: myController,
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: const InputDecoration(
                       border: InputBorder.none,
                       hintText: "Email or Phone number"),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,
                   ),
@@ -94,7 +79,8 @@ class ForgotPass extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: TextButton(
                   onPressed: () {
-                    print("data di submit");
+                    var _email = myController.text;
+                    print("email : " + _email);
                   },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(10),
