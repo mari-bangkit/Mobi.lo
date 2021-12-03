@@ -211,7 +211,7 @@ class DetailsPage extends StatelessWidget {
                                   height: 10,
                                 ),
                                 Container(
-                                  padding: EdgeInsets.only(
+                                  padding: const EdgeInsets.only(
                                     right: 5,
                                   ),
                                   child: const ReadMoreText(
