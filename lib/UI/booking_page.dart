@@ -39,8 +39,8 @@ class _BookingPageState extends State<BookingPage> {
           onPressed: () {
             var _name = _myNamecontroler.text;
             var _numberWA = _myNumbercontroler.text;
-            var _date = eventDate.toString();
-            var _time = eventTime.toString();
+            var _date = DateFormat("dd-MM-yyyy").format(eventDate!);
+            var _time = eventTime!.format(context);
 
             print("Tempat dipesan \nNama :" +
                 _name +

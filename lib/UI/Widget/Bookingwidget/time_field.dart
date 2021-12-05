@@ -22,13 +22,13 @@ class TimeField extends StatelessWidget {
               eventTime == null
                   ? "Select the event time"
                   : eventTime!.format(context),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15.0,
                 fontWeight: FontWeight.w500,
               ),
             ),
           ),
-          Icon(
+          const Icon(
             Icons.timer_rounded,
             size: 18.0,
           ),
