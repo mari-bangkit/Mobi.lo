@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:intl/intl.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
+
+import 'Widget/Bookingwidget/date_field.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({Key? key}) : super(key: key);
@@ -13,8 +16,12 @@ class BookingPage extends StatefulWidget {
 class _BookingPageState extends State<BookingPage> {
   final TextEditingController _myNamecontroler = TextEditingController();
   final TextEditingController _myNumbercontroler = TextEditingController();
-  final TextEditingController _myDatecontroler = TextEditingController();
-  final TextEditingController _myWatchcontroler = TextEditingController();
+
+  DateTime currentDate = DateTime.now();
+  DateTime? eventDate;
+
+  TimeOfDay currentTime = TimeOfDay.now();
+  TimeOfDay? eventTime;
 
   @override
   Widget build(BuildContext context) {
@@ -106,10 +113,48 @@ class _BookingPageState extends State<BookingPage> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              const Text(
+                "Tanggal berapa ",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "Montserrat"),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              GestureDetector(
+                onTap: selectEventDate,
+                child: DateField(eventDate: eventDate),
+              ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  void selectEventDate() async {
+    var today = DateTime.now();
+    eventDate = await showDatePicker(
+      context: context,
+      initialDate: today,
+      firstDate: today,
+      lastDate: DateTime(currentDate.year + 1),
+    );
+    print(eventDate);
+    if (eventDate != null && eventDate != today) {
+      setState(() {
+        today = eventDate!;
+      });
+    }
+    //  else if (eventDate == null) {
+    //   setState(() {
+    //     eventDate = today;
+    //   });
+    // }
   }
 }
