@@ -5,6 +5,7 @@ import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
 
 import 'Widget/Bookingwidget/date_field.dart';
+import 'Widget/Bookingwidget/time_field.dart';
 
 class BookingPage extends StatefulWidget {
   const BookingPage({Key? key}) : super(key: key);
@@ -26,6 +27,45 @@ class _BookingPageState extends State<BookingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Container(
+        height: 50,
+        width: MediaQuery.of(context).size.width,
+        margin: const EdgeInsets.only(
+          left: 10,
+          right: 10,
+        ),
+        child: FloatingActionButton(
+          onPressed: () {
+            var _name = _myNamecontroler.text;
+            var _numberWA = _myNumbercontroler.text;
+            var _date = eventDate.toString();
+            var _time = eventTime.toString();
+
+            print("Tempat dipesan \nNama :" +
+                _name +
+                "\nnomor: " +
+                _numberWA +
+                "\ntanggal: " +
+                _date +
+                "\njam: " +
+                _time);
+          },
+          child: const Text(
+            "Booking now",
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w700,
+              fontFamily: "Montserrat",
+            ),
+          ), //child widget inside this button
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(15.0),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Container(
           width: MediaQuery.of(context).size.width,
@@ -78,7 +118,7 @@ class _BookingPageState extends State<BookingPage> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               const Text(
                 "No Whatsapp",
@@ -114,7 +154,7 @@ class _BookingPageState extends State<BookingPage> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
               ),
               const Text(
                 "Tanggal berapa ",
@@ -129,6 +169,30 @@ class _BookingPageState extends State<BookingPage> {
               GestureDetector(
                 onTap: selectEventDate,
                 child: DateField(eventDate: eventDate),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const Text(
+                "Jam berapa ",
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "Montserrat"),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              GestureDetector(
+                onTap: () async {
+                  final _now = TimeOfDay.now();
+                  eventTime = await showTimePicker(
+                    context: context,
+                    initialTime: _now,
+                  );
+                  setState(() {});
+                },
+                child: TimeField(eventTime: eventTime),
               ),
             ],
           ),
