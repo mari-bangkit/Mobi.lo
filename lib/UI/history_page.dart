@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -21,8 +22,8 @@ class _HistoryPageState extends State<HistoryPage> {
             left: 10,
             right: 10,
           ),
-          child: ListView(
-            shrinkWrap: true,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 10,
@@ -53,7 +54,27 @@ class _HistoryPageState extends State<HistoryPage> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     // builder: (context) => const DetailsPage(),
+                        //   ),
+                        // );
+                      },
+                      child: const HistoryData(),
+                    );
+                  },
+                ),
               ),
             ],
           ),
