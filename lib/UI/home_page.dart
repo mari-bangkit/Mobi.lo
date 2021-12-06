@@ -1,14 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:yuk_mancing/Constant/style.dart';
+
 import 'package:yuk_mancing/UI/Widget/HomeWidget/category_widget.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _isFavorit = true;
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +46,14 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      CupertinoIcons.bell,
-                      color: kBlack,
-                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isFavorit = !_isFavorit;
+                      });
+                    },
+                    icon: Icon(_isFavorit
+                        ? CupertinoIcons.bell
+                        : CupertinoIcons.bell_fill),
                   ),
                 ],
               ),
