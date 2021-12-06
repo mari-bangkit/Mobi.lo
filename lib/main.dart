@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return const SettingPage();
     }
 
-    return const HomePage();
+    return HomePage();
   }
 
   @override

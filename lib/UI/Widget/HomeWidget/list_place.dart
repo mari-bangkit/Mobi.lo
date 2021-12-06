@@ -2,9 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 
-class ListPlace extends StatelessWidget {
+class ListPlace extends StatefulWidget {
   const ListPlace({Key? key}) : super(key: key);
 
+  @override
+  State<ListPlace> createState() => _ListPlaceState();
+}
+
+class _ListPlaceState extends State<ListPlace> {
+  bool _isFavorit = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -58,12 +64,12 @@ class ListPlace extends StatelessWidget {
                 Container(
                   padding: const EdgeInsets.only(
                     left: 5,
-                    top: 10,
+                    top: 5,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "Nama Tempat",
                         style: TextStyle(
                           fontSize: 17,
@@ -72,7 +78,19 @@ class ListPlace extends StatelessWidget {
                           fontFamily: "Monstserrat",
                         ),
                       ),
-                      Icon(CupertinoIcons.heart),
+                      IconButton(
+                        onPressed: () => setState(
+                          () {
+                            _isFavorit = !_isFavorit;
+                          },
+                        ),
+                        icon: Icon(
+                          _isFavorit
+                              ? CupertinoIcons.heart
+                              : CupertinoIcons.heart_fill,
+                          color: Colors.red,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -94,7 +112,7 @@ class ListPlace extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
