@@ -1,16 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/history_place_model.dart';
 
-class HistoryData extends StatefulWidget {
-  const HistoryData({Key? key}) : super(key: key);
+class HistoryData extends StatelessWidget {
+  final HistoryPlace historyPlace;
+  const HistoryData({
+    Key? key,
+    required this.historyPlace,
+  }) : super(key: key);
 
-  @override
-  _HistoryDataState createState() => _HistoryDataState();
-}
-
-class _HistoryDataState extends State<HistoryData> {
-  bool _isFavorit = true;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,9 +23,9 @@ class _HistoryDataState extends State<HistoryData> {
       ),
       child: Stack(
         children: [
-          const Text(
-            "Tanggal - bulan - Tahun",
-            style: TextStyle(
+          Text(
+            historyPlace.date,
+            style: const TextStyle(
               fontSize: 18,
               color: kBlack,
               fontWeight: FontWeight.w400,
@@ -77,13 +76,11 @@ class _HistoryDataState extends State<HistoryData> {
                               ),
                             ),
                             IconButton(
-                              onPressed: () => setState(() {
-                                _isFavorit = !_isFavorit;
-                              }),
-                              icon: Icon(
-                                _isFavorit
-                                    ? CupertinoIcons.heart
-                                    : CupertinoIcons.heart_fill,
+                              onPressed: () {},
+                              icon: const Icon(
+                                // _isFavorit
+                                CupertinoIcons.heart,
+                                // : CupertinoIcons.heart_fill,
                                 color: Colors.red,
                               ),
                             ),
