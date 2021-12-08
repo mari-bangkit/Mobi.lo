@@ -24,6 +24,11 @@ class _BookingPageState extends State<BookingPage> {
   TimeOfDay currentTime = TimeOfDay.now();
   TimeOfDay? eventTime;
 
+  var _name;
+  var _numberWA;
+  var _date;
+  var _time;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,10 +42,10 @@ class _BookingPageState extends State<BookingPage> {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            var _name = _myNamecontroler.text;
-            var _numberWA = _myNumbercontroler.text;
-            var _date = DateFormat("dd-MM-yyyy").format(eventDate!);
-            var _time = eventTime!.format(context);
+            _name = _myNamecontroler.text;
+            _numberWA = _myNumbercontroler.text;
+            _date = DateFormat("dd-MM-yyyy").format(eventDate!);
+            _time = eventTime!.format(context);
 
             print("Tempat dipesan \nNama :" +
                 _name +

@@ -27,16 +27,17 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               Container(
                 margin: const EdgeInsets.only(
-                  top: 20,
+                  top: 30,
                 ),
-                height: 72,
+                height: 75,
                 width: MediaQuery.of(context).size.width / 1.5,
                 child: const Text(
                   "Yuk cari dulu \ntempatnya",
                   style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: "Montserrat Alternates "),
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Monstserrat",
+                  ),
                 ),
               ),
               const SizedBox(
