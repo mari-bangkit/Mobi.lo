@@ -5,7 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
+import 'package:yuk_mancing/UI/login_page.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool _isFavorit = false;
-  var _usernamechange = 'nama belum ditampilkan';
+  var _usernamechange = ' ';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,13 +104,44 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
+                    const SizedBox(
+                      height: 20,
                     ),
-                    Text(
-                      _usernamechange,
-                      style: TextStyle(fontSize: 15),
-                    )
+                    GestureDetector(
+                      onTap: () {
+                        print("on tap");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Loginpage(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: 48,
+                        width: MediaQuery.of(context).size.width,
+                        margin: const EdgeInsets.only(right: 10),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          color: kLightred.withOpacity(0.4),
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(10),
+                          ),
+                        ),
+                        child: const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "Log Out",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: kLightred,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               )
@@ -144,6 +175,7 @@ class _SettingPageState extends State<SettingPage> {
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
@@ -154,14 +186,13 @@ class _SettingPageState extends State<SettingPage> {
                           fontFamily: "Montserrat"),
                     ),
                     const SizedBox(
-                      height: 2,
+                      height: 3,
                     ),
                     Container(
                       height: 48,
                       width: MediaQuery.of(context).size.width,
                       margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
                       decoration: BoxDecoration(
                         color: kLightGray.withOpacity(0.3),
                         borderRadius: const BorderRadius.all(
@@ -180,17 +211,23 @@ class _SettingPageState extends State<SettingPage> {
                         ),
                       ),
                     ),
-                    FlatButton(
-                      onPressed: () {
-                        Fluttertoast.showToast(
-                            msg: "Profile telah diubah",
-                            gravity: ToastGravity.BOTTOM);
-                        setState(() {
-                          _usernamechange = _nameChange.text;
-                        });
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Change"),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: TextButton(
+                        onPressed: () {
+                          Fluttertoast.showToast(
+                              msg: "Profile telah diubah",
+                              gravity: ToastGravity.BOTTOM);
+                          setState(() {
+                            _usernamechange = _nameChange.text;
+                          });
+                          Navigator.of(context).pop();
+                        },
+                        child: const Text("Change"),
+                      ),
                     ),
                   ],
                 ),
