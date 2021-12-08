@@ -2,6 +2,8 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/history_page.dart';
 import 'package:yuk_mancing/UI/home_page.dart';
@@ -70,49 +72,74 @@ class _MyHomePageState extends State<MyHomePage> {
     return HomePage();
   }
 
+  DateTime _timebackPressed = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _getWidget(),
-      bottomNavigationBar: SnakeNavigationBar.color(
-        // height: 80,
-        backgroundColor: kPrimary,
-        behaviour: SnakeBarBehaviour.pinned,
-        snakeShape: snakeShape = SnakeShape.circle,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(15),
-            topRight: Radius.circular(15),
+    return WillPopScope(
+      onWillPop: () async {
+        final _difference = DateTime.now().difference(_timebackPressed);
+        final _exitwarning = _difference >= Duration(seconds: 2);
+
+        _timebackPressed = DateTime.now();
+
+        if (_exitwarning) {
+          const message = 'Press back again to exit';
+          Fluttertoast.showToast(
+            msg: message,
+            fontSize: 18,
+            gravity: ToastGravity.BOTTOM,
+          );
+          return false;
+        } else {
+          Fluttertoast.cancel();
+          SystemNavigator.pop();
+          return true;
+        }
+      },
+      child: Scaffold(
+        body: _getWidget(),
+        bottomNavigationBar: SnakeNavigationBar.color(
+          // height: 80,
+          backgroundColor: kPrimary,
+          behaviour: SnakeBarBehaviour.pinned,
+          snakeShape: snakeShape = SnakeShape.circle,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(15),
+              topRight: Radius.circular(15),
+            ),
           ),
+          padding: EdgeInsets.zero,
+
+          ///configuration for SnakeNavigationBar.color
+          snakeViewColor: kSecondary,
+
+          selectedItemColor: kBlack,
+          unselectedItemColor: kWhite,
+
+          ///configuration for SnakeNavigationBar.gradient
+          // snakeViewGradient: selectedGradient,
+          // selectedItemGradient: snakeShape == SnakeShape.indicator ? selectedGradient : null,
+          // unselectedItemGradient: unselectedGradient,
+
+          showSelectedLabels: showSelectedLabels = false,
+          showUnselectedLabels: showUnselectedLabels = false,
+          currentIndex: _selectedItemPosition,
+          onTap: (index) => setState(() => _selectedItemPosition = index),
+          items: const [
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.home), label: 'home'),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.search), label: 'Search'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.history), label: 'History'),
+            BottomNavigationBarItem(
+                icon: Icon(CupertinoIcons.settings), label: 'search')
+          ],
+          selectedLabelStyle: const TextStyle(fontSize: 14),
+          unselectedLabelStyle: const TextStyle(fontSize: 10),
         ),
-        padding: EdgeInsets.zero,
-
-        ///configuration for SnakeNavigationBar.color
-        snakeViewColor: kSecondary,
-
-        selectedItemColor: kBlack,
-        unselectedItemColor: kWhite,
-
-        ///configuration for SnakeNavigationBar.gradient
-        // snakeViewGradient: selectedGradient,
-        // selectedItemGradient: snakeShape == SnakeShape.indicator ? selectedGradient : null,
-        // unselectedItemGradient: unselectedGradient,
-
-        showSelectedLabels: showSelectedLabels = false,
-        showUnselectedLabels: showUnselectedLabels = false,
-        currentIndex: _selectedItemPosition,
-        onTap: (index) => setState(() => _selectedItemPosition = index),
-        items: const [
-          BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.home), label: 'home'),
-          BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.search), label: 'Search'),
-          BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
-          BottomNavigationBarItem(
-              icon: Icon(CupertinoIcons.settings), label: 'search')
-        ],
-        selectedLabelStyle: const TextStyle(fontSize: 14),
-        unselectedLabelStyle: const TextStyle(fontSize: 10),
       ),
     );
   }
