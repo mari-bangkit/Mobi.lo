@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:yuk_mancing/Constant/style.dart';
@@ -29,51 +30,59 @@ class SplashScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width / 1.3,
                   margin: const EdgeInsets.all(10),
                   padding: const EdgeInsets.all(5),
-                  child: const Text(
-                    "Jika engkau menginginkan kebahagiaan selama satu hari, pergilah memancing.",
-                    style: TextStyle(
-                      fontFamily: "Monstserrat",
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: kWhite,
+                  child: FadeInDown(
+                    delay: const Duration(milliseconds: 100),
+                    duration: const Duration(milliseconds: 800),
+                    child: const Text(
+                      "Jika engkau menginginkan kebahagiaan selama satu hari, pergilah memancing.",
+                      style: TextStyle(
+                        fontFamily: "Monstserrat",
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: kWhite,
+                      ),
                     ),
                   ),
                 ),
               ),
               Align(
                 alignment: Alignment.bottomRight,
-                child: Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 25,
-                    right: 20,
-                  ),
-                  padding: const EdgeInsets.all(2),
-                  height: 65,
-                  width: 181,
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Loginpage(),
-                        ),
-                      );
-                    },
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(10),
-                      minimumSize:
-                          Size.fromWidth(MediaQuery.of(context).size.width / 3),
-                      primary: kBlack,
-                      backgroundColor: kPrimary,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                child: FadeInRight(
+                  duration: const Duration(milliseconds: 900),
+                  child: Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 25,
+                      right: 20,
                     ),
-                    child: const Text(
-                      'Get started',
-                      style: TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.w600,
-                        color: kBlack,
+                    padding: const EdgeInsets.all(2),
+                    height: 65,
+                    width: 181,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const Loginpage(),
+                          ),
+                        );
+                      },
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.all(10),
+                        minimumSize: Size.fromWidth(
+                            MediaQuery.of(context).size.width / 3),
+                        primary: kBlack,
+                        backgroundColor: kPrimary,
+                        shape: const RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                      ),
+                      child: const Text(
+                        'Get started',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w600,
+                          color: kBlack,
+                        ),
                       ),
                     ),
                   ),
