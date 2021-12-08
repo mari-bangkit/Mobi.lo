@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/history_place_model.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -60,7 +61,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: 4,
+                  itemCount: historylist.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
@@ -71,7 +72,9 @@ class _HistoryPageState extends State<HistoryPage> {
                         //   ),
                         // );
                       },
-                      child: const HistoryData(),
+                      child: HistoryData(
+                        historyPlace: historylist[index],
+                      ),
                     );
                   },
                 ),

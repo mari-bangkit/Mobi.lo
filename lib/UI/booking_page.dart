@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
+import 'package:yuk_mancing/Model/history_place_model.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
 
@@ -24,10 +25,10 @@ class _BookingPageState extends State<BookingPage> {
   TimeOfDay currentTime = TimeOfDay.now();
   TimeOfDay? eventTime;
 
-  var _name;
-  var _numberWA;
-  var _date;
-  var _time;
+  // var _name;
+  // var _numberWA;
+  // var _date;
+  // var _time;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +43,13 @@ class _BookingPageState extends State<BookingPage> {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            _name = _myNamecontroler.text;
-            _numberWA = _myNumbercontroler.text;
-            _date = DateFormat("dd-MM-yyyy").format(eventDate!);
-            _time = eventTime!.format(context);
-
+            var _name = _myNamecontroler.text;
+            var _numberWA = _myNumbercontroler.text;
+            var _date = DateFormat("dd-MM-yyyy").format(eventDate!);
+            var _time = eventTime!.format(context);
+            historylist.add(
+              HistoryPlace(_name, _numberWA, _date, _time),
+            );
             print("Tempat dipesan \nNama :" +
                 _name +
                 "\nnomor: " +
