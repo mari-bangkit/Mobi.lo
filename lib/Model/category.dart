@@ -11,12 +11,12 @@ List categoryData = [
     "name": "Recommended",
   },
   {
-    "name": "popular",
+    "name": "Popular",
   },
   {
-    "name": "Noodle",
+    "name": "New place",
   },
   {
-    "name": "Pizza",
+    "name": "Best place",
   },
 ];
