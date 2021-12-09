@@ -52,8 +52,7 @@ class SignUp extends StatelessWidget {
                 ),
                 child: const TextField(
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Email or Phone number"),
+                      border: InputBorder.none, hintText: "Nama lengkap"),
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,

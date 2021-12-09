@@ -16,7 +16,6 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool _isFavorit = false;
-  var _usernamechange = ' ';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,9 +220,7 @@ class _SettingPageState extends State<SettingPage> {
                           Fluttertoast.showToast(
                               msg: "Profile telah diubah",
                               gravity: ToastGravity.BOTTOM);
-                          setState(() {
-                            _usernamechange = _nameChange.text;
-                          });
+                          setState(() {});
                           Navigator.of(context).pop();
                         },
                         child: const Text("Change"),

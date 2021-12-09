@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
 
 class SearchPage extends StatefulWidget {
@@ -30,13 +31,23 @@ class _SearchPageState extends State<SearchPage> {
                   top: 30,
                 ),
                 height: 75,
-                width: MediaQuery.of(context).size.width / 1.5,
-                child: const Text(
-                  "Yuk cari dulu \ntempatnya",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: "Monstserrat",
+                width: MediaQuery.of(context).size.width / 2,
+                child: RichText(
+                  text: const TextSpan(
+                    text: "Yuk",
+                    style: TextStyle(
+                        color: kPrimary,
+                        fontSize: 30,
+                        fontWeight: FontWeight.w600),
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: ', dicari \ndulu tempatnya',
+                        style: TextStyle(
+                          color: kBlack,
+                          fontSize: 30,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),

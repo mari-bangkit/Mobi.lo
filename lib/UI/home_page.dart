@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
 
-import 'package:yuk_mancing/UI/Widget/HomeWidget/category_widget.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
@@ -28,8 +27,6 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             margin: const EdgeInsets.only(
               top: 10,
-              left: 10,
-              right: 15,
             ),
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -41,7 +38,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     Container(
                       width: 130,
-                      height: 45,
+                      height: 35,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage("Assets/Images/Logo.png"),
@@ -64,7 +61,13 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(
                   height: 20,
                 ),
-                const UsernameText(),
+                const Padding(
+                  padding: EdgeInsets.only(
+                    left: 10,
+                    right: 10,
+                  ),
+                  child: UsernameText(),
+                ),
                 // const Category(),
                 const SizedBox(
                   height: 10,
@@ -105,31 +108,91 @@ class _HomePageState extends State<HomePage> {
                   ).toList(),
                 ),
                 Expanded(
-                  child: TabBarView(
-                    children: [
-                      ListView.builder(
-                        padding: const EdgeInsets.only(top: 10),
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const DetailsPage(),
-                                ),
-                              );
-                            },
-                            child: const ListPlace(),
-                          );
-                        },
-                      ),
-                      Text("data"),
-                      Text("data2"),
-                      Text("data3")
-                    ],
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      right: 10,
+                    ),
+                    child: TabBarView(
+                      children: [
+                        ListView.builder(
+                          padding: const EdgeInsets.only(top: 10),
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 4,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailsPage(),
+                                  ),
+                                );
+                              },
+                              child: const ListPlace(),
+                            );
+                          },
+                        ),
+                        ListView.builder(
+                          padding: const EdgeInsets.only(top: 10),
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 2,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailsPage(),
+                                  ),
+                                );
+                              },
+                              child: const ListPlace(),
+                            );
+                          },
+                        ),
+                        ListView.builder(
+                          padding: const EdgeInsets.only(top: 10),
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 1,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailsPage(),
+                                  ),
+                                );
+                              },
+                              child: const ListPlace(),
+                            );
+                          },
+                        ),
+                        ListView.builder(
+                          padding: const EdgeInsets.only(top: 10),
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: 3,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const DetailsPage(),
+                                  ),
+                                );
+                              },
+                              child: const ListPlace(),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

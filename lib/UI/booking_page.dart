@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
 import 'package:yuk_mancing/Model/history_place_model.dart';
@@ -50,6 +51,10 @@ class _BookingPageState extends State<BookingPage> {
             historylist.add(
               HistoryPlace(_name, _numberWA, _date, _time),
             );
+            Fluttertoast.showToast(
+                msg: "Booking telah disimpan", gravity: ToastGravity.BOTTOM);
+            setState(() {});
+            Navigator.of(context).pop();
             print("Tempat dipesan \nNama :" +
                 _name +
                 "\nnomor: " +

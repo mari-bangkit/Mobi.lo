@@ -29,8 +29,8 @@ class _LoginPageState extends State<Loginpage> {
   var _username;
   var _passwordUser;
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     DateTime _timebackPressed = DateTime.now();
@@ -132,7 +132,7 @@ class _LoginPageState extends State<Loginpage> {
                                         color: Colors.black, width: 2),
                                   ),
                                   errorText: _validateUsername
-                                      ? "Email Can\'t empty"
+                                      ? "Email Can't empty"
                                       : null,
                                   hintText: "Email"),
                               style: const TextStyle(
@@ -162,7 +162,7 @@ class _LoginPageState extends State<Loginpage> {
                                       color: Colors.black, width: 2),
                                 ),
                                 errorText: _validatePassword
-                                    ? "Paswords Can\'t empty"
+                                    ? "Paswords Can't empty"
                                     : null,
                                 hintText: "Password",
                                 suffixIcon: IconButton(
@@ -223,16 +223,32 @@ class _LoginPageState extends State<Loginpage> {
                               onPressed: () {
                                 setState(
                                   () {
-                                    if (_usernameController.text.isEmpty) {
+                                    if (_usernameController.text.isEmpty &&
+                                        _passwordController.text.isNotEmpty) {
                                       _validateUsername = true;
-                                    } else if (_passwordController
-                                        .text.isEmpty) {
+                                    } else if (_usernameController
+                                            .text.isNotEmpty &&
+                                        _passwordController.text.isEmpty) {
                                       _validatePassword = true;
+                                    } else if (_passwordController
+                                            .text.isEmpty &&
+                                        _usernameController.text.isEmpty) {
+                                      _validatePassword = true;
+                                      _validateUsername = true;
                                     } else {
                                       _validatePassword = false;
                                       _validateUsername = false;
+
                                       _username = _usernameController.text;
                                       _passwordUser = _passwordController.text;
+
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const MyHomePage(),
+                                        ),
+                                      );
                                     }
                                   },
                                 );
@@ -243,12 +259,6 @@ class _LoginPageState extends State<Loginpage> {
                                 //     _username +
                                 //     '\npassword: ' +
                                 //     _passwordUser);
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => const MyHomePage(),
-                                //   ),
-                                // );
                               },
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(5),
