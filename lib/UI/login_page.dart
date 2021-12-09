@@ -23,10 +23,18 @@ class Loginpage extends StatefulWidget {
 
 class _LoginPageState extends State<Loginpage> {
   bool _isObscure = true;
+  bool _validateUsername = false;
+  bool _validatePassword = false;
 
+  var _username;
+  var _passwordUser;
+
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     DateTime _timebackPressed = DateTime.now();
+
     return WillPopScope(
       onWillPop: () async {
         final _difference = DateTime.now().difference(_timebackPressed);
@@ -61,10 +69,10 @@ class _LoginPageState extends State<Loginpage> {
                     child: Container(
                       margin: const EdgeInsets.only(
                         top: 10,
-                        right: 15,
+                        right: 10,
                       ),
-                      height: 50,
-                      width: 150,
+                      height: 40,
+                      width: 100,
                       decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: AssetImage("Assets/Images/Logo.png"),
@@ -107,22 +115,27 @@ class _LoginPageState extends State<Loginpage> {
                             height: 30,
                           ),
                           Container(
-                            height: 48,
-                            width: MediaQuery.of(context).size.width,
                             margin: const EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kLightGray.withOpacity(0.3),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
-                            child: const TextField(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: TextField(
+                              controller: _usernameController,
+                              keyboardType: TextInputType.emailAddress,
                               decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Email or Phone number"),
-                              style: TextStyle(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5),
+                                    borderSide: const BorderSide(
+                                        color: Colors.black, width: 2),
+                                  ),
+                                  errorText: _validateUsername
+                                      ? "Email Can\'t empty"
+                                      : null,
+                                  hintText: "Email"),
+                              style: const TextStyle(
                                 fontStyle: FontStyle.italic,
                                 color: kGray,
                               ),
@@ -132,21 +145,25 @@ class _LoginPageState extends State<Loginpage> {
                             height: 20,
                           ),
                           Container(
-                            height: 48,
-                            width: MediaQuery.of(context).size.width,
                             margin: const EdgeInsets.only(right: 10),
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 5),
-                            decoration: BoxDecoration(
-                              color: kLightGray.withOpacity(0.3),
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(20),
-                              ),
-                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 5),
                             child: TextField(
                               obscureText: _isObscure,
+                              controller: _passwordController,
                               decoration: InputDecoration(
-                                border: InputBorder.none,
+                                enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5),
+                                  borderSide: const BorderSide(
+                                      color: Colors.black, width: 2),
+                                ),
+                                errorText: _validatePassword
+                                    ? "Paswords Can\'t empty"
+                                    : null,
                                 hintText: "Password",
                                 suffixIcon: IconButton(
                                   icon: Icon(_isObscure
@@ -204,12 +221,34 @@ class _LoginPageState extends State<Loginpage> {
                             width: MediaQuery.of(context).size.height,
                             child: TextButton(
                               onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const MyHomePage(),
-                                  ),
+                                setState(
+                                  () {
+                                    if (_usernameController.text.isEmpty) {
+                                      _validateUsername = true;
+                                    } else if (_passwordController
+                                        .text.isEmpty) {
+                                      _validatePassword = true;
+                                    } else {
+                                      _validatePassword = false;
+                                      _validateUsername = false;
+                                      _username = _usernameController.text;
+                                      _passwordUser = _passwordController.text;
+                                    }
+                                  },
                                 );
+
+                                print(_username);
+                                print(_passwordUser);
+                                // print('username : ' +
+                                //     _username +
+                                //     '\npassword: ' +
+                                //     _passwordUser);
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) => const MyHomePage(),
+                                //   ),
+                                // );
                               },
                               style: TextButton.styleFrom(
                                 padding: const EdgeInsets.all(5),
