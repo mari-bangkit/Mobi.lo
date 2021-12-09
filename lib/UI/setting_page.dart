@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/username.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 
 class SettingPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool _isFavorit = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -217,6 +219,7 @@ class _SettingPageState extends State<SettingPage> {
                       alignment: Alignment.centerRight,
                       child: TextButton(
                         onPressed: () {
+                          name = _nameChange.text;
                           Fluttertoast.showToast(
                               msg: "Profile telah diubah",
                               gravity: ToastGravity.BOTTOM);

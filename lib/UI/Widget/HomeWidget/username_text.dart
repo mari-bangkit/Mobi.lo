@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 
 class UsernameText extends StatelessWidget {
-  const UsernameText({Key? key}) : super(key: key);
+  final String data;
+
+  const UsernameText({
+    Key? key,
+    required this.data,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -12,16 +17,16 @@ class UsernameText extends StatelessWidget {
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
+        children: [
           Text(
-            "Hi Aldan,",
-            style: TextStyle(
+            "Hi $data ,",
+            style: const TextStyle(
                 fontSize: 30,
                 fontFamily: "Monstserrat",
                 fontWeight: FontWeight.bold,
                 color: kBlack),
           ),
-          Text(
+          const Text(
             "Good day for fishing",
             style: TextStyle(
                 fontSize: 20,
