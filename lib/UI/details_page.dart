@@ -81,11 +81,6 @@ class DetailsPage extends StatelessWidget {
                             child: const Icon(Icons.arrow_back,
                                 size: 25, color: kWhite),
                           ),
-                          const Icon(
-                            CupertinoIcons.heart,
-                            size: 25,
-                            color: kWhite,
-                          ),
                         ],
                       ),
                     ),
@@ -96,7 +91,7 @@ class DetailsPage extends StatelessWidget {
                         height: 235,
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height,
+                        height: MediaQuery.of(context).size.height * 1.5,
                         width: MediaQuery.of(context).size.width,
                         decoration: const BoxDecoration(
                           borderRadius: BorderRadius.only(
@@ -183,7 +178,7 @@ class DetailsPage extends StatelessWidget {
                                         right: 20,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.5),
+                                        color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Icon(
@@ -199,7 +194,7 @@ class DetailsPage extends StatelessWidget {
                                         right: 20,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.5),
+                                        color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Icon(
@@ -215,7 +210,7 @@ class DetailsPage extends StatelessWidget {
                                         right: 20,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.5),
+                                        color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Icon(
@@ -231,7 +226,7 @@ class DetailsPage extends StatelessWidget {
                                         right: 15,
                                       ),
                                       decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.5),
+                                        color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
                                       child: const Icon(
@@ -262,7 +257,7 @@ class DetailsPage extends StatelessWidget {
                                   right: 5,
                                 ),
                                 child: const ReadMoreText(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Maecenas accumsan lacus vel facilisis volutpat est velit. Nisl purus in mollis nunc. Ornare arcu dui vivamus arcu felis bibendum ut. At quis risus sed vulputate odio ut.",
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Fringilla phasellus faucibus scelerisque eleifend. Nunc eget lorem dolor sed viverra ipsum nunc aliquet bibendum. Risus sed vulputate odio ut. Senectus et netus et malesuada fames ac turpis egestas. Convallis tellus id interdum velit. Odio eu feugiat pretium nibh ipsum consequat.",
                                   trimLines: 3,
                                   textAlign: TextAlign.justify,
                                   trimMode: TrimMode.Line,

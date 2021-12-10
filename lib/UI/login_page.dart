@@ -158,8 +158,6 @@ class _LoginPageState extends State<Loginpage> {
                                 ),
                                 focusedBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(5),
-                                  borderSide: const BorderSide(
-                                      color: Colors.black, width: 2),
                                 ),
                                 errorText: _validatePassword
                                     ? "Paswords Can't empty"
