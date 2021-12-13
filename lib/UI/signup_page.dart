@@ -1,10 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/user_data.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
+import 'package:yuk_mancing/providers/auth.dart';
 
-class SignUp extends StatelessWidget {
+class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
+
+  @override
+  State<SignUp> createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  Duration get loginTime => const Duration(milliseconds: 3000);
+
+  TextEditingController _emailcontroller = TextEditingController();
+  TextEditingController _passwordcontroller = TextEditingController();
+
+  bool _isObscure = true;
+  String errorText = '';
+  bool _passmatch = false;
+
+  // late Userdata data;
 
   @override
   Widget build(BuildContext context) {
@@ -28,40 +47,40 @@ class SignUp extends StatelessWidget {
               const SizedBox(
                 height: 50,
               ),
-              const Text(
-                "Nama lengkap",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                    fontFamily: "Montserrat"),
-              ),
-              const SizedBox(
-                height: 2,
-              ),
-              Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
-                margin: const EdgeInsets.only(right: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: kLightGray.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                      border: InputBorder.none, hintText: "Nama lengkap"),
-                  style: TextStyle(
-                    fontStyle: FontStyle.italic,
-                    color: kGray,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // const Text(
+              //   "Nama lengkap",
+              //   style: TextStyle(
+              //       fontSize: 20,
+              //       fontWeight: FontWeight.w500,
+              //       fontFamily: "Montserrat"),
+              // ),
+              // const SizedBox(
+              //   height: 2,
+              // ),
+              // Container(
+              //   height: 48,
+              //   width: MediaQuery.of(context).size.width,
+              //   margin: const EdgeInsets.only(right: 10),
+              //   padding:
+              //       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+              //   decoration: BoxDecoration(
+              //     color: kLightGray.withOpacity(0.3),
+              //     borderRadius: const BorderRadius.all(
+              //       Radius.circular(10),
+              //     ),
+              //   ),
+              //   child: const TextField(
+              //     decoration: InputDecoration(
+              //         border: InputBorder.none, hintText: "Nama lengkap"),
+              //     style: TextStyle(
+              //       fontStyle: FontStyle.italic,
+              //       color: kGray,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               const Text(
                 "Email",
                 style: TextStyle(
@@ -73,22 +92,25 @@ class SignUp extends StatelessWidget {
                 height: 2,
               ),
               Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(right: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: kLightGray.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: const TextField(
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: TextField(
+                  controller: _emailcontroller,
+                  keyboardType: TextInputType.emailAddress,
                   decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Email or Phone number"),
-                  style: TextStyle(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2),
+                      ),
+                      // errorText: _validateUsername ? "Email Can't empty" : null,
+                      hintText: "Email"),
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,
                   ),
@@ -108,24 +130,34 @@ class SignUp extends StatelessWidget {
                 height: 2,
               ),
               Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(right: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: kLightGray.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: const TextField(
-                  obscureText: true,
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: TextField(
+                  obscureText: _isObscure,
+                  controller: _passwordcontroller,
                   decoration: InputDecoration(
-                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    // errorText:
+                    //     _validatePassword ? "Paswords Can't empty" : null,
                     hintText: "Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                   ),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,
                   ),
@@ -145,24 +177,39 @@ class SignUp extends StatelessWidget {
                 height: 2,
               ),
               Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(right: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: kLightGray.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
-                child: const TextField(
-                  obscureText: true,
+                padding: const EdgeInsets.symmetric(vertical: 5),
+                child: TextField(
+                  obscureText: _isObscure,
                   decoration: InputDecoration(
-                    border: InputBorder.none,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide:
+                          const BorderSide(color: Colors.black, width: 2),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    errorText: _passmatch ? "Password tidak sama" : null,
                     hintText: "Password",
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                          _isObscure ? Icons.visibility : Icons.visibility_off),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                   ),
-                  style: TextStyle(
+                  onChanged: (value) {
+                    if (value != _passwordcontroller.text) {
+                      _passmatch = true;
+                    } else {
+                      _passmatch = false;
+                    }
+                  },
+                  style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,
                   ),
@@ -177,7 +224,14 @@ class SignUp extends StatelessWidget {
                 width: MediaQuery.of(context).size.width,
                 child: TextButton(
                   onPressed: () {
-                    print("data di submit");
+                    var email = _emailcontroller.text;
+                    var passworrd = _passwordcontroller.text;
+
+                    Future.delayed(loginTime).then((value) {
+                      Provider.of<Auth>(context, listen: false)
+                          .signup(email, passworrd);
+                    });
+                    print("berhasil diinput");
                   },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(10),
