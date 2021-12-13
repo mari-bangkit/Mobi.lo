@@ -32,7 +32,7 @@ class _LoginPageState extends State<Loginpage> {
   var _username;
   var _passwordUser;
 
-  Duration get loginTime => const Duration(milliseconds: 3000);
+  Duration get loginTime => const Duration(milliseconds: 800);
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -70,7 +70,7 @@ class _LoginPageState extends State<Loginpage> {
               child: ListView(
                 children: [
                   FadeInRight(
-                    duration: const Duration(milliseconds: 900),
+                    duration: const Duration(milliseconds: 200),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Container(
@@ -272,30 +272,38 @@ class _LoginPageState extends State<Loginpage> {
                                         _passwordUser =
                                             _passwordController.text;
 
-                                        Future.delayed(loginTime).then((value) {
-                                          Provider.of<Auth>(context,
-                                                  listen: false)
-                                              .login(_username, _passwordUser);
-
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MyHomePage(),
-                                            ),
-                                          );
+                                        Future.delayed(loginTime)
+                                            .then((value) async {
+                                          String message = "in";
+                                          try {
+                                            await Provider.of<Auth>(context,
+                                                    listen: false)
+                                                .login(
+                                                    _username, _passwordUser);
+                                          } catch (e) {
+                                            message = e.toString();
+                                            return message;
+                                          } finally {
+                                            if (message != "in") {
+                                              Fluttertoast.showToast(
+                                                msg: message.toString(),
+                                                fontSize: 18,
+                                                gravity: ToastGravity.BOTTOM,
+                                              );
+                                            } else {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const MyHomePage(),
+                                                ),
+                                              );
+                                            }
+                                          }
                                         });
-                                        print("berhasil diinput");
                                       }
                                     },
                                   );
-
-                                  print(_username);
-                                  print(_passwordUser);
-                                  // print('username : ' +
-                                  //     _username +
-                                  //     '\npassword: ' +
-                                  //     _passwordUser);
                                 },
                                 style: TextButton.styleFrom(
                                   padding: const EdgeInsets.all(5),

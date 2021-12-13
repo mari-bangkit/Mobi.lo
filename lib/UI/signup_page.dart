@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/user_data.dart';
@@ -14,7 +15,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  Duration get loginTime => const Duration(milliseconds: 3000);
+  Duration get loginTime => const Duration(milliseconds: 200);
 
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordcontroller = TextEditingController();
@@ -226,10 +227,17 @@ class _SignUpState extends State<SignUp> {
                   onPressed: () {
                     var email = _emailcontroller.text;
                     var passworrd = _passwordcontroller.text;
-
-                    Future.delayed(loginTime).then((value) {
-                      Provider.of<Auth>(context, listen: false)
-                          .signup(email, passworrd);
+                    Future.delayed(loginTime).then((value) async {
+                      try {
+                        await Provider.of<Auth>(context, listen: false)
+                            .signup(email, passworrd);
+                      } catch (e) {
+                        Fluttertoast.showToast(
+                          msg: e.toString(),
+                          fontSize: 18,
+                          gravity: ToastGravity.BOTTOM,
+                        );
+                      }
                     });
                     print("berhasil diinput");
                   },
