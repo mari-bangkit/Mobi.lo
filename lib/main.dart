@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/history_page.dart';
 import 'package:yuk_mancing/UI/home_page.dart';
@@ -11,6 +12,7 @@ import 'package:yuk_mancing/UI/search_page.dart';
 import 'package:yuk_mancing/UI/setting_page.dart';
 import 'package:yuk_mancing/UI/splash_screen.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:yuk_mancing/providers/auth.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,9 +24,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: const SplashScreen(),
-      debugShowCheckedModeBanner: false,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (ctx) => Auth(),
+        ),
+      ],
+      builder: (context, child) => MaterialApp(
+        home: const SplashScreen(),
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }
