@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.yuk_mancing">
+    <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="yuk_mancing"
         android:icon="@mipmap/ic_launcher">
