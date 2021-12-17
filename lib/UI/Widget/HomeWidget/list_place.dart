@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/places_data.dart';
 
 class ListPlace extends StatefulWidget {
-  const ListPlace({Key? key}) : super(key: key);
+  final Datatempat tempatdata;
+  const ListPlace({Key? key, required this.tempatdata}) : super(key: key);
 
   @override
   State<ListPlace> createState() => _ListPlaceState();
