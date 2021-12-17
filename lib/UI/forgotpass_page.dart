@@ -13,6 +13,9 @@ class ForgotPass extends StatefulWidget {
 
 class _ForgotPassState extends State<ForgotPass> {
   final TextEditingController myController = TextEditingController();
+  bool _validateUsername = false;
+
+  var _email;
 
   @override
   Widget build(BuildContext context) {
@@ -47,23 +50,24 @@ class _ForgotPassState extends State<ForgotPass> {
                 height: 2,
               ),
               Container(
-                height: 48,
-                width: MediaQuery.of(context).size.width,
                 margin: const EdgeInsets.only(right: 10),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                decoration: BoxDecoration(
-                  color: kLightGray.withOpacity(0.3),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                ),
+                padding: const EdgeInsets.symmetric(vertical: 5),
                 child: TextField(
                   controller: myController,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "Email or Phone number"),
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5),
+                        borderSide:
+                            const BorderSide(color: Colors.black, width: 2),
+                      ),
+                      errorText: _validateUsername ? "Email Can't empty" : null,
+                      hintText: "Email"),
                   style: const TextStyle(
                     fontStyle: FontStyle.italic,
                     color: kGray,
@@ -79,8 +83,15 @@ class _ForgotPassState extends State<ForgotPass> {
                 width: MediaQuery.of(context).size.width,
                 child: TextButton(
                   onPressed: () {
-                    var _email = myController.text;
-                    print("email : " + _email);
+                    setState(() {
+                      if (myController.text.isEmpty) {
+                        _validateUsername = true;
+                      } else {
+                        _validateUsername = false;
+                        _email = myController.text;
+                      }
+                      print(_email);
+                    });
                   },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(10),
