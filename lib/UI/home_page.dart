@@ -1,13 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
+import 'package:yuk_mancing/Model/places_data.dart';
+
 import 'package:yuk_mancing/Model/username.dart';
 
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
+import 'package:yuk_mancing/providers/place_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,9 +22,19 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _isFavorit = true;
+  bool isInit = true;
+  @override
+  void didChangeDependencies() {
+    if (isInit) {
+      Provider.of<Placesdata>(context).initialData();
+    }
+    isInit = false;
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
+    final allPlaceProvider = Provider.of<Placesdata>(context);
     return DefaultTabController(
       length: categoryData.length,
       child: Scaffold(
@@ -122,18 +136,22 @@ class _HomePageState extends State<HomePage> {
                           padding: const EdgeInsets.only(top: 10),
                           physics: const BouncingScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: 4,
+                          itemCount: allPlaceProvider.tempat.length,
                           itemBuilder: (context, index) {
                             return GestureDetector(
                               onTap: () {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DetailsPage(),
+                                    builder: (context) => DetailsPage(
+                                      pickplace: allPlaceProvider.tempat[index],
+                                    ),
                                   ),
                                 );
                               },
-                              child: const ListPlace(),
+                              child: ListPlace(
+                                tempatdata: allPlaceProvider.tempat[index],
+                              ),
                             );
                           },
                         ),
@@ -148,11 +166,13 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DetailsPage(),
+                                    builder: (context) => DetailsPage(
+                                      pickplace: allPlaceProvider.tempat[index],
+                                    ),
                                   ),
                                 );
                               },
-                              child: const ListPlace(),
+                              // child: const ListPlace(),
                             );
                           },
                         ),
@@ -167,11 +187,13 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DetailsPage(),
+                                    builder: (context) => DetailsPage(
+                                      pickplace: allPlaceProvider.tempat[index],
+                                    ),
                                   ),
                                 );
                               },
-                              child: const ListPlace(),
+                              //  child: const ListPlace(),
                             );
                           },
                         ),
@@ -186,11 +208,13 @@ class _HomePageState extends State<HomePage> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DetailsPage(),
+                                    builder: (context) => DetailsPage(
+                                      pickplace: allPlaceProvider.tempat[index],
+                                    ),
                                   ),
                                 );
                               },
-                              child: const ListPlace(),
+                              // child: const ListPlace(),
                             );
                           },
                         ),
