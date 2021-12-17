@@ -13,6 +13,7 @@ import 'package:yuk_mancing/UI/setting_page.dart';
 import 'package:yuk_mancing/UI/splash_screen.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:yuk_mancing/providers/auth.dart';
+import 'package:yuk_mancing/providers/place_data.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,6 +30,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => Placesdata(),
+        )
       ],
       builder: (context, child) => MaterialApp(
         home: const SplashScreen(),

@@ -4,7 +4,6 @@ import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
-import 'package:yuk_mancing/Model/places_data.dart';
 
 import 'package:yuk_mancing/Model/username.dart';
 

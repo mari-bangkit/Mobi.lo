@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:readmore/readmore.dart';
+import 'package:yuk_mancing/Model/places_data.dart';
 import 'package:yuk_mancing/UI/booking_page.dart';
 import 'package:yuk_mancing/main.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({Key? key}) : super(key: key);
+  final Datatempat pickplace;
+  const DetailsPage({Key? key, required this.pickplace}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +58,11 @@ class DetailsPage extends StatelessWidget {
                   Container(
                     height: 250,
                     width: MediaQuery.of(context).size.width,
-                    decoration: const BoxDecoration(
-                      /*image: DecorationImage(
-                      image: AssetImage(""),
-                    ),*/
-                      color: Colors.blue,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(pickplace.imageUrl),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     padding:
                         const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -111,13 +113,16 @@ class DetailsPage extends StatelessWidget {
                               const SizedBox(
                                 height: 50,
                               ),
-                              const Text(
-                                "Nama Tempat",
-                                style: TextStyle(
-                                  fontSize: 30,
+                              Text(
+                                pickplace.name,
+                                style: const TextStyle(
+                                  fontSize: 25,
                                   fontFamily: "Montserrat",
                                   fontWeight: FontWeight.bold,
                                 ),
+                              ),
+                              const SizedBox(
+                                height: 5,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -143,18 +148,18 @@ class DetailsPage extends StatelessWidget {
                                     width: 20,
                                   ),
                                   Row(
-                                    children: const [
-                                      Icon(
+                                    children: [
+                                      const Icon(
                                         CupertinoIcons.location,
                                         color: kGray,
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 3,
                                       ),
                                       Text(
-                                        "Location",
-                                        style: TextStyle(
-                                          fontSize: 18,
+                                        pickplace.alamat,
+                                        style: const TextStyle(
+                                          fontSize: 12,
                                           fontFamily: "Montserrat",
                                           color: kLightGray,
                                         ),

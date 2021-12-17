@@ -3,8 +3,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
 import 'package:yuk_mancing/Model/history_place_model.dart';
-import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
-import 'package:yuk_mancing/UI/details_page.dart';
 
 import 'Widget/Bookingwidget/date_field.dart';
 import 'Widget/Bookingwidget/time_field.dart';
@@ -90,11 +88,11 @@ class _BookingPageState extends State<BookingPage> {
           ),
           child: ListView(
             children: [
-              const AppbarCostum(
-                leftIcon: Icons.arrow_back,
-                nameappbar: "Isi dulu \npendaftarannya",
-                leftCallback: DetailsPage(),
-              ),
+              // const AppbarCostum(
+              //   leftIcon: Icons.arrow_back,
+              //   nameappbar: "Isi dulu \npendaftarannya",
+              //   leftCallback: DetailsPage(),
+              // ),
               const SizedBox(
                 height: 50,
               ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/history_place_model.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
-import 'package:yuk_mancing/UI/details_page.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -66,12 +65,12 @@ class _HistoryPageState extends State<HistoryPage> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsPage(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => DetailsPage(pickplace: null,),
+                        //   ),
+                        // );
                       },
                       child: HistoryData(
                         historyPlace: historylist[index],

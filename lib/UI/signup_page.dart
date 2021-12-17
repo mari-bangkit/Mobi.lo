@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/user_data.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 import 'package:yuk_mancing/providers/auth.dart';
@@ -17,8 +16,8 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   Duration get loginTime => const Duration(milliseconds: 200);
 
-  TextEditingController _emailcontroller = TextEditingController();
-  TextEditingController _passwordcontroller = TextEditingController();
+  final TextEditingController _emailcontroller = TextEditingController();
+  final TextEditingController _passwordcontroller = TextEditingController();
 
   bool _isObscure = true;
   String errorText = '';

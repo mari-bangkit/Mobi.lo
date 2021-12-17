@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
 
 class SearchWidget extends StatefulWidget {
   final String text;
-  //final ValueChanged<String> onChanged;
+  final ValueChanged<String> onChanged;
   final String hintText;
 
   const SearchWidget({
     Key? key,
     required this.text,
-    // required this.onChanged,
+    required this.onChanged,
     required this.hintText,
   }) : super(key: key);
 
@@ -22,18 +21,16 @@ class _SearchWidgetState extends State<SearchWidget> {
 
   @override
   Widget build(BuildContext context) {
-    const styleActive =
-        TextStyle(color: Colors.black, fontStyle: FontStyle.italic);
-    const styleHint = TextStyle(color: kLightGray);
+    final styleActive = TextStyle(color: Colors.black);
+    final styleHint = TextStyle(color: Colors.black54);
     final style = widget.text.isEmpty ? styleHint : styleActive;
 
     return Container(
       height: 42,
-      width: MediaQuery.of(context).size.width,
-      margin: const EdgeInsets.fromLTRB(0, 16, 0, 16),
+      margin: const EdgeInsets.fromLTRB(5, 10, 5, 10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: kLightGray.withOpacity(0.6),
+        color: Colors.white,
         border: Border.all(color: Colors.black26),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -46,7 +43,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   child: Icon(Icons.close, color: style.color),
                   onTap: () {
                     controller.clear();
-                    //widget.onChanged('');
+                    widget.onChanged('');
                     FocusScope.of(context).requestFocus(FocusNode());
                   },
                 )
@@ -56,7 +53,7 @@ class _SearchWidgetState extends State<SearchWidget> {
           border: InputBorder.none,
         ),
         style: style,
-        //onChanged: widget.onChanged,
+        onChanged: widget.onChanged,
       ),
     );
   }
