@@ -22,6 +22,7 @@ class _SignUpState extends State<SignUp> {
   bool _isObscure = true;
   String errorText = '';
   bool _passmatch = false;
+  bool _isloading = false;
 
   // late Userdata data;
 
@@ -47,40 +48,6 @@ class _SignUpState extends State<SignUp> {
               const SizedBox(
                 height: 50,
               ),
-              // const Text(
-              //   "Nama lengkap",
-              //   style: TextStyle(
-              //       fontSize: 20,
-              //       fontWeight: FontWeight.w500,
-              //       fontFamily: "Montserrat"),
-              // ),
-              // const SizedBox(
-              //   height: 2,
-              // ),
-              // Container(
-              //   height: 48,
-              //   width: MediaQuery.of(context).size.width,
-              //   margin: const EdgeInsets.only(right: 10),
-              //   padding:
-              //       const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-              //   decoration: BoxDecoration(
-              //     color: kLightGray.withOpacity(0.3),
-              //     borderRadius: const BorderRadius.all(
-              //       Radius.circular(10),
-              //     ),
-              //   ),
-              //   child: const TextField(
-              //     decoration: InputDecoration(
-              //         border: InputBorder.none, hintText: "Nama lengkap"),
-              //     style: TextStyle(
-              //       fontStyle: FontStyle.italic,
-              //       color: kGray,
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
               const Text(
                 "Email",
                 style: TextStyle(
@@ -226,16 +193,35 @@ class _SignUpState extends State<SignUp> {
                   onPressed: () {
                     var email = _emailcontroller.text;
                     var passworrd = _passwordcontroller.text;
+                    setState(() {
+                      _isloading = true;
+                    });
                     Future.delayed(loginTime).then((value) async {
+                      String message = "in";
                       try {
                         await Provider.of<Auth>(context, listen: false)
                             .signup(email, passworrd);
                       } catch (e) {
-                        Fluttertoast.showToast(
-                          msg: e.toString(),
-                          fontSize: 18,
-                          gravity: ToastGravity.BOTTOM,
-                        );
+                        message = e.toString();
+                        return message;
+                      } finally {
+                        setState(() {
+                          _isloading = false;
+                        });
+                        if (message != "in") {
+                          Fluttertoast.showToast(
+                            msg: message.toString(),
+                            fontSize: 18,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        } else {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Loginpage(),
+                            ),
+                          );
+                        }
                       }
                     });
                     print("berhasil diinput");

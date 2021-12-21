@@ -5,6 +5,7 @@ import 'package:yuk_mancing/Constant/style.dart';
 import 'package:readmore/readmore.dart';
 import 'package:yuk_mancing/Model/places_data.dart';
 import 'package:yuk_mancing/UI/booking_page.dart';
+import 'package:yuk_mancing/UI/underconstructor_pages.dart';
 import 'package:yuk_mancing/main.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -28,7 +29,9 @@ class DetailsPage extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const BookingPage(),
+                builder: (context) => BookingPage(
+                  tempatPilih: pickplace,
+                ),
               ),
             );
           },
@@ -315,7 +318,15 @@ class DetailsPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const UnderConstructor(),
+                                ),
+                              );
+                            },
                             child: const ImageIcon(
                               AssetImage(
                                 "Assets/Icons/directions.png",

@@ -16,6 +16,7 @@ import 'package:yuk_mancing/UI/forgotpass_page.dart';
 import 'package:yuk_mancing/UI/signup_page.dart';
 import 'package:yuk_mancing/main.dart';
 import 'package:yuk_mancing/providers/auth.dart';
+import 'package:yuk_mancing/providers/google_sign.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -28,11 +29,12 @@ class _LoginPageState extends State<Loginpage> {
   bool _isObscure = true;
   bool _validateUsername = false;
   bool _validatePassword = false;
+  bool _isloading = false;
 
   var _username;
   var _passwordUser;
 
-  Duration get loginTime => const Duration(milliseconds: 800);
+  Duration get loginTime => const Duration(milliseconds: 3000);
 
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -271,7 +273,9 @@ class _LoginPageState extends State<Loginpage> {
                                         _username = _usernameController.text;
                                         _passwordUser =
                                             _passwordController.text;
-
+                                        setState(() {
+                                          _isloading = true;
+                                        });
                                         Future.delayed(loginTime)
                                             .then((value) async {
                                           String message = "in";
@@ -284,6 +288,9 @@ class _LoginPageState extends State<Loginpage> {
                                             message = e.toString();
                                             return message;
                                           } finally {
+                                            setState(() {
+                                              _isloading = false;
+                                            });
                                             if (message != "in") {
                                               Fluttertoast.showToast(
                                                 msg: message.toString(),
@@ -315,14 +322,23 @@ class _LoginPageState extends State<Loginpage> {
                                       borderRadius: BorderRadius.all(
                                           Radius.circular(20))),
                                 ),
-                                child: const Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                    color: kBlack,
-                                  ),
-                                ),
+                                child: _isloading
+                                    ? const SizedBox(
+                                        height: 18,
+                                        width: 18,
+                                        child: CircularProgressIndicator(
+                                          color: kWhite,
+                                          backgroundColor: kBlack,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Login',
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: kBlack,
+                                        ),
+                                      ),
                               ),
                             ),
                           ),
@@ -422,7 +438,12 @@ class _LoginPageState extends State<Loginpage> {
                               children: [
                                 IconButton(
                                   color: kLightred,
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    final googleprovider =
+                                        Provider.of<GoogleSign>(context,
+                                            listen: false);
+                                    googleprovider.googleLogin();
+                                  },
                                   icon: const ImageIcon(
                                     AssetImage(
                                       "Assets/Icons/flat-color-icons_google.png",

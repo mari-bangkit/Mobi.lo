@@ -22,12 +22,18 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _isFavorit = true;
   bool isInit = true;
+  bool _isloading = true;
+
   @override
   void didChangeDependencies() {
     if (isInit) {
-      Provider.of<Placesdata>(context).initialData();
+      Provider.of<Placesdata>(context).initialDataPlace();
+      setState(() {
+        _isloading = false;
+      });
     }
     isInit = false;
+
     super.didChangeDependencies();
   }
 
@@ -129,96 +135,105 @@ class _HomePageState extends State<HomePage> {
                       left: 10,
                       right: 10,
                     ),
-                    child: TabBarView(
-                      children: [
-                        ListView.builder(
-                          padding: const EdgeInsets.only(top: 10),
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: allPlaceProvider.tempat.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPage(
-                                      pickplace: allPlaceProvider.tempat[index],
+                    child: (allPlaceProvider.tempat.isEmpty)
+                        ? const Align(
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator())
+                        : TabBarView(
+                            children: [
+                              ListView.builder(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: allPlaceProvider.tempat.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            pickplace:
+                                                allPlaceProvider.tempat[index],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: ListPlace(
+                                      tempatdata:
+                                          allPlaceProvider.tempat[index],
                                     ),
-                                  ),
-                                );
-                              },
-                              child: ListPlace(
-                                tempatdata: allPlaceProvider.tempat[index],
+                                  );
+                                },
                               ),
-                            );
-                          },
-                        ),
-                        ListView.builder(
-                          padding: const EdgeInsets.only(top: 10),
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 2,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPage(
-                                      pickplace: allPlaceProvider.tempat[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              // child: const ListPlace(),
-                            );
-                          },
-                        ),
-                        ListView.builder(
-                          padding: const EdgeInsets.only(top: 10),
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 1,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPage(
-                                      pickplace: allPlaceProvider.tempat[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              //  child: const ListPlace(),
-                            );
-                          },
-                        ),
-                        ListView.builder(
-                          padding: const EdgeInsets.only(top: 10),
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: 3,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => DetailsPage(
-                                      pickplace: allPlaceProvider.tempat[index],
-                                    ),
-                                  ),
-                                );
-                              },
-                              // child: const ListPlace(),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                              ListView.builder(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: 2,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            pickplace:
+                                                allPlaceProvider.tempat[index],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    // child: const ListPlace(),
+                                  );
+                                },
+                              ),
+                              ListView.builder(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: 1,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            pickplace:
+                                                allPlaceProvider.tempat[index],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    //  child: const ListPlace(),
+                                  );
+                                },
+                              ),
+                              ListView.builder(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: 3,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            pickplace:
+                                                allPlaceProvider.tempat[index],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    // child: const ListPlace(),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
                   ),
                 ),
               ],

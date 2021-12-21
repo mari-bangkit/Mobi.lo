@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
-import 'package:yuk_mancing/Model/history_place_model.dart';
+import 'package:yuk_mancing/Model/places_data.dart';
+import 'package:yuk_mancing/providers/player.dart';
 
 import 'Widget/Bookingwidget/date_field.dart';
 import 'Widget/Bookingwidget/time_field.dart';
 
 class BookingPage extends StatefulWidget {
-  const BookingPage({Key? key}) : super(key: key);
+  final Datatempat tempatPilih;
+  const BookingPage({Key? key, required this.tempatPilih}) : super(key: key);
 
   @override
   _BookingPageState createState() => _BookingPageState();
@@ -24,13 +26,9 @@ class _BookingPageState extends State<BookingPage> {
   TimeOfDay currentTime = TimeOfDay.now();
   TimeOfDay? eventTime;
 
-  // var _name;
-  // var _numberWA;
-  // var _date;
-  // var _time;
-
   @override
   Widget build(BuildContext context) {
+    final players = Provider.of<PlayersProviders>(context, listen: false);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
@@ -44,23 +42,45 @@ class _BookingPageState extends State<BookingPage> {
           onPressed: () {
             var _name = _myNamecontroler.text;
             var _numberWA = _myNumbercontroler.text;
-            var _date = DateFormat("dd-MM-yyyy").format(eventDate!);
-            var _time = eventTime!.format(context);
-            historylist.add(
-              HistoryPlace(_name, _numberWA, _date, _time),
+            var _date = DateFormat("dd-MM-yyyy").format(eventDate!).toString();
+            var _time = eventTime!.format(context).toString();
+
+            players
+                .addPlayer(_name, _numberWA, _date, _time, widget.tempatPilih)
+                .then(
+              (response) {
+                print("Kembali ke Home & kasih notif snack bar");
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Berhasil ditambahkan"),
+                    duration: Duration(seconds: 4),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                );
+                Navigator.pop(context);
+              },
+            ).catchError(
+              (err) => showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: Text("TERJADI ERROR $err"),
+                  content: const Text("Tidak dapat menambahkan player."),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text("OKAY"),
+                    ),
+                  ],
+                ),
+              ),
             );
-            Fluttertoast.showToast(
-                msg: "Booking telah disimpan", gravity: ToastGravity.BOTTOM);
-            setState(() {});
-            Navigator.of(context).pop();
-            print("Tempat dipesan \nNama :" +
-                _name +
-                "\nnomor: " +
-                _numberWA +
-                "\ntanggal: " +
-                _date +
-                "\njam: " +
-                _time);
           },
           child: const Text(
             "Booking now",

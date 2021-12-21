@@ -1,19 +1,33 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/history_place_model.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
+import 'package:yuk_mancing/providers/player.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
 
   @override
-  _HistoryPageState createState() => _HistoryPageState();
+  State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+  bool isInit = true;
+
+  @override
+  void didChangeDependencies() {
+    if (isInit) {
+      Provider.of<PlayersProviders>(context).initialData();
+    }
+    isInit = false;
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final playersdata = Provider.of<PlayersProviders>(context, listen: false);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -61,10 +75,11 @@ class _HistoryPageState extends State<HistoryPage> {
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: historylist.length,
+                  itemCount: playersdata.history.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
+                        print(playersdata.history.length);
                         // Navigator.push(
                         //   context,
                         //   MaterialPageRoute(
@@ -72,8 +87,25 @@ class _HistoryPageState extends State<HistoryPage> {
                         //   ),
                         // );
                       },
-                      child: HistoryData(
-                        historyPlace: historylist[index],
+                      child: Slidable(
+                        key: const ValueKey(0),
+                        endActionPane: ActionPane(
+                          motion: const ScrollMotion(),
+                          children: [
+                            SlidableAction(
+                              // An action can be bigger than the others.
+                              flex: 2,
+                              onPressed: deleteplayer,
+                              backgroundColor: const Color(0xFF7BC043),
+                              foregroundColor: Colors.white,
+                              icon: Icons.delete,
+                              label: 'Delete',
+                            ),
+                          ],
+                        ),
+                        child: HistoryData(
+                          historyPlace: playersdata.history[index],
+                        ),
                       ),
                     );
                   },
@@ -85,4 +117,6 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
     );
   }
+
+  void deleteplayer(BuildContext context) {}
 }

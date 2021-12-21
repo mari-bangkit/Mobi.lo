@@ -8,6 +8,7 @@ class UnderConstructor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: kBlack,
       body: SafeArea(
         child: Align(
           alignment: Alignment.center,
@@ -19,7 +20,7 @@ class UnderConstructor extends StatelessWidget {
               ),
               Lottie.asset('Assets/Images/underconstruction-1.json'),
               const SizedBox(
-                height: 10,
+                height: 5,
               ),
               const Text(
                 "Oops Page not found ",
@@ -29,13 +30,42 @@ class UnderConstructor extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 3,
               ),
               const Text(
                 "We a sorry, this page under construtor ",
                 style: TextStyle(
                   fontSize: 15,
                   color: kWhite,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: const EdgeInsets.only(left: 20, right: 20),
+                width: MediaQuery.of(context).size.width,
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.only(top: 18, bottom: 18),
+                    primary: Colors.black26,
+                    backgroundColor: kSecondary,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(50),
+                      ),
+                    ),
+                  ),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Go back",
+                    style: TextStyle(
+                      color: kBlack,
+                      fontSize: 15,
+                    ),
+                  ),
                 ),
               ),
             ],

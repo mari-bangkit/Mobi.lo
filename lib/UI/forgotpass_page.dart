@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
+import 'package:yuk_mancing/providers/auth.dart';
 
 class ForgotPass extends StatefulWidget {
   const ForgotPass({Key? key}) : super(key: key);
@@ -12,9 +15,12 @@ class ForgotPass extends StatefulWidget {
 }
 
 class _ForgotPassState extends State<ForgotPass> {
-  final TextEditingController myController = TextEditingController();
-  bool _validateUsername = false;
+  Duration get forgotpassTime => const Duration(milliseconds: 500);
 
+  final TextEditingController myController = TextEditingController();
+
+  bool _validateUsername = false;
+  bool _isloading = false;
   var _email;
 
   @override
@@ -89,6 +95,36 @@ class _ForgotPassState extends State<ForgotPass> {
                       } else {
                         _validateUsername = false;
                         _email = myController.text;
+
+                        Future.delayed(forgotpassTime).then((value) async {
+                          String message = "in";
+                          try {
+                            await Provider.of<Auth>(context, listen: false)
+                                .forgotpass(_email);
+                          } catch (e) {
+                            message = e.toString();
+                            return message;
+                          } finally {
+                            setState(() {
+                              _isloading = false;
+                            });
+                            if (message != "in") {
+                              Fluttertoast.showToast(
+                                msg: message.toString(),
+                                fontSize: 18,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            } else {
+                              String msg =
+                                  "link forgot password telah dikirim ke email";
+                              Fluttertoast.showToast(
+                                msg: msg,
+                                fontSize: 18,
+                                gravity: ToastGravity.CENTER,
+                              );
+                            }
+                          }
+                        });
                       }
                       print(_email);
                     });
