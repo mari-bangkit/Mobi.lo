@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/history_place_model.dart';
 
 class HistoryData extends StatelessWidget {
-  final HistoryPlace historyPlace;
+  final historyPlace;
   const HistoryData({
     Key? key,
     required this.historyPlace,
