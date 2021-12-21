@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "710000388862",
+    "firebase_url": "https://yukmancing-88624-default-rtdb.firebaseio.com",
+    "project_id": "yukmancing-88624",
+    "storage_bucket": "yukmancing-88624.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710000388862:android:01e78a3942e224a2a193af",
+        "android_client_info": {
+          "package_name": "com.example.yuk_mancing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710000388862-5cbue2dq0ltcftmqfr50n0u5msq9793o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA-8mgY_THpWyGlYPcO8atqwp2Nx9tdL58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710000388862-5cbue2dq0ltcftmqfr50n0u5msq9793o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
