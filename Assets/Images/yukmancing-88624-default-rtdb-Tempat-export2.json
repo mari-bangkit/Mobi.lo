@@ -1,0 +1,57 @@
+{
+  "placedata" : [ {
+    "alamat" : "Jl. Kamboja No.292",
+    "fasilitas" : {
+      "kolam" : "2",
+      "toilet" : "1"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMDM8BA2yDtk2L_MXcLtGsemY1oW2ra0BNHdD8B=s0",
+    "name" : "Pemancingan Gilang BNI 60",
+    "rating" : "4,5"
+  }, {
+    "alamat" : "Jl. Hidup Baru No.30, Serua, Kec. Ciputat",
+    "fasilitas" : {
+      "kolam" : "1",
+      "toilet" : "1"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipP2A8akjhDig34UzK4zXJSUCOuAuEsLlx9TikOf=s0",
+    "name" : "Pemancingan Tambok Lobu",
+    "rating" : "4,5"
+  }, {
+    "alamat" : "Jl. Bougenville No.18, Serua,",
+    "fasilitas" : {
+      "kolam" : "1",
+      "toilet" : "1"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMB1hRynPGjOarYDI7jI_CJc4ho8kRggbKTAQm8=s0",
+    "name" : "PEMANCINGAN GALATAMA LELE KONG DALIH 64",
+    "rating" : "4,2"
+  },{
+    "alamat" : "Jl. Waru Doyong No.63, Jombang",
+    "fasilitas" : {
+      "kolam" : "1",
+      "toilet" : "0"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipOoBaC1VE9uok4IpjLOXR8v_I7-hSRV__n3q1Sv=s0",
+    "name" : "Pemancingan Waru Doyong",
+    "rating" : "4,0"
+  },{
+    "alamat" : "Jl. H. Saleh Kompleks Makadam No.C-21/23",
+    "fasilitas" : {
+      "kolam" : "1",
+      "toilet" : "2"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipNA9U5uNy6QvwfcLFxF97ty1uAG22jIzQTF2Tsd=s0",
+    "name" : "Pemancingan Putra Bani",
+    "rating" : "4,5"
+  },{
+    "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+    "fasilitas" : {
+      "kolam" : "2",
+      "toilet" : "1"
+    },
+    "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+    "name" : "Pemancingan ikan mas harian Jagal",
+    "rating" : "4,0"
+  }]
+}
