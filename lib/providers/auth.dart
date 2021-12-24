@@ -1,13 +1,10 @@
 import 'dart:convert';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 import 'package:http/http.dart' as http;
 
 class Auth with ChangeNotifier {
-  final googlesignin = GoogleSignIn();
   var _idToken, userId, _username;
 
   String? get token {
@@ -28,32 +25,6 @@ class Auth with ChangeNotifier {
 
   bool get isAuth {
     return token != null;
-  }
-
-  GoogleSignInAccount? _user;
-
-  GoogleSignInAccount? get user => _user;
-
-  Future<void> googleLogin() async {
-    final googleUser = await googlesignin.signIn();
-
-    if (googleUser == null) return;
-    _user = googleUser;
-
-    final googleAuth = await googleUser.authentication;
-
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth.accessToken,
-      idToken: googleAuth.idToken,
-    );
-
-    await FirebaseAuth.instance.signInWithCredential(credential);
-
-    _idToken = credential.idToken!;
-
-    userId = FirebaseAuth.instance.currentUser!.uid;
-
-    notifyListeners();
   }
 
   Future<void> signup(String email, String password) async {

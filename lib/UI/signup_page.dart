@@ -215,6 +215,12 @@ class _SignUpState extends State<SignUp> {
                             gravity: ToastGravity.BOTTOM,
                           );
                         } else {
+                          var msg = "akun telah ditambahkan";
+                          Fluttertoast.showToast(
+                            msg: msg.toString(),
+                            fontSize: 18,
+                            gravity: ToastGravity.BOTTOM,
+                          );
                           Navigator.push(
                             context,
                             MaterialPageRoute(

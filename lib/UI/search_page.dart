@@ -40,64 +40,85 @@ class _SearchPageState extends State<SearchPage> {
             left: 10,
             right: 10,
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                margin: const EdgeInsets.only(
-                  top: 30,
-                ),
-                height: 75,
-                width: MediaQuery.of(context).size.width,
-                child: RichText(
-                  text: const TextSpan(
-                    text: "Yuk",
-                    style: TextStyle(
-                        color: kPrimary,
-                        fontSize: 30,
-                        fontWeight: FontWeight.w600),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: ', dicari \ndulu tempatnya',
-                        style: TextStyle(
-                          color: kBlack,
-                          fontSize: 30,
+          child: (searchplaces != null)
+              ? Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: 30,
+                      ),
+                      height: 75,
+                      width: MediaQuery.of(context).size.width,
+                      child: RichText(
+                        text: const TextSpan(
+                          text: "Yuk",
+                          style: TextStyle(
+                              color: kPrimary,
+                              fontSize: 30,
+                              fontWeight: FontWeight.w600),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text: ', dicari \ndulu tempatnya',
+                              style: TextStyle(
+                                color: kBlack,
+                                fontSize: 30,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              buildSearch(),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: searchplaces.length,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    final book = searchplaces[index];
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DetailsPage(
-                              pickplace: book,
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    buildSearch(),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: searchplaces.length,
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) {
+                          final book = searchplaces[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsPage(
+                                    pickplace: book,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: ListPlace(
+                              tempatdata: book,
                             ),
-                          ),
-                        );
-                      },
-                      child: ListPlace(
-                        tempatdata: book,
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                  ],
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      margin: const EdgeInsets.only(
+                        top: 30,
+                      ),
+                      height: 75,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Text(
+                        "Data Tidak ditemukan",
+                        style: TextStyle(
+                            color: kPrimary,
+                            fontSize: 30,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
         ),
       ),
     );

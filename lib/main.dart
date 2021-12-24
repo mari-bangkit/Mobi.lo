@@ -14,7 +14,6 @@ import 'package:yuk_mancing/UI/setting_page.dart';
 import 'package:yuk_mancing/UI/splash_screen.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:yuk_mancing/providers/auth.dart';
-import 'package:yuk_mancing/providers/google_sign.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
 import 'package:yuk_mancing/providers/player.dart';
 
@@ -34,9 +33,6 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (ctx) => Auth(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => GoogleSign(),
         ),
         ChangeNotifierProxyProvider<Auth, Placesdata>(
           create: (context) => Placesdata(),
