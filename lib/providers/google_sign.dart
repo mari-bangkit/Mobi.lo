@@ -17,16 +17,13 @@ class GoogleSign extends ChangeNotifier {
 
     final googleAuth = await googleUser.authentication;
 
-    print(googleUser);
-
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
-    print(credential.idToken);
     await FirebaseAuth.instance.signInWithCredential(credential);
-    print(FirebaseAuth.instance.currentUser!.email);
+
     notifyListeners();
   }
 }

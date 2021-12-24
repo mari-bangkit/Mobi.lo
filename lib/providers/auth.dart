@@ -50,7 +50,7 @@ class Auth with ChangeNotifier {
     await FirebaseAuth.instance.signInWithCredential(credential);
 
     _idToken = credential.idToken!;
-    print(_idToken);
+
     userId = FirebaseAuth.instance.currentUser!.uid;
 
     notifyListeners();
@@ -180,8 +180,6 @@ class Auth with ChangeNotifier {
       userId = responseData["localId"];
       _username = responseData["displayName"];
 
-      print(_idToken);
-      print(_username);
       // _expirydate = DateTime.now().add(
       //   Duration(
       //     seconds: int.parse(responseData["expiresIn"]),

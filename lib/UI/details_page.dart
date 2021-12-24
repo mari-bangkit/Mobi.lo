@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:readmore/readmore.dart';
-import 'package:yuk_mancing/Model/places_data.dart';
+import 'package:yuk_mancing/Model/categorydata.dart';
 import 'package:yuk_mancing/UI/booking_page.dart';
 import 'package:yuk_mancing/UI/underconstructor_pages.dart';
 import 'package:yuk_mancing/main.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Datatempat pickplace;
+  final Bestplace pickplace;
   const DetailsPage({Key? key, required this.pickplace}) : super(key: key);
 
   @override
@@ -25,7 +25,6 @@ class DetailsPage extends StatelessWidget {
         ),
         child: FloatingActionButton(
           onPressed: () {
-            print("Dipesan");
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -131,15 +130,15 @@ class DetailsPage extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   Row(
-                                    children: const [
-                                      Icon(CupertinoIcons.star_fill,
+                                    children: [
+                                      const Icon(CupertinoIcons.star_fill,
                                           color: Colors.yellow),
-                                      SizedBox(
+                                      const SizedBox(
                                         width: 3,
                                       ),
                                       Text(
-                                        "Rating",
-                                        style: TextStyle(
+                                        pickplace.rating,
+                                        style: const TextStyle(
                                           fontSize: 18,
                                           fontFamily: "Montserrat",
                                           color: kLightGray,
@@ -175,13 +174,15 @@ class DetailsPage extends StatelessWidget {
                                 height: 15,
                               ),
                               SizedBox(
-                                height: 60,
+                                height: 90,
                                 width: MediaQuery.of(context).size.width,
                                 child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
                                     Container(
                                       width: 75,
-                                      height: 60,
+                                      height: 80,
                                       margin: const EdgeInsets.only(
                                         right: 20,
                                       ),
@@ -189,15 +190,35 @@ class DetailsPage extends StatelessWidget {
                                         color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: const Icon(
-                                        CupertinoIcons.home,
-                                        color: kWhite,
-                                        size: 30,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            CupertinoIcons.square,
+                                            color: kWhite,
+                                            size: 30,
+                                          ),
+                                          const Text(
+                                            "Kolam",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: kGray,
+                                            ),
+                                          ),
+                                          Text(
+                                            pickplace.fasilitas.kolam,
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: kBlack,
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
                                     Container(
                                       width: 75,
-                                      height: 60,
+                                      height: 80,
                                       margin: const EdgeInsets.only(
                                         right: 20,
                                       ),
@@ -205,42 +226,30 @@ class DetailsPage extends StatelessWidget {
                                         color: kPrimary.withOpacity(0.6),
                                         borderRadius: BorderRadius.circular(10),
                                       ),
-                                      child: const Icon(
-                                        CupertinoIcons.home,
-                                        color: kWhite,
-                                        size: 30,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 75,
-                                      height: 60,
-                                      margin: const EdgeInsets.only(
-                                        right: 20,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.6),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: const Icon(
-                                        CupertinoIcons.home,
-                                        color: kWhite,
-                                        size: 30,
-                                      ),
-                                    ),
-                                    Container(
-                                      width: 75,
-                                      height: 60,
-                                      margin: const EdgeInsets.only(
-                                        right: 15,
-                                      ),
-                                      decoration: BoxDecoration(
-                                        color: kPrimary.withOpacity(0.6),
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: const Icon(
-                                        CupertinoIcons.home,
-                                        color: kWhite,
-                                        size: 30,
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.house_outlined,
+                                            color: kWhite,
+                                            size: 30,
+                                          ),
+                                          const Text(
+                                            "Toilet",
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              color: kGray,
+                                            ),
+                                          ),
+                                          Text(
+                                            pickplace.fasilitas.toilet,
+                                            style: const TextStyle(
+                                              fontSize: 13,
+                                              color: kBlack,
+                                            ),
+                                          )
+                                        ],
                                       ),
                                     ),
                                   ],

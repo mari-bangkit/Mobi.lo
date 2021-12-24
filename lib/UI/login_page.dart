@@ -16,7 +16,6 @@ import 'package:yuk_mancing/UI/forgotpass_page.dart';
 import 'package:yuk_mancing/UI/signup_page.dart';
 import 'package:yuk_mancing/main.dart';
 import 'package:yuk_mancing/providers/auth.dart';
-import 'package:yuk_mancing/providers/google_sign.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);
@@ -388,110 +387,6 @@ class _LoginPageState extends State<Loginpage> {
                           const SizedBox(
                             height: 5,
                           ),
-                          FadeInUp(
-                            delay: const Duration(milliseconds: 400),
-                            duration: const Duration(milliseconds: 800),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: 0.8,
-                                      color: kLightGray.withOpacity(0.5),
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    right: 5,
-                                    left: 5,
-                                  ),
-                                  child: const Text(
-                                    "Or login with",
-                                    style: TextStyle(
-                                      fontFamily: "Monstserrat",
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15,
-                                      color: kLightGray,
-                                    ),
-                                  ),
-                                ),
-                                Container(
-                                  width: MediaQuery.of(context).size.width / 3,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      width: 0.8,
-                                      color: kLightGray.withOpacity(0.5),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          FadeInUp(
-                            delay: const Duration(milliseconds: 400),
-                            duration: const Duration(milliseconds: 800),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  color: kLightred,
-                                  onPressed: () {
-                                    Future.delayed(loginTime)
-                                        .then((value) async {
-                                      String message = "in";
-                                      try {
-                                        final googleprovider =
-                                            Provider.of<Auth>(context,
-                                                listen: false);
-                                        await googleprovider.googleLogin();
-                                      } catch (e) {
-                                        message = e.toString();
-                                        return message;
-                                      } finally {
-                                        setState(() {
-                                          _isloading = false;
-                                        });
-                                        if (message != "in") {
-                                          Fluttertoast.showToast(
-                                            msg: message.toString(),
-                                            fontSize: 18,
-                                            gravity: ToastGravity.BOTTOM,
-                                          );
-                                        } else {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const MyHomePage(),
-                                            ),
-                                          );
-                                        }
-                                      }
-                                    });
-                                  },
-                                  icon: const ImageIcon(
-                                    AssetImage(
-                                      "Assets/Icons/flat-color-icons_google.png",
-                                    ),
-                                  ),
-                                  iconSize: 35,
-                                ),
-                                IconButton(
-                                  color: kLighBlue,
-                                  onPressed: () {},
-                                  icon: const ImageIcon(
-                                    AssetImage(
-                                      "Assets/Icons/ant-design_facebook-filled.png",
-                                    ),
-                                  ),
-                                  iconSize: 35,
-                                ),
-                              ],
-                            ),
-                          )
                         ],
                       ),
                     ),

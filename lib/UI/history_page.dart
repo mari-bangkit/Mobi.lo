@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
+import 'package:yuk_mancing/UI/details_page.dart';
 import 'package:yuk_mancing/providers/player.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -88,33 +88,18 @@ class _HistoryPageState extends State<HistoryPage> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              print(playersdata.history.length);
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => DetailsPage(pickplace: null,),
-                              //   ),
-                              // );
-                            },
-                            child: Slidable(
-                              key: const ValueKey(0),
-                              endActionPane: ActionPane(
-                                motion: const ScrollMotion(),
-                                children: [
-                                  SlidableAction(
-                                    // An action can be bigger than the others.
-                                    flex: 2,
-                                    onPressed: deleteplayer,
-                                    backgroundColor: const Color(0xFF7BC043),
-                                    foregroundColor: Colors.white,
-                                    icon: Icons.delete,
-                                    label: 'Delete',
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DetailsPage(
+                                    pickplace:
+                                        playersdata.history[index].datatempat,
                                   ),
-                                ],
-                              ),
-                              child: HistoryData(
-                                historyPlace: playersdata.history[index],
-                              ),
+                                ),
+                              );
+                            },
+                            child: HistoryData(
+                              historyPlace: playersdata.history[index],
                             ),
                           );
                         },

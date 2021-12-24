@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/players.dart';
 
 class HistoryData extends StatelessWidget {
-  final historyPlace;
+  final Players historyPlace;
   const HistoryData({
     Key? key,
     required this.historyPlace,
@@ -22,13 +23,54 @@ class HistoryData extends StatelessWidget {
       ),
       child: Stack(
         children: [
-          Text(
-            historyPlace.date,
-            style: const TextStyle(
-              fontSize: 18,
-              color: kBlack,
-              fontWeight: FontWeight.w400,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              SizedBox(
+                child: Row(
+                  children: [
+                    const Text(
+                      "Tanggal : ",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: kBlack,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      historyPlace.date,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: kBlack,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                child: Row(
+                  children: [
+                    const Text(
+                      "Jam : ",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: kBlack,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    Text(
+                      historyPlace.time,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: kBlack,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           Align(
             alignment: Alignment.bottomCenter,
@@ -46,6 +88,10 @@ class HistoryData extends StatelessWidget {
                     height: 100,
                     width: 90,
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(historyPlace.datatempat.imageUrl),
+                        fit: BoxFit.cover,
+                      ),
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         bottomLeft: Radius.circular(20),
@@ -65,22 +111,16 @@ class HistoryData extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text(
-                              "Nama Tempat",
-                              style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w600,
-                                color: kBlack,
-                                fontFamily: "Monstserrat",
-                              ),
-                            ),
-                            IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                // _isFavorit
-                                CupertinoIcons.heart,
-                                // : CupertinoIcons.heart_fill,
-                                color: Colors.red,
+                            Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              child: Text(
+                                historyPlace.datatempat.name,
+                                style: const TextStyle(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: kBlack,
+                                  fontFamily: "Monstserrat",
+                                ),
                               ),
                             ),
                           ],
@@ -90,17 +130,17 @@ class HistoryData extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
-                            Icon(
+                          children: [
+                            const Icon(
                               CupertinoIcons.star_fill,
                               color: Colors.yellow,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 2,
                             ),
                             Text(
-                              "Rating",
-                              style: TextStyle(
+                              historyPlace.datatempat.rating,
+                              style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Monstserrat",
                                 color: kBlack,

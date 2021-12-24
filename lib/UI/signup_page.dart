@@ -224,7 +224,6 @@ class _SignUpState extends State<SignUp> {
                         }
                       }
                     });
-                    print("berhasil diinput");
                   },
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(10),

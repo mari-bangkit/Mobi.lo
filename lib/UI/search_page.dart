@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/Model/places_data.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
@@ -24,7 +23,7 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      searchdata = searchplaces = Provider.of<Placesdata>(context).recommended;
+      searchdata = searchplaces = Provider.of<Placesdata>(context).tempat;
     }
     isInit = false;
     super.didChangeDependencies();
@@ -81,15 +80,14 @@ class _SearchPageState extends State<SearchPage> {
                     final book = searchplaces[index];
                     return GestureDetector(
                       onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailsPage(
-                        //       pickplace: book,
-                        //     ),
-                        //   ),
-                        // );
-                        print(book);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailsPage(
+                              pickplace: book,
+                            ),
+                          ),
+                        );
                       },
                       child: ListPlace(
                         tempatdata: book,

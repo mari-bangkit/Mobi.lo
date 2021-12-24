@@ -5,8 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
 
-import 'package:yuk_mancing/Model/username.dart';
-
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
@@ -27,7 +25,6 @@ class _HomePageState extends State<HomePage> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      Provider.of<Placesdata>(context).initialDataPlace();
       Provider.of<Placesdata>(context).getdataplace();
       setState(() {
         _isloading = false;
@@ -154,8 +151,8 @@ class _HomePageState extends State<HomePage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) => DetailsPage(
-                                            pickplace:
-                                                allPlaceProvider.tempat[index],
+                                            pickplace: allPlaceProvider
+                                                .recommended[index],
                                           ),
                                         ),
                                       );

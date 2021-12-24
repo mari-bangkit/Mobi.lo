@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:yuk_mancing/Model/places_data.dart';
+import 'package:yuk_mancing/Model/categorydata.dart';
 import 'package:yuk_mancing/Model/players.dart';
 
 class PlayersProviders with ChangeNotifier {
@@ -20,9 +20,9 @@ class PlayersProviders with ChangeNotifier {
   String urlmaster = "https://yukmancing-88624-default-rtdb.firebaseio.com/";
 
   addPlayer(String name, String noWa, String date, String time,
-      Datatempat tempat) async {
+      Bestplace tempat) async {
     var id = "";
-    print(userid);
+
     Uri url = Uri.parse('$urlmaster/history.json?auth=$token');
 
     var data = Players(
@@ -33,7 +33,6 @@ class PlayersProviders with ChangeNotifier {
         time: time,
         datatempat: tempat,
         userID: userid);
-    print(data);
 
     try {
       final response = await http.post(
@@ -55,7 +54,7 @@ class PlayersProviders with ChangeNotifier {
         '$urlmaster/history.json?auth=$token&orderBy="userID"&equalTo="$userid"');
 
     var hasilGetData = await http.get(url);
-    print(hasilGetData.body);
+
     var dataResponse = json.decode(hasilGetData.body) as Map<String, dynamic>;
 
     history.clear();
@@ -67,7 +66,7 @@ class PlayersProviders with ChangeNotifier {
           noWa: value["noWa"],
           date: value["date"],
           time: value["time"],
-          datatempat: Datatempat.fromJson(
+          datatempat: Bestplace.fromJson(
             value["datatempat"],
           ),
           userID: value["userID"],
@@ -75,7 +74,6 @@ class PlayersProviders with ChangeNotifier {
         history.add(prod);
       },
     );
-    print("BERHASIL MASUKAN DATA LIST");
 
     notifyListeners();
   }

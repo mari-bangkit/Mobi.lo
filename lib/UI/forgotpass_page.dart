@@ -126,7 +126,6 @@ class _ForgotPassState extends State<ForgotPass> {
                           }
                         });
                       }
-                      print(_email);
                     });
                   },
                   style: TextButton.styleFrom(
@@ -160,7 +159,6 @@ class _ForgotPassState extends State<ForgotPass> {
                     primary: kWhite,
                   ),
                   onPressed: () {
-                    print("dialihkan ke forgot password");
                     Navigator.push(
                       context,
                       MaterialPageRoute(

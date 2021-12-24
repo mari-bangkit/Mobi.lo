@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:yuk_mancing/Model/places_data.dart';
+import 'package:yuk_mancing/Model/categorydata.dart';
 
 Players playersFromJson(String str) => Players.fromJson(json.decode(str));
 
@@ -23,7 +23,7 @@ class Players {
   String date;
   String time;
   String userID;
-  Datatempat datatempat;
+  Bestplace datatempat;
   factory Players.fromJson(Map<String, dynamic> json) => Players(
         id: json["id"],
         nama: json["nama"],
@@ -31,7 +31,7 @@ class Players {
         date: json["date"],
         time: json["time"],
         userID: json["userID"],
-        datatempat: Datatempat.fromJson(json["datatempat"]),
+        datatempat: Bestplace.fromJson(json["datatempat"]),
       );
 
   Map<String, dynamic> toJson() => {

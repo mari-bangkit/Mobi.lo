@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
-import 'package:yuk_mancing/Model/places_data.dart';
+import 'package:yuk_mancing/Model/categorydata.dart';
+import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
+import 'package:yuk_mancing/UI/details_page.dart';
 import 'package:yuk_mancing/providers/player.dart';
 
 import 'Widget/Bookingwidget/date_field.dart';
 import 'Widget/Bookingwidget/time_field.dart';
 
 class BookingPage extends StatefulWidget {
-  final Datatempat tempatPilih;
+  final Bestplace tempatPilih;
   const BookingPage({Key? key, required this.tempatPilih}) : super(key: key);
 
   @override
@@ -49,7 +51,6 @@ class _BookingPageState extends State<BookingPage> {
                 .addPlayer(_name, _numberWA, _date, _time, widget.tempatPilih)
                 .then(
               (response) {
-                print("Kembali ke Home & kasih notif snack bar");
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text("Berhasil ditambahkan"),
@@ -108,11 +109,13 @@ class _BookingPageState extends State<BookingPage> {
           ),
           child: ListView(
             children: [
-              // const AppbarCostum(
-              //   leftIcon: Icons.arrow_back,
-              //   nameappbar: "Isi dulu \npendaftarannya",
-              //   leftCallback: DetailsPage(),
-              // ),
+              AppbarCostum(
+                leftIcon: Icons.arrow_back,
+                nameappbar: "Isi dulu \npendaftarannya",
+                leftCallback: DetailsPage(
+                  pickplace: widget.tempatPilih,
+                ),
+              ),
               const SizedBox(
                 height: 50,
               ),
@@ -240,7 +243,6 @@ class _BookingPageState extends State<BookingPage> {
       firstDate: today,
       lastDate: DateTime(currentDate.year + 1),
     );
-    print(eventDate);
     if (eventDate != null && eventDate != today) {
       setState(() {
         today = eventDate!;

@@ -78,7 +78,6 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print("on tap");
                       _showsimpledialog(context);
                     },
                     child: Container(
@@ -117,7 +116,6 @@ class _SettingPageState extends State<SettingPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      print("on tap");
                       Navigator.push(
                         context,
                         MaterialPageRoute(
