@@ -15,11 +15,15 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   bool isInit = true;
+  bool _isloading = true;
 
   @override
   void didChangeDependencies() {
     if (isInit) {
       Provider.of<PlayersProviders>(context).initialData();
+      setState(() {
+        _isloading = false;
+      });
     }
     isInit = false;
     super.didChangeDependencies();
@@ -72,44 +76,49 @@ class _HistoryPageState extends State<HistoryPage> {
                 height: 10,
               ),
               Expanded(
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: playersdata.history.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        print(playersdata.history.length);
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => DetailsPage(pickplace: null,),
-                        //   ),
-                        // );
-                      },
-                      child: Slidable(
-                        key: const ValueKey(0),
-                        endActionPane: ActionPane(
-                          motion: const ScrollMotion(),
-                          children: [
-                            SlidableAction(
-                              // An action can be bigger than the others.
-                              flex: 2,
-                              onPressed: deleteplayer,
-                              backgroundColor: const Color(0xFF7BC043),
-                              foregroundColor: Colors.white,
-                              icon: Icons.delete,
-                              label: 'Delete',
+                child: (playersdata.history.isEmpty)
+                    ? const Align(
+                        alignment: Alignment.center,
+                        child: CircularProgressIndicator(),
+                      )
+                    : ListView.builder(
+                        physics: const BouncingScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: playersdata.history.length,
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: () {
+                              print(playersdata.history.length);
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => DetailsPage(pickplace: null,),
+                              //   ),
+                              // );
+                            },
+                            child: Slidable(
+                              key: const ValueKey(0),
+                              endActionPane: ActionPane(
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    // An action can be bigger than the others.
+                                    flex: 2,
+                                    onPressed: deleteplayer,
+                                    backgroundColor: const Color(0xFF7BC043),
+                                    foregroundColor: Colors.white,
+                                    icon: Icons.delete,
+                                    label: 'Delete',
+                                  ),
+                                ],
+                              ),
+                              child: HistoryData(
+                                historyPlace: playersdata.history[index],
+                              ),
                             ),
-                          ],
-                        ),
-                        child: HistoryData(
-                          historyPlace: playersdata.history[index],
-                        ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
               ),
             ],
           ),

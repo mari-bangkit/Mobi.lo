@@ -439,10 +439,38 @@ class _LoginPageState extends State<Loginpage> {
                                 IconButton(
                                   color: kLightred,
                                   onPressed: () {
-                                    final googleprovider =
-                                        Provider.of<GoogleSign>(context,
-                                            listen: false);
-                                    googleprovider.googleLogin();
+                                    Future.delayed(loginTime)
+                                        .then((value) async {
+                                      String message = "in";
+                                      try {
+                                        final googleprovider =
+                                            Provider.of<Auth>(context,
+                                                listen: false);
+                                        await googleprovider.googleLogin();
+                                      } catch (e) {
+                                        message = e.toString();
+                                        return message;
+                                      } finally {
+                                        setState(() {
+                                          _isloading = false;
+                                        });
+                                        if (message != "in") {
+                                          Fluttertoast.showToast(
+                                            msg: message.toString(),
+                                            fontSize: 18,
+                                            gravity: ToastGravity.BOTTOM,
+                                          );
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const MyHomePage(),
+                                            ),
+                                          );
+                                        }
+                                      }
+                                    });
                                   },
                                   icon: const ImageIcon(
                                     AssetImage(

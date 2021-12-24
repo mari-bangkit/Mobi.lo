@@ -1,0 +1,100 @@
+{
+    "recomended":[ {
+      "alamat" : "Jl. Kamboja No.292",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMDM8BA2yDtk2L_MXcLtGsemY1oW2ra0BNHdD8B=s0",
+      "name" : "Pemancingan Gilang BNI 60",
+      "rating" : "4,5"
+    }, {
+      "alamat" : "Jl. Hidup Baru No.30, Serua, Kec. Ciputat",
+      "fasilitas" : {
+        "kolam" : "1",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    }, {
+      "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    }],
+  "newplace":[ {
+      "alamat" : "Jl. Kamboja No.292",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMDM8BA2yDtk2L_MXcLtGsemY1oW2ra0BNHdD8B=s0",
+      "name" : "Pemancingan Gilang BNI 60",
+      "rating" : "4,5"
+    }, {
+      "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    }],
+    "popular":[ {
+      "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    },
+      {
+      "alamat" : "Jl. Kamboja No.292",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMDM8BA2yDtk2L_MXcLtGsemY1oW2ra0BNHdD8B=s0",
+      "name" : "Pemancingan Gilang BNI 60",
+      "rating" : "4,5"
+    }, {
+      "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    }],
+    "bestplace":[ {
+      "alamat" : "Jl. Kamboja No.292",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipMDM8BA2yDtk2L_MXcLtGsemY1oW2ra0BNHdD8B=s0",
+      "name" : "Pemancingan Gilang BNI 60",
+      "rating" : "4,5"
+    }],
+    
+    "placedata":[ {
+      "alamat" : "Madrasah al-falah, Gg. Masjid, Serua Indah",
+      "fasilitas" : {
+        "kolam" : "2",
+        "toilet" : "1"
+      },
+      "imageUrl" : "https://lh3.googleusercontent.com/p/AF1QipM94EKP8RBOCyc9-bTI8Qfd74qLVN1TdUt2-hVS=s0",
+      "name" : "Pemancingan ikan mas harian Jagal",
+      "rating" : "4,0"
+    }]
+}
+

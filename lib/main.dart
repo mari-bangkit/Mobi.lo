@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,9 +14,13 @@ import 'package:yuk_mancing/UI/setting_page.dart';
 import 'package:yuk_mancing/UI/splash_screen.dart';
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
 import 'package:yuk_mancing/providers/auth.dart';
+import 'package:yuk_mancing/providers/google_sign.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
+import 'package:yuk_mancing/providers/player.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -31,8 +36,18 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Auth(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => Placesdata(),
-        )
+          create: (ctx) => GoogleSign(),
+        ),
+        ChangeNotifierProxyProvider<Auth, Placesdata>(
+          create: (context) => Placesdata(),
+          update: (context, auth, places) =>
+              places!..updatedata(auth.token, auth.userId),
+        ),
+        ChangeNotifierProxyProvider<Auth, PlayersProviders>(
+          create: (context) => PlayersProviders(),
+          update: (context, auth, playersdata) =>
+              playersdata!..updatedata(auth.token, auth.userId),
+        ),
       ],
       builder: (context, child) => MaterialApp(
         home: const SplashScreen(),

@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 
 class GoogleSign extends ChangeNotifier {
   final googlesignin = GoogleSignIn();
+  late String userId;
 
   GoogleSignInAccount? _user;
 
@@ -13,18 +14,19 @@ class GoogleSign extends ChangeNotifier {
     final googleUser = await googlesignin.signIn();
 
     if (googleUser == null) return;
-    print(googleUser);
-    _user = googleUser;
 
     final googleAuth = await googleUser.authentication;
+
+    print(googleUser);
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
       idToken: googleAuth.idToken,
     );
 
+    print(credential.idToken);
     await FirebaseAuth.instance.signInWithCredential(credential);
-
+    print(FirebaseAuth.instance.currentUser!.email);
     notifyListeners();
   }
 }

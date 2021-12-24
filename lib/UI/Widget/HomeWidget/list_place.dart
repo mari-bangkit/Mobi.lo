@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/categorydata.dart';
 import 'package:yuk_mancing/Model/places_data.dart';
 
 class ListPlace extends StatefulWidget {
-  final Datatempat tempatdata;
+  final Bestplace tempatdata;
   const ListPlace({Key? key, required this.tempatdata}) : super(key: key);
 
   @override
@@ -18,10 +19,10 @@ class _ListPlaceState extends State<ListPlace> {
     return Container(
       margin: const EdgeInsets.only(bottom: 5, top: 5),
       width: MediaQuery.of(context).size.width,
-      height: 130,
+      height: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: kLightGray.withOpacity(0.6),
+        color: kLightGray.withOpacity(0.2),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.2),
@@ -38,8 +39,12 @@ class _ListPlaceState extends State<ListPlace> {
         children: [
           Container(
             width: 117,
-            height: 130,
+            height: 150,
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(widget.tempatdata.imageUrl),
+                fit: BoxFit.cover,
+              ),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20),
                 bottomLeft: Radius.circular(20),
@@ -66,72 +71,62 @@ class _ListPlaceState extends State<ListPlace> {
                 Container(
                   padding: const EdgeInsets.only(
                     left: 5,
-                    top: 5,
+                    top: 10,
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Nama Tempat",
-                        style: TextStyle(
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                          color: kBlack,
-                          fontFamily: "Monstserrat",
-                        ),
-                      ),
-                      IconButton(
-                        onPressed: () => setState(
-                          () {
-                            _isFavorit = !_isFavorit;
-                          },
-                        ),
-                        icon: Icon(
-                          _isFavorit
-                              ? CupertinoIcons.heart
-                              : CupertinoIcons.heart_fill,
-                          color: Colors.red,
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    widget.tempatdata.name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                      color: kBlack,
+                      fontFamily: "Monstserrat",
+                    ),
                   ),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(CupertinoIcons.location),
-                    Text(
-                      "Location",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Monstserrat",
-                        color: kLightGray,
+                  children: [
+                    Container(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: const Icon(CupertinoIcons.location)),
+                    Container(
+                      padding: const EdgeInsets.only(left: 5),
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: Text(
+                        widget.tempatdata.alamat,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          fontFamily: "Monstserrat",
+                          color: kGray,
+                        ),
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Icon(
-                      CupertinoIcons.star_fill,
-                      color: Colors.yellow,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: const Icon(
+                        CupertinoIcons.star_fill,
+                        color: Colors.yellow,
+                      ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 2,
                     ),
-                    Text(
-                      "Rating",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Monstserrat",
-                        color: kLightGray,
+                    Container(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                        widget.tempatdata.rating,
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontFamily: "Monstserrat",
+                          color: kGray2.withOpacity(0.6),
+                        ),
                       ),
                     ),
                   ],

@@ -28,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   void didChangeDependencies() {
     if (isInit) {
       Provider.of<Placesdata>(context).initialDataPlace();
+      Provider.of<Placesdata>(context).getdataplace();
       setState(() {
         _isloading = false;
       });
@@ -87,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                     right: 10,
                   ),
                   child: UsernameText(
-                    data: name,
+                    data: allPlaceProvider.userid,
                   ),
                 ),
                 // const Category(),
@@ -145,7 +146,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: allPlaceProvider.tempat.length,
+                                itemCount: allPlaceProvider.recommended.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -161,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                                     },
                                     child: ListPlace(
                                       tempatdata:
-                                          allPlaceProvider.tempat[index],
+                                          allPlaceProvider.recommended[index],
                                     ),
                                   );
                                 },
@@ -170,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: 2,
+                                itemCount: allPlaceProvider.popular.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -184,7 +185,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     },
-                                    // child: const ListPlace(),
+                                    child: ListPlace(
+                                      tempatdata:
+                                          allPlaceProvider.popular[index],
+                                    ),
                                   );
                                 },
                               ),
@@ -192,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: 1,
+                                itemCount: allPlaceProvider.newplace.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -206,7 +210,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     },
-                                    //  child: const ListPlace(),
+                                    child: ListPlace(
+                                      tempatdata:
+                                          allPlaceProvider.newplace[index],
+                                    ),
                                   );
                                 },
                               ),
@@ -214,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: 3,
+                                itemCount: allPlaceProvider.bestplace.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
@@ -228,7 +235,10 @@ class _HomePageState extends State<HomePage> {
                                         ),
                                       );
                                     },
-                                    // child: const ListPlace(),
+                                    child: ListPlace(
+                                      tempatdata:
+                                          allPlaceProvider.bestplace[index],
+                                    ),
                                   );
                                 },
                               ),

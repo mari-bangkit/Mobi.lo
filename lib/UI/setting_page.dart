@@ -4,9 +4,11 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/username.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
+import 'package:yuk_mancing/providers/auth.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -17,6 +19,8 @@ class SettingPage extends StatefulWidget {
 
 class _SettingPageState extends State<SettingPage> {
   bool _isFavorit = false;
+
+  Duration get changeTime => const Duration(milliseconds: 200);
 
   @override
   Widget build(BuildContext context) {
@@ -105,68 +109,8 @@ class _SettingPageState extends State<SettingPage> {
                   const SizedBox(
                     height: 15,
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      print("on tap");
-                      // _showsimpledialog(context);
-                    },
-                    child: Container(
-                      height: 48,
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: kLightGray.withOpacity(0.3),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Notification settings",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: kBlack.withOpacity(0.6),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 15,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      print("on tap");
-                      // _showsimpledialog(context);
-                    },
-                    child: Container(
-                      height: 48,
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: kLightGray.withOpacity(0.3),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "Privacy & Policy",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: kBlack.withOpacity(0.6),
-                          ),
-                        ),
-                      ),
-                    ),
                   ),
                   const SizedBox(
                     height: 30,
@@ -218,84 +162,103 @@ class _SettingPageState extends State<SettingPage> {
   void _showsimpledialog(BuildContext context) {
     TextEditingController _nameChange = TextEditingController();
     showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(10),
-              ),
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
             ),
-            title: const Text(
-              "Edit profile",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w500,
-              ),
+          ),
+          title: const Text(
+            "Edit profile",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
             ),
-            titlePadding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Nama lengkap",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          fontFamily: "Montserrat"),
-                    ),
-                    const SizedBox(
-                      height: 3,
-                    ),
-                    Container(
-                      height: 48,
-                      width: MediaQuery.of(context).size.width,
-                      margin: const EdgeInsets.only(right: 10),
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      decoration: BoxDecoration(
-                        color: kLightGray.withOpacity(0.3),
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                      child: TextField(
-                        controller: _nameChange,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Nama lengkap",
-                        ),
-                        style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          color: kGray,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                        onPressed: () {
-                          name = _nameChange.text;
-                          Fluttertoast.showToast(
-                              msg: "Profile telah diubah",
-                              gravity: ToastGravity.BOTTOM);
-                          setState(() {});
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text("Change"),
+          ),
+          titlePadding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Nama lengkap",
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        fontFamily: "Montserrat"),
+                  ),
+                  const SizedBox(
+                    height: 3,
+                  ),
+                  Container(
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    margin: const EdgeInsets.only(right: 5),
+                    child: TextField(
+                      controller: _nameChange,
+                      decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide:
+                                const BorderSide(color: Colors.black, width: 2),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          hintText: 'ubah nama anda'),
+                      style: const TextStyle(
+                        fontStyle: FontStyle.italic,
+                        color: kGray,
                       ),
                     ),
-                  ],
-                ),
-              )
-            ],
-          );
-        });
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        name = _nameChange.text;
+                        Future.delayed(changeTime).then((value) async {
+                          String message = "in";
+                          try {
+                            await Provider.of<Auth>(context, listen: false)
+                                .update(name);
+                          } catch (e) {
+                            message = e.toString();
+                            return message;
+                          } finally {
+                            if (message != "in") {
+                              Fluttertoast.showToast(
+                                msg: message.toString(),
+                                fontSize: 18,
+                                gravity: ToastGravity.BOTTOM,
+                              );
+                            } else {
+                              Fluttertoast.showToast(
+                                  msg: "Profile telah diubah",
+                                  gravity: ToastGravity.BOTTOM);
+                              setState(() {});
+                              Navigator.of(context).pop();
+                            }
+                          }
+                        });
+                      },
+                      child: const Text("Change"),
+                    ),
+                  ),
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
   }
 }
