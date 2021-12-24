@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/Model/places_data.dart';
 
 class ListPlace extends StatefulWidget {
   final Bestplace tempatdata;
