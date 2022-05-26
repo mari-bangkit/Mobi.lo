@@ -1,6 +1,5 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 

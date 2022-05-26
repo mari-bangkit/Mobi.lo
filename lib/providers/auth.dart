@@ -13,7 +13,7 @@ class Auth with ChangeNotifier {
 
   String? get usernamedata {
     if (_username == null) {
-      return _username;
+      return userId;
     } else {
       return _username;
     }
@@ -105,13 +105,14 @@ class Auth with ChangeNotifier {
       );
 
       var responseData = json.decode(response.body);
-
+      print(responseData);
       if (responseData['error'] != null) {
         throw responseData['error']["message"];
       }
 
       _idToken = responseData["idToken"];
       userId = responseData["localId"];
+      _username = responseData["displayName"];
 
       // _expirydate = DateTime.now().add(
       //   Duration(

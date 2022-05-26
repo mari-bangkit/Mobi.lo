@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/brand.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
 
 class ListPlace extends StatefulWidget {
-  final Bestplace tempatdata;
+  final Brand tempatdata;
   const ListPlace({Key? key, required this.tempatdata}) : super(key: key);
 
   @override
@@ -73,7 +74,7 @@ class _ListPlaceState extends State<ListPlace> {
                     top: 10,
                   ),
                   child: Text(
-                    widget.tempatdata.name,
+                    widget.tempatdata.model,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -94,7 +95,7 @@ class _ListPlaceState extends State<ListPlace> {
                       padding: const EdgeInsets.only(left: 5),
                       width: MediaQuery.of(context).size.width / 2,
                       child: Text(
-                        widget.tempatdata.alamat,
+                        widget.tempatdata.varian,
                         style: const TextStyle(
                           fontSize: 15,
                           fontFamily: "Monstserrat",
@@ -120,7 +121,7 @@ class _ListPlaceState extends State<ListPlace> {
                     Container(
                       padding: const EdgeInsets.only(left: 5),
                       child: Text(
-                        widget.tempatdata.rating,
+                        widget.tempatdata.jumlahKursi.toString(),
                         style: TextStyle(
                           fontSize: 18,
                           fontFamily: "Monstserrat",

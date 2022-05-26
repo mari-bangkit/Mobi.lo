@@ -8,15 +8,18 @@ List<CategoryData> categorydata =
 
 List categoryData = [
   {
-    "name": "Recommended",
+    "name": "TOYOTA",
   },
   {
-    "name": "Popular",
+    "name": "HONDA",
   },
   {
-    "name": "New place",
+    "name": "MITSUBISHI",
   },
   {
-    "name": "Best place",
+    "name": "NISSAN",
+  },
+  {
+    "name": "ISUZU",
   },
 ];

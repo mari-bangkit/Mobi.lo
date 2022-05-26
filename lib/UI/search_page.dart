@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Model/brand.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
@@ -16,8 +16,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<Bestplace> searchdata = [];
-  List<Bestplace> searchplaces = [];
+  List<Brand> searchdata = [];
+  List<Brand> searchplaces = [];
   String query = "";
   bool isInit = true;
   @override
@@ -81,14 +81,14 @@ class _SearchPageState extends State<SearchPage> {
                           final book = searchplaces[index];
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailsPage(
-                                    pickplace: book,
-                                  ),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => DetailsPage(
+                              //       pickplace: book,
+                              //     ),
+                              //   ),
+                              // );
                             },
                             child: ListPlace(
                               tempatdata: book,
@@ -132,7 +132,7 @@ class _SearchPageState extends State<SearchPage> {
 
   void searchPlaces(String query) {
     final books = searchdata.where((book) {
-      final titleLower = book.name.toLowerCase();
+      final titleLower = book.model.toLowerCase();
       final searchLower = query.toLowerCase();
 
       return titleLower.contains(searchLower);

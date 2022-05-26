@@ -1,6 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
@@ -22,6 +23,8 @@ class _HomePageState extends State<HomePage> {
   bool isInit = true;
   bool _isloading = true;
 
+  Widget _showwidget = const CircularProgressIndicator();
+
   @override
   void didChangeDependencies() {
     if (isInit) {
@@ -31,8 +34,24 @@ class _HomePageState extends State<HomePage> {
       });
     }
     isInit = false;
-
+    startTimer();
     super.didChangeDependencies();
+  }
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 5), (t) {
+      setState(() {
+        _showwidget = const Center(
+          child: Text(
+            "Data tidak ditemukan",
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+        ); //set loading to false
+      });
+      t.cancel(); //stops the timer
+    });
   }
 
   @override
@@ -85,7 +104,7 @@ class _HomePageState extends State<HomePage> {
                     right: 10,
                   ),
                   child: UsernameText(
-                    data: allPlaceProvider.userid,
+                    data: allPlaceProvider.name,
                   ),
                 ),
                 // const Category(),
@@ -134,32 +153,34 @@ class _HomePageState extends State<HomePage> {
                       right: 10,
                     ),
                     child: (allPlaceProvider.tempat.isEmpty)
-                        ? const Align(
+                        ? Align(
                             alignment: Alignment.center,
-                            child: CircularProgressIndicator())
+                            child: _showwidget,
+                          )
                         : TabBarView(
                             children: [
                               ListView.builder(
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: allPlaceProvider.recommended.length,
+                                itemCount: allPlaceProvider.TOYOTA.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailsPage(
-                                            pickplace: allPlaceProvider
-                                                .recommended[index],
-                                          ),
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DetailsPage(
+                                      //       pickplace: allPlaceProvider
+                                      //           .recommended[index],
+                                      //     ),
+                                      //   ),
+
+                                      // );
                                     },
                                     child: ListPlace(
                                       tempatdata:
-                                          allPlaceProvider.recommended[index],
+                                          allPlaceProvider.TOYOTA[index],
                                     ),
                                   );
                                 },
@@ -168,23 +189,23 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: allPlaceProvider.popular.length,
+                                itemCount: allPlaceProvider.HONDA.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailsPage(
-                                            pickplace:
-                                                allPlaceProvider.tempat[index],
-                                          ),
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DetailsPage(
+                                      //       pickplace: allPlaceProvider
+                                      //           .recommended[index],
+                                      //     ),
+                                      //   ),
+
+                                      // );
                                     },
                                     child: ListPlace(
-                                      tempatdata:
-                                          allPlaceProvider.popular[index],
+                                      tempatdata: allPlaceProvider.HONDA[index],
                                     ),
                                   );
                                 },
@@ -193,23 +214,23 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: allPlaceProvider.newplace.length,
+                                itemCount: allPlaceProvider.MITSUBISHI.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailsPage(
-                                            pickplace:
-                                                allPlaceProvider.tempat[index],
-                                          ),
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DetailsPage(
+                                      //       pickplace: allPlaceProvider
+                                      //           .tempat[index],
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                     child: ListPlace(
                                       tempatdata:
-                                          allPlaceProvider.newplace[index],
+                                          allPlaceProvider.MITSUBISHI[index],
                                     ),
                                   );
                                 },
@@ -218,23 +239,47 @@ class _HomePageState extends State<HomePage> {
                                 padding: const EdgeInsets.only(top: 10),
                                 physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
-                                itemCount: allPlaceProvider.bestplace.length,
+                                itemCount: allPlaceProvider.NISSAN.length,
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => DetailsPage(
-                                            pickplace:
-                                                allPlaceProvider.tempat[index],
-                                          ),
-                                        ),
-                                      );
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DetailsPage(
+                                      //       pickplace: allPlaceProvider
+                                      //           .tempat[index],
+                                      //     ),
+                                      //   ),
+                                      // );
                                     },
                                     child: ListPlace(
                                       tempatdata:
-                                          allPlaceProvider.bestplace[index],
+                                          allPlaceProvider.NISSAN[index],
+                                    ),
+                                  );
+                                },
+                              ),
+                              ListView.builder(
+                                padding: const EdgeInsets.only(top: 10),
+                                physics: const BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: allPlaceProvider.ISUZU.length,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      // Navigator.push(
+                                      //   context,
+                                      //   MaterialPageRoute(
+                                      //     builder: (context) => DetailsPage(
+                                      //       pickplace: allPlaceProvider
+                                      //           .tempat[index],
+                                      //     ),
+                                      //   ),
+                                      // );
+                                    },
+                                    child: ListPlace(
+                                      tempatdata: allPlaceProvider.ISUZU[index],
                                     ),
                                   );
                                 },

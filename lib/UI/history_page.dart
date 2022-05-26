@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
@@ -15,18 +16,39 @@ class HistoryPage extends StatefulWidget {
 
 class _HistoryPageState extends State<HistoryPage> {
   bool isInit = true;
-  bool _isloading = true;
+
+  Widget _showwidget = const CircularProgressIndicator();
+
+  @override
+  void initState() {
+    startTimer(); //start the timer on loading
+    super.initState();
+  }
 
   @override
   void didChangeDependencies() {
     if (isInit) {
       Provider.of<PlayersProviders>(context).initialData();
-      setState(() {
-        _isloading = false;
-      });
     }
+    Future.delayed(const Duration(seconds: 4));
     isInit = false;
     super.didChangeDependencies();
+  }
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 5), (t) {
+      setState(() {
+        _showwidget = const Center(
+          child: Text(
+            "Data tidak ditemukan",
+            style: TextStyle(
+              fontSize: 20,
+            ),
+          ),
+        ); //set loading to false
+      });
+      t.cancel(); //stops the timer
+    });
   }
 
   @override
@@ -77,9 +99,9 @@ class _HistoryPageState extends State<HistoryPage> {
               ),
               Expanded(
                 child: (playersdata.history.isEmpty)
-                    ? const Align(
+                    ? Align(
                         alignment: Alignment.center,
-                        child: CircularProgressIndicator(),
+                        child: _showwidget,
                       )
                     : ListView.builder(
                         physics: const BouncingScrollPhysics(),

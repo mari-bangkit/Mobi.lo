@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Auth, Placesdata>(
           create: (context) => Placesdata(),
           update: (context, auth, places) =>
-              places!..updatedata(auth.token, auth.userId),
+              places!..updatedata(auth.token, auth.userId, auth.usernamedata),
         ),
         ChangeNotifierProxyProvider<Auth, PlayersProviders>(
           create: (context) => PlayersProviders(),
