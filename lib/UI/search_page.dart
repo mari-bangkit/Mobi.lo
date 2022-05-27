@@ -8,6 +8,8 @@ import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
 
+import '../providers/player.dart';
+
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
 
@@ -20,12 +22,16 @@ class _SearchPageState extends State<SearchPage> {
   List<Brand> searchplaces = [];
   String query = "";
   bool isInit = true;
+  late String nama, email;
+
   @override
   void didChangeDependencies() {
     if (isInit) {
       searchdata = searchplaces = Provider.of<Placesdata>(context).tempat;
     }
     isInit = false;
+    nama = Provider.of<Placesdata>(context).name;
+    email = Provider.of<Placesdata>(context).dataEmail;
     super.didChangeDependencies();
   }
 
@@ -72,7 +78,24 @@ class _SearchPageState extends State<SearchPage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    buildSearch(),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width / 1.3,
+                          child: buildSearch(),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            filterDialog(context);
+                          },
+                          child: Image.asset(
+                            "Assets/Images/icon_filter.png",
+                            width: 24,
+                          ),
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 10),
                     Expanded(
                       child: ListView.builder(
                         itemCount: searchplaces.length,
@@ -142,5 +165,35 @@ class _SearchPageState extends State<SearchPage> {
       this.query = query;
       searchplaces = books;
     });
+  }
+
+  void filterDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SimpleDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(5),
+            ),
+          ),
+          title: const Text(
+            "Filter",
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          titlePadding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+          children: [
+            Text(
+              nama.toString(),
+              style: const TextStyle(
+                  fontSize: 20, color: kBlack, fontWeight: FontWeight.bold),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

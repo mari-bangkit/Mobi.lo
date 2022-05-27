@@ -74,12 +74,7 @@ class DetailsPage extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MyHomePage(),
-                                ),
-                              );
+                              Navigator.pop(context);
                             },
                             child: const Icon(Icons.arrow_back,
                                 size: 25, color: kWhite),

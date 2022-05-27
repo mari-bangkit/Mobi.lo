@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/UI/Widget/SignWidget/title_widget.dart';
 import 'package:yuk_mancing/UI/forgotpass_page.dart';
 import 'package:yuk_mancing/UI/signup_page.dart';
 import 'package:yuk_mancing/main.dart';
@@ -64,26 +65,6 @@ class _LoginPageState extends State<Loginpage> {
               width: MediaQuery.of(context).size.width,
               child: ListView(
                 children: [
-                  FadeInRight(
-                    duration: const Duration(milliseconds: 200),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                          top: 10,
-                          right: 10,
-                        ),
-                        height: 40,
-                        width: 100,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("Assets/Images/Logo.png"),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
                   const SizedBox(
                     height: 40,
                   ),
@@ -92,36 +73,39 @@ class _LoginPageState extends State<Loginpage> {
                     child: Container(
                       margin: const EdgeInsets.only(
                         left: 10,
+                        right: 10,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           FadeInDown(
-                            delay: const Duration(milliseconds: 200),
-                            duration: const Duration(milliseconds: 800),
-                            child: RichText(
-                              text: const TextSpan(
-                                text: "Brother,\n",
-                                style: TextStyle(
-                                  fontFamily: "Gothic A1",
-                                  fontSize: 35,
-                                  color: kPrimary,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                children: <TextSpan>[
-                                  TextSpan(
-                                    text: "Welcome back",
-                                    style: TextStyle(
-                                      fontFamily: "Gothic A1",
-                                      fontSize: 35,
-                                      color: kBlack,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ),
-                                ],
+                              delay: const Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 800),
+                              child: const TitleWidget(
+                                  title: "Brother, \nWelcome back")
+                              //  RichText(
+                              //   text: const TextSpan(
+                              //     text: "Brother,\n",
+                              //     style: TextStyle(
+                              //       fontFamily: "Gothic A1",
+                              //       fontSize: 35,
+                              //       color: kPrimary,
+                              //       fontWeight: FontWeight.bold,
+                              //     ),
+                              //     children: <TextSpan>[
+                              //       TextSpan(
+                              //         text: "Welcome back",
+                              //         style: TextStyle(
+                              //           fontFamily: "Gothic A1",
+                              //           fontSize: 35,
+                              //           color: kBlack,
+                              //           fontWeight: FontWeight.w500,
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                               ),
-                            ),
-                          ),
                           const SizedBox(
                             height: 30,
                           ),
@@ -129,8 +113,13 @@ class _LoginPageState extends State<Loginpage> {
                             delay: const Duration(milliseconds: 300),
                             duration: const Duration(milliseconds: 800),
                             child: Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              margin: const EdgeInsets.only(
+                                top: 30,
+                              ),
+                              decoration: BoxDecoration(
+                                color: kWhite,
+                                borderRadius: BorderRadius.circular(14),
+                              ),
                               child: TextField(
                                 controller: _usernameController,
                                 keyboardType: TextInputType.emailAddress,
@@ -157,14 +146,16 @@ class _LoginPageState extends State<Loginpage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 20,
+                            height: 15,
                           ),
                           FadeInLeft(
                             delay: const Duration(milliseconds: 500),
                             duration: const Duration(milliseconds: 800),
                             child: Container(
-                              margin: const EdgeInsets.only(right: 10),
-                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              decoration: BoxDecoration(
+                                color: kWhite,
+                                borderRadius: BorderRadius.circular(14),
+                              ),
                               child: TextField(
                                 obscureText: _isObscure,
                                 controller: _passwordController,
@@ -237,9 +228,6 @@ class _LoginPageState extends State<Loginpage> {
                             delay: const Duration(milliseconds: 400),
                             duration: const Duration(milliseconds: 800),
                             child: Container(
-                              margin: const EdgeInsets.only(
-                                right: 20,
-                              ),
                               padding: const EdgeInsets.all(2),
                               height: 45,
                               width: MediaQuery.of(context).size.height,
@@ -295,7 +283,9 @@ class _LoginPageState extends State<Loginpage> {
                                                 context,
                                                 MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const MyHomePage(),
+                                                      const MyHomePage(
+                                                    selectedPage: 0,
+                                                  ),
                                                 ),
                                               );
                                             }
@@ -312,8 +302,10 @@ class _LoginPageState extends State<Loginpage> {
                                   primary: kBlack,
                                   backgroundColor: kSecondary,
                                   shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(20))),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(13),
+                                    ),
+                                  ),
                                 ),
                                 child: _isloading
                                     ? const SizedBox(

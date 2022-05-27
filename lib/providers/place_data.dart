@@ -9,6 +9,8 @@ class Placesdata with ChangeNotifier {
   late String token;
   late String userid;
   late String name;
+  late String dataEmail;
+
   List<Brand> tempat = [];
   List<Brand> TOYOTA = [];
   List<Brand> HONDA = [];
@@ -16,10 +18,11 @@ class Placesdata with ChangeNotifier {
   List<Brand> NISSAN = [];
   List<Brand> ISUZU = [];
 
-  void updatedata(tokenData, uid, username) {
+  void updatedata(tokenData, uid, username, email) {
     token = tokenData;
     userid = uid;
     name = username;
+    dataEmail = email;
 
     notifyListeners();
   }

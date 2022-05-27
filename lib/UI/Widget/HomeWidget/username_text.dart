@@ -30,14 +30,14 @@ class UsernameText extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: kBlack),
                 ),
-                const Text(
-                  "Good day for fishing",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: "Monstserrat",
-                      fontWeight: FontWeight.w600,
-                      color: kBlack),
-                ),
+                // const Text(
+                //   "Good day For buying car",
+                //   style: TextStyle(
+                //       fontSize: 20,
+                //       fontFamily: "Monstserrat",
+                //       fontWeight: FontWeight.w600,
+                //       color: kBlack),
+                // ),
               ],
             )
           : Column(

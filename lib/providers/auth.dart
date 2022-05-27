@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class Auth with ChangeNotifier {
-  var _idToken, userId, _username;
+  var _idToken, userId, _username, _email;
 
   String? get token {
     return _idToken;
@@ -17,6 +17,10 @@ class Auth with ChangeNotifier {
     } else {
       return _username;
     }
+  }
+
+  String? get email {
+    return _email;
   }
 
   String? get uidtoken {
@@ -113,6 +117,7 @@ class Auth with ChangeNotifier {
       _idToken = responseData["idToken"];
       userId = responseData["localId"];
       _username = responseData["displayName"];
+      _email = responseData["email"];
 
       // _expirydate = DateTime.now().add(
       //   Duration(

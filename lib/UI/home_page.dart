@@ -9,6 +9,7 @@ import 'package:yuk_mancing/Model/category.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
+import 'package:yuk_mancing/main.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
 
 class HomePage extends StatefulWidget {
@@ -71,43 +72,87 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      width: 130,
-                      height: 35,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("Assets/Images/Logo.png"),
-                          fit: BoxFit.cover,
-                        ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 10,
+                      ),
+                      child: UsernameText(
+                        data: allPlaceProvider.name,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _isFavorit = !_isFavorit;
-                        });
-                      },
-                      icon: Icon(_isFavorit
-                          ? CupertinoIcons.bell
-                          : CupertinoIcons.bell_fill),
+                    const Spacer(),
+                    Container(
+                      margin: const EdgeInsets.only(
+                        right: 10,
+                      ),
+                      child: IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _isFavorit = !_isFavorit;
+                          });
+                        },
+                        icon: Icon(_isFavorit
+                            ? CupertinoIcons.bell
+                            : CupertinoIcons.bell_fill),
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
-                    right: 10,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const MyHomePage(selectedPage: 1),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: 56,
+                    margin: const EdgeInsets.only(
+                      top: 30,
+                      left: 10,
+                      right: 10,
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(14),
+                      color: kWhite,
+                      border: Border.all(
+                        color: kBlack,
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          height: 42,
+                          width: MediaQuery.of(context).size.width / 1.8,
+                          padding: const EdgeInsets.all(10),
+                          child: const Text("Search Furniture",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              )),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        const SizedBox(
+                          height: 44,
+                          width: 50,
+                          child: Center(
+                            child: Icon(
+                              Icons.search,
+                              size: 24,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                  child: UsernameText(
-                    data: allPlaceProvider.name,
-                  ),
                 ),
-                // const Category(),
                 const SizedBox(
                   height: 10,
                 ),

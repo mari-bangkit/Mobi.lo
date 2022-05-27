@@ -74,7 +74,7 @@ class _ListPlaceState extends State<ListPlace> {
                     top: 10,
                   ),
                   child: Text(
-                    widget.tempatdata.model,
+                    widget.tempatdata.varian,
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
@@ -95,7 +95,7 @@ class _ListPlaceState extends State<ListPlace> {
                       padding: const EdgeInsets.only(left: 5),
                       width: MediaQuery.of(context).size.width / 2,
                       child: Text(
-                        widget.tempatdata.varian,
+                        widget.tempatdata.model,
                         style: const TextStyle(
                           fontSize: 15,
                           fontFamily: "Monstserrat",

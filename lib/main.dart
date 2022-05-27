@@ -36,8 +36,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProxyProvider<Auth, Placesdata>(
           create: (context) => Placesdata(),
-          update: (context, auth, places) =>
-              places!..updatedata(auth.token, auth.userId, auth.usernamedata),
+          update: (context, auth, places) => places!
+            ..updatedata(
+                auth.token, auth.userId, auth.usernamedata, auth.email),
         ),
         ChangeNotifierProxyProvider<Auth, PlayersProviders>(
           create: (context) => PlayersProviders(),
@@ -54,8 +55,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
+  final int selectedPage;
   const MyHomePage({
     Key? key,
+    required this.selectedPage,
   }) : super(key: key);
 
   @override
@@ -70,6 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
     ),
   );
 
+  bool selectpage = true;
   int _selectedItemPosition = 0;
   SnakeShape snakeShape = SnakeShape.circle;
 
@@ -83,6 +87,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Color unselectedColor = Colors.grey;
   Gradient unselectedGradient =
       const LinearGradient(colors: [Colors.red, Colors.blueGrey]);
+
+  @override
+  void initState() {
+    super.initState();
+    if (selectpage == true) {
+      _selectedItemPosition = widget.selectedPage;
+    }
+  }
 
   Widget _getWidget() {
     if (_selectedItemPosition == 1) {
@@ -149,8 +161,12 @@ class _MyHomePageState extends State<MyHomePage> {
 
           showSelectedLabels: showSelectedLabels = false,
           showUnselectedLabels: showUnselectedLabels = false,
-          currentIndex: _selectedItemPosition,
-          onTap: (index) => setState(() => _selectedItemPosition = index),
+          currentIndex:
+              selectpage == true ? widget.selectedPage : _selectedItemPosition,
+          onTap: (index) => setState(() {
+            _selectedItemPosition = index;
+            selectpage = false;
+          }),
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.home), label: 'home'),

@@ -156,6 +156,7 @@ class _SettingPageState extends State<SettingPage> {
 
   void _showsimpledialog(BuildContext context) {
     TextEditingController _nameChange = TextEditingController();
+
     showDialog(
       context: context,
       builder: (context) {
@@ -220,30 +221,32 @@ class _SettingPageState extends State<SettingPage> {
                     child: TextButton(
                       onPressed: () {
                         name = _nameChange.text;
-                        Future.delayed(changeTime).then((value) async {
-                          String message = "in";
-                          try {
-                            await Provider.of<Auth>(context, listen: false)
-                                .update(name);
-                          } catch (e) {
-                            message = e.toString();
-                            return message;
-                          } finally {
-                            if (message != "in") {
-                              Fluttertoast.showToast(
-                                msg: message.toString(),
-                                fontSize: 18,
-                                gravity: ToastGravity.BOTTOM,
-                              );
-                            } else {
-                              Fluttertoast.showToast(
-                                  msg: "Profile telah diubah",
-                                  gravity: ToastGravity.BOTTOM);
-                              setState(() {});
-                              Navigator.of(context).pop();
+                        Future.delayed(changeTime).then(
+                          (value) async {
+                            String message = "in";
+                            try {
+                              await Provider.of<Auth>(context, listen: false)
+                                  .update(name);
+                            } catch (e) {
+                              message = e.toString();
+                              return message;
+                            } finally {
+                              if (message != "in") {
+                                Fluttertoast.showToast(
+                                  msg: message.toString(),
+                                  fontSize: 18,
+                                  gravity: ToastGravity.BOTTOM,
+                                );
+                              } else {
+                                Fluttertoast.showToast(
+                                    msg: "Profile telah diubah",
+                                    gravity: ToastGravity.BOTTOM);
+                                setState(() {});
+                                Navigator.of(context).pop();
+                              }
                             }
-                          }
-                        });
+                          },
+                        );
                       },
                       child: const Text("Change"),
                     ),
