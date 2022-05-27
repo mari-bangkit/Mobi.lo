@@ -1,4 +1,4 @@
-### Aplikasi informasi & pemesanan tempat pemancingan 
+### Aplikasi prediction tentang pembelian harga mobil berdasarkan budget 
 
 [Mockup design](https://www.figma.com/file/2qKjV89j5jGLPjwMq60wDL/Ui-kuy-mancing?fuid=894805675517878148)
 
