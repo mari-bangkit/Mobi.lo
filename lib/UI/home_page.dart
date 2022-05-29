@@ -8,7 +8,6 @@ import 'package:yuk_mancing/Model/category.dart';
 
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
-import 'package:yuk_mancing/UI/details_page.dart';
 import 'package:yuk_mancing/main.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
 

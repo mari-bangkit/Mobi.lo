@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Model/categorydata.dart';
+import 'package:yuk_mancing/Model/username.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
-import 'package:yuk_mancing/UI/details_page.dart';
 import 'package:yuk_mancing/providers/place_data.dart';
-
-import '../providers/player.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -23,6 +20,8 @@ class _SearchPageState extends State<SearchPage> {
   String query = "";
   bool isInit = true;
   late String nama, email;
+
+  final emailController = TextEditingController(text: '');
 
   @override
   void didChangeDependencies() {
@@ -177,23 +176,52 @@ class _SearchPageState extends State<SearchPage> {
               Radius.circular(5),
             ),
           ),
-          title: const Text(
+          title: Text(
             "Filter",
-            style: TextStyle(
+            style: blackTextStyle.copyWith(
               fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontWeight: bold,
             ),
           ),
+          clipBehavior: Clip.antiAlias,
           titlePadding: const EdgeInsets.fromLTRB(10, 15, 10, 10),
+          contentPadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
           children: [
-            Text(
-              nama.toString(),
-              style: const TextStyle(
-                  fontSize: 20, color: kBlack, fontWeight: FontWeight.bold),
-            ),
+            namefield(),
           ],
         );
       },
+    );
+  }
+
+  Widget namefield() {
+    return Container(
+      padding: const EdgeInsets.all(10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Name",
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Text(
+            name,
+            style: greyTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

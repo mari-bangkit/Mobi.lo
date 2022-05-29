@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
@@ -12,8 +13,8 @@ class Auth with ChangeNotifier {
   }
 
   String? get usernamedata {
-    if (_username == null) {
-      return userId;
+    if (_username == '') {
+      return _username = "User";
     } else {
       return _username;
     }
@@ -33,7 +34,7 @@ class Auth with ChangeNotifier {
 
   Future<void> signup(String email, String password) async {
     Uri url = Uri.parse(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyB7xZNF2E-ZTf9Iquart56mbayUs6p_kFo",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCCHSZWkE9OT7Mgi_K0hNJcnfVUjQCGg4w",
     );
 
     try {
@@ -67,7 +68,7 @@ class Auth with ChangeNotifier {
 
   Future<void> forgotpass(String email) async {
     Uri url = Uri.parse(
-      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyB7xZNF2E-ZTf9Iquart56mbayUs6p_kFo",
+      "https://identitytoolkit.googleapis.com/v1/accounts:sendOobCode?key=AIzaSyCCHSZWkE9OT7Mgi_K0hNJcnfVUjQCGg4w",
     );
 
     try {
@@ -95,7 +96,7 @@ class Auth with ChangeNotifier {
 
   Future<void> login(String email, String password) async {
     Uri url = Uri.parse(
-      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyB7xZNF2E-ZTf9Iquart56mbayUs6p_kFo",
+      "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCCHSZWkE9OT7Mgi_K0hNJcnfVUjQCGg4w",
     );
 
     try {
@@ -109,7 +110,9 @@ class Auth with ChangeNotifier {
       );
 
       var responseData = json.decode(response.body);
-      print(responseData);
+      if (kDebugMode) {
+        print(responseData);
+      }
       if (responseData['error'] != null) {
         throw responseData['error']["message"];
       }
@@ -133,7 +136,7 @@ class Auth with ChangeNotifier {
 
   Future<void> update(String username) async {
     Uri url = Uri.parse(
-      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyB7xZNF2E-ZTf9Iquart56mbayUs6p_kFo",
+      "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyCCHSZWkE9OT7Mgi_K0hNJcnfVUjQCGg4w",
     );
 
     try {

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/Model/username.dart';
 
 class Placesdata with ChangeNotifier {
   late String token;
@@ -29,10 +27,11 @@ class Placesdata with ChangeNotifier {
 
   Future<void> getdataplace() async {
     Uri url = Uri.parse(
-        "https://yukmancing-88624-default-rtdb.firebaseio.com/databrand.json?auth=$token");
+        "https://carpredictionapp-default-rtdb.firebaseio.com/datamobil.json?auth=$token");
 
     var hasilGetData = await http.get(url);
     // final DataTempat data = dataTempatFromJson(hasilGetData.body);
+
     final List<Brand> data = brandFromJson(hasilGetData.body);
 
     tempat = data;

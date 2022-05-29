@@ -38,6 +38,7 @@ dependencies:
   readmore: ^2.1.0
   flutter_snake_navigationbar: ^0.5.0
   intl: ^0.17.0
+  google_fonts: ^2.3.2
   
   lottie: ^1.2.1
   fluttertoast: ^8.0.8

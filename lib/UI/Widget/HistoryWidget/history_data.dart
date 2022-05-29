@@ -111,7 +111,7 @@ class HistoryData extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
+                            SizedBox(
                               width: MediaQuery.of(context).size.width / 2,
                               child: Text(
                                 historyPlace.datatempat.name,

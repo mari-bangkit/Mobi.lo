@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Model/categorydata.dart';
 
 class ListPlace extends StatefulWidget {
   final Brand tempatdata;

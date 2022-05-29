@@ -15,52 +15,38 @@ class UsernameText extends StatelessWidget {
   Widget build(BuildContext context) {
     final username = Provider.of<Auth>(context).usernamedata;
     return Container(
-      margin: const EdgeInsets.only(
-        top: 10,
-      ),
-      child: (username == null)
-          ? Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Hi $data ,",
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Monstserrat",
-                      fontWeight: FontWeight.bold,
-                      color: kBlack),
-                ),
-                // const Text(
-                //   "Good day For buying car",
-                //   style: TextStyle(
-                //       fontSize: 20,
-                //       fontFamily: "Monstserrat",
-                //       fontWeight: FontWeight.w600,
-                //       color: kBlack),
-                // ),
-              ],
-            )
-          : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Hi $username ,",
-                  style: const TextStyle(
-                      fontSize: 30,
-                      fontFamily: "Monstserrat",
-                      fontWeight: FontWeight.bold,
-                      color: kBlack),
-                ),
-                const Text(
-                  "Good day for fishing",
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontFamily: "Monstserrat",
-                      fontWeight: FontWeight.w600,
-                      color: kBlack),
-                ),
-              ],
+        margin: const EdgeInsets.only(
+          top: 10,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            (username == null)
+                ? Text(
+                    "Hi $data ,",
+                    style: const TextStyle(
+                        fontSize: 30,
+                        fontFamily: "Monstserrat",
+                        fontWeight: FontWeight.bold,
+                        color: kBlack),
+                  )
+                : Text(
+                    "Hi $username ,",
+                    style: const TextStyle(
+                        fontSize: 30,
+                        fontFamily: "Monstserrat",
+                        fontWeight: FontWeight.bold,
+                        color: kBlack),
+                  ),
+            const Text(
+              "Good day For buying car",
+              style: TextStyle(
+                  fontSize: 20,
+                  fontFamily: "Monstserrat",
+                  fontWeight: FontWeight.w600,
+                  color: kBlack),
             ),
-    );
+          ],
+        ));
   }
 }
