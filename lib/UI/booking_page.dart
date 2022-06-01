@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
+import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
 import 'package:yuk_mancing/UI/details_page.dart';
-import 'package:yuk_mancing/providers/player.dart';
 
 import 'Widget/Bookingwidget/date_field.dart';
 import 'Widget/Bookingwidget/time_field.dart';

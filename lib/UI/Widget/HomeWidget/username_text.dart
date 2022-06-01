@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/providers/auth.dart';
+import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
 
 class UsernameText extends StatelessWidget {
   final String data;

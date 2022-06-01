@@ -6,11 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
 import 'package:yuk_mancing/UI/Widget/SignWidget/title_widget.dart';
 import 'package:yuk_mancing/UI/forgotpass_page.dart';
 import 'package:yuk_mancing/UI/signup_page.dart';
 import 'package:yuk_mancing/main.dart';
-import 'package:yuk_mancing/providers/auth.dart';
+
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);

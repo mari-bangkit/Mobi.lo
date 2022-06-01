@@ -6,11 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
+import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
 import 'package:yuk_mancing/main.dart';
-import 'package:yuk_mancing/providers/place_data.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

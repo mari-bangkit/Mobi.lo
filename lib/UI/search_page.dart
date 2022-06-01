@@ -3,9 +3,9 @@ import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
 import 'package:yuk_mancing/Model/username.dart';
+import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
-import 'package:yuk_mancing/providers/place_data.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
