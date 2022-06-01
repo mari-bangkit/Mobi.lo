@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/username.dart';
 import 'package:yuk_mancing/UI/login_page.dart';
 import 'package:yuk_mancing/providers/auth.dart';
 
@@ -33,154 +31,109 @@ class _SettingPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          color: kWhiteGreyColor,
-          padding: const EdgeInsets.only(
-            top: 25,
-          ),
-          child: ListView(
-            children: [
-              const SizedBox(
-                height: 30,
+      body: Container(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        color: kWhiteGreyColor,
+        padding: const EdgeInsets.only(
+          top: 25,
+        ),
+        child: ListView(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          children: [
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 20,
+                right: 24,
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 24,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const SizedBox(
-                          height: 22,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(
+                        height: 22,
+                      ),
+                      Text(
+                        "Hi, $name",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 30,
+                          fontWeight: bold,
                         ),
-                        Text(
-                          "Hi, $name",
-                          style: blackTextStyle.copyWith(
-                            fontSize: 30,
-                            fontWeight: bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height,
-                margin: const EdgeInsets.only(top: 50),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 32,
-                ),
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(36),
+                      ),
+                    ],
                   ),
-                  color: kWhiteColor,
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height,
+              margin: const EdgeInsets.only(top: 50),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 24,
+                vertical: 32,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(36),
                 ),
-                child: Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        _showsimpledialog(context);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 30,
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Edit Profile",
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 18,
-                                    fontWeight: bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.chevron_right,
-                              color: kBlackColor,
-                            ),
-                          ],
-                        ),
+                color: kWhiteColor,
+              ),
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _showsimpledialog(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 20,
                       ),
-                    ),
-                    ProfileMenuItem(
-                      title: 'Frequently Asked Questions',
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        _showsimpledialog(context);
-                      },
-                      child: Container(
-                        margin: const EdgeInsets.only(
-                          bottom: 30,
-                        ),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  'Customer Care',
-                                  style: blackTextStyle.copyWith(
-                                    fontSize: 18,
-                                    fontWeight: bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Spacer(),
-                            Icon(
-                              Icons.chevron_right,
-                              color: kBlackColor,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Loginpage(),
+                      height: 30,
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 20,
                           ),
-                        );
-                      },
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Edit Profile",
+                              style: blackTextStyle.copyWith(
+                                fontSize: 18,
+                                fontWeight: bold,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          Icon(
+                            Icons.chevron_right,
+                            color: kBlackColor,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  ProfileMenuItem(
+                    title: 'Frequently Asked Questions',
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _showsimpledialog(context);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 30,
+                      ),
                       child: Row(
                         children: [
                           const SizedBox(
@@ -195,116 +148,62 @@ class _SettingPageState extends State<SettingPage> {
                             child: Align(
                               alignment: Alignment.centerLeft,
                               child: Text(
-                                "Log Out",
-                                style: TextStyle(
+                                'Customer Care',
+                                style: blackTextStyle.copyWith(
                                   fontSize: 18,
-                                  color: kLightred,
                                   fontWeight: bold,
                                 ),
                               ),
                             ),
                           ),
                           const Spacer(),
-                          const Icon(
+                          Icon(
                             Icons.chevron_right,
-                            color: kLightred,
+                            color: kBlackColor,
                           ),
                         ],
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      _showdeletedialog(context);
+                    },
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(10),
+                            ),
+                          ),
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              "Log Out",
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: kLightred,
+                                fontWeight: bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const Spacer(),
+                        const Icon(
+                          Icons.chevron_right,
+                          color: kLightred,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              // Column(
-              //   crossAxisAlignment: CrossAxisAlignment.start,
-              //   children: [
-              //     const Text(
-              //       "Account settings",
-              //       style: TextStyle(
-              //         fontFamily: "Mon",
-              //         fontSize: 20,
-              //         fontWeight: FontWeight.w400,
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       height: 5,
-              //     ),
-              //     GestureDetector(
-              //       onTap: () {
-              //         _showsimpledialog(context);
-              //       },
-              //       child: Container(
-              //         height: 48,
-              //         width: MediaQuery.of(context).size.width,
-              //         margin: const EdgeInsets.only(right: 10),
-              //         padding: const EdgeInsets.symmetric(
-              //           horizontal: 10,
-              //         ),
-              //         decoration: BoxDecoration(
-              //           color: kLightGray.withOpacity(0.3),
-              //           borderRadius: const BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //         child: Align(
-              //           alignment: Alignment.centerLeft,
-              //           child: Text(
-              //             "Edit Profile",
-              //             style: TextStyle(
-              //               fontSize: 18,
-              //               color: kBlack.withOpacity(0.6),
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       height: 15,
-              //     ),
-              //     const SizedBox(
-              //       height: 15,
-              //     ),
-              //     const SizedBox(
-              //       height: 30,
-              //     ),
-              //     GestureDetector(
-              //       onTap: () {
-              //         Navigator.push(
-              //           context,
-              //           MaterialPageRoute(
-              //             builder: (context) => const Loginpage(),
-              //           ),
-              //         );
-              //       },
-              //       child: Container(
-              //         height: 48,
-              //         width: MediaQuery.of(context).size.width,
-              //         margin: const EdgeInsets.only(right: 10),
-              //         padding: const EdgeInsets.symmetric(
-              //           horizontal: 10,
-              //         ),
-              //         decoration: BoxDecoration(
-              //           color: kLightred.withOpacity(0.4),
-              //           borderRadius: const BorderRadius.all(
-              //             Radius.circular(10),
-              //           ),
-              //         ),
-              //         child: const Align(
-              //           alignment: Alignment.centerLeft,
-              //           child: Text(
-              //             "Log Out",
-              //             style: TextStyle(
-              //               fontSize: 18,
-              //               color: kLightred,
-              //             ),
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -366,12 +265,9 @@ class _SettingPageState extends State<SettingPage> {
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(5),
                         ),
-                        hintText: 'ubah nama anda',
+                        hintText: 'cth: Jhond Smith',
                       ),
-                      style: TextStyle(
-                        fontStyle: FontStyle.italic,
-                        color: kWhiteGreyColor,
-                      ),
+                      style: blackAccentTextStyle,
                     ),
                   ),
                   const SizedBox(
@@ -419,5 +315,62 @@ class _SettingPageState extends State<SettingPage> {
         );
       },
     );
+  }
+
+  void _showdeletedialog(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Container(
+              height: 90,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Do you want to exit?"),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            print('yes selected');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const Loginpage(),
+                              ),
+                            );
+                          },
+                          child: const Text("Yes"),
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.red.shade800),
+                        ),
+                      ),
+                      const SizedBox(width: 15),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            print('no selected');
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            "No",
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

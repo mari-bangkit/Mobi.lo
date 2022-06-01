@@ -47,6 +47,9 @@ class MyApp extends StatelessWidget {
         ),
       ],
       builder: (context, child) => MaterialApp(
+        theme: ThemeData(
+          androidOverscrollIndicator: AndroidOverscrollIndicator.stretch,
+        ),
         home: const SplashScreen(),
         debugShowCheckedModeBanner: false,
       ),

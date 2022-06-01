@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
 
@@ -21,18 +22,18 @@ class _ListPlaceState extends State<ListPlace> {
       height: 150,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: kLightGray.withOpacity(0.2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            offset: const Offset(
-              2.0,
-              2.0,
-            ),
-            blurRadius: 5.0,
-            spreadRadius: 1.0,
-          ), //BoxShadow
-        ],
+        color: kWhiteGreyColor,
+        // boxShadow: [
+        //   BoxShadow(
+        //     color: Colors.black.withOpacity(0.2),
+        //     offset: const Offset(
+        //       2.0,
+        //       2.0,
+        //     ),
+        //     blurRadius: 5.0,
+        //     spreadRadius: 1.0,
+        //   ), //BoxShadow
+        // ],
       ),
       child: Row(
         children: [
@@ -74,57 +75,42 @@ class _ListPlaceState extends State<ListPlace> {
                   ),
                   child: Text(
                     widget.tempatdata.varian,
-                    style: const TextStyle(
+                    style: blackTextStyle.copyWith(
                       fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: kBlack,
-                      fontFamily: "Monstserrat",
+                      fontWeight: semiBold,
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
                 Row(
                   children: [
-                    Container(
-                        padding: const EdgeInsets.only(left: 5),
-                        child: const Icon(CupertinoIcons.location)),
                     Container(
                       padding: const EdgeInsets.only(left: 5),
                       width: MediaQuery.of(context).size.width / 2,
                       child: Text(
                         widget.tempatdata.model,
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontFamily: "Monstserrat",
-                          color: kGray,
+                        style: blackAccentTextStyle.copyWith(
+                          fontSize: 18,
                         ),
                       ),
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       padding: const EdgeInsets.only(left: 5),
-                      child: const Icon(
-                        CupertinoIcons.star_fill,
-                        color: Colors.yellow,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 2,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.only(left: 5),
                       child: Text(
-                        widget.tempatdata.jumlahKursi.toString(),
-                        style: TextStyle(
+                        NumberFormat.currency(
+                          locale: 'id-ID',
+                          symbol: 'IDR ',
+                          decimalDigits: 0,
+                        ).format(widget.tempatdata.harga),
+                        style: blackTextStyle.copyWith(
                           fontSize: 18,
-                          fontFamily: "Monstserrat",
-                          color: kGray2.withOpacity(0.6),
                         ),
                       ),
                     ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:after_layout/after_layout.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
 
@@ -18,10 +19,11 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   bool _isFavorit = true;
   bool isInit = true;
   bool _isloading = true;
+  bool _isSameName = false;
 
   Widget _showwidget = const CircularProgressIndicator();
 
@@ -36,6 +38,84 @@ class _HomePageState extends State<HomePage> {
     isInit = false;
     startTimer();
     super.didChangeDependencies();
+  }
+
+  @override
+  void afterFirstLayout(BuildContext context) {
+    if (_isSameName == true) {
+      _showAlert(context);
+    }
+  }
+
+  void _showAlert(BuildContext context) {
+    Timer.periodic(const Duration(seconds: 2), (t) {
+      showDialog(
+        context: context,
+        builder: (context) => SimpleDialog(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+              Radius.circular(10),
+            ),
+          ),
+          title: Text(
+            "Perbaharui profile",
+            style: redTextStyle.copyWith(
+              fontSize: 20,
+              fontWeight: bold,
+            ),
+          ),
+          titlePadding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 10,
+          ),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  Text(
+                    "Tolong perbaharui profile untuk kemudahan anda dalam pencarian mobil yang diinginkan ",
+                    style: blackTextStyle.copyWith(
+                      fontSize: 18,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(2),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const MyHomePage(selectedPage: 3),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        "Perbaharui data",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      );
+      t.cancel(); //stops the timer
+    });
   }
 
   void startTimer() {
@@ -57,6 +137,13 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final allPlaceProvider = Provider.of<Placesdata>(context);
+    final nameUser = Provider.of<Placesdata>(context).name;
+    final userId = Provider.of<Placesdata>(context).userid;
+    if (nameUser == "User") {
+      setState(() {
+        _isSameName = true;
+      });
+    }
     return DefaultTabController(
       length: categoryData.length,
       child: Scaffold(
@@ -65,6 +152,7 @@ class _HomePageState extends State<HomePage> {
             margin: const EdgeInsets.only(
               top: 10,
             ),
+            color: kWhiteColor,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: Column(
@@ -129,11 +217,13 @@ class _HomePageState extends State<HomePage> {
                           height: 42,
                           width: MediaQuery.of(context).size.width / 1.8,
                           padding: const EdgeInsets.all(10),
-                          child: const Text("Search Furniture",
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w500,
-                              )),
+                          child: Text(
+                            "Cari Mobil ",
+                            style: greyTextStyle.copyWith(
+                              fontSize: 16,
+                              fontWeight: semiBold,
+                            ),
+                          ),
                         ),
                         const SizedBox(
                           width: 10,
