@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
-import 'package:yuk_mancing/UI/login_page.dart';
+import 'package:yuk_mancing/UI/Pages/login_page.dart';
+import 'package:yuk_mancing/UI/Widget/SettingWidget/profile_menu_item.dart';
 
-import 'Widget/SettingWidget/profile_menu_item.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);

@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:readmore/readmore.dart';
 import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/UI/booking_page.dart';
-import 'package:yuk_mancing/UI/underconstructor_pages.dart';
+import 'package:yuk_mancing/UI/Pages/booking_page.dart';
+import 'package:yuk_mancing/UI/Pages/underconstructor_pages.dart';
+
 
 class DetailsPage extends StatelessWidget {
   final Bestplace pickplace;

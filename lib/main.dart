@@ -10,12 +10,13 @@ import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/UI/history_page.dart';
-import 'package:yuk_mancing/UI/home_page.dart';
-import 'package:yuk_mancing/UI/search_page.dart';
-import 'package:yuk_mancing/UI/setting_page.dart';
-import 'package:yuk_mancing/UI/splash_screen.dart';
+
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:yuk_mancing/UI/Pages/history_page.dart';
+import 'package:yuk_mancing/UI/Pages/home_page.dart';
+import 'package:yuk_mancing/UI/Pages/search_page.dart';
+import 'package:yuk_mancing/UI/Pages/setting_page.dart';
+import 'package:yuk_mancing/UI/Pages/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

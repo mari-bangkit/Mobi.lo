@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/player.dart';
+import 'package:yuk_mancing/UI/Pages/details_page.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
-import 'package:yuk_mancing/UI/details_page.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);

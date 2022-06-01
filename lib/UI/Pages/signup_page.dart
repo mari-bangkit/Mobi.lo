@@ -3,8 +3,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
+import 'package:yuk_mancing/UI/Pages/login_page.dart';
 import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
-import 'package:yuk_mancing/UI/login_page.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);

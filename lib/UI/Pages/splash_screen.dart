@@ -1,7 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/UI/login_page.dart';
+import 'package:yuk_mancing/UI/Pages/login_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
