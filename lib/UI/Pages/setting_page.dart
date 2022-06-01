@@ -7,7 +7,6 @@ import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 import 'package:yuk_mancing/UI/Pages/login_page.dart';
 import 'package:yuk_mancing/UI/Widget/SettingWidget/profile_menu_item.dart';
 
-
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
 
@@ -123,7 +122,7 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                     ),
                   ),
-                  ProfileMenuItem(
+                  const ProfileMenuItem(
                     title: 'Frequently Asked Questions',
                   ),
                   GestureDetector(
@@ -322,7 +321,7 @@ class _SettingPageState extends State<SettingPage> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Container(
+            content: SizedBox(
               height: 90,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

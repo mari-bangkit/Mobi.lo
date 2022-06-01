@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +10,8 @@ import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
+import 'package:yuk_mancing/Repository/local/helper/db_helper.dart';
+import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
 import 'package:yuk_mancing/UI/Pages/history_page.dart';
 import 'package:yuk_mancing/UI/Pages/home_page.dart';
 import 'package:yuk_mancing/UI/Pages/search_page.dart';
@@ -46,6 +46,11 @@ class MyApp extends StatelessWidget {
           update: (context, auth, playersdata) =>
               playersdata!..updatedata(auth.token, auth.userId),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => DatabaseProvider(
+            databaseHelper: DatabaseHelper(),
+          ),
+        )
       ],
       builder: (context, child) => MaterialApp(
         theme: ThemeData(
@@ -109,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return const SettingPage();
     }
 
-    return HomePage();
+    return const HomePage();
   }
 
   DateTime _timebackPressed = DateTime.now();
@@ -119,7 +124,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return WillPopScope(
       onWillPop: () async {
         final _difference = DateTime.now().difference(_timebackPressed);
-        final _exitwarning = _difference >= Duration(seconds: 2);
+        final _exitwarning = _difference >= const Duration(seconds: 2);
 
         _timebackPressed = DateTime.now();
 
@@ -144,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
           backgroundColor: kPrimary,
           behaviour: SnakeBarBehaviour.pinned,
           snakeShape: snakeShape = SnakeShape.circle,
-          shape: RoundedRectangleBorder(
+          shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(15),
               topRight: Radius.circular(15),
