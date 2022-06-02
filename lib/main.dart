@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
+import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
 import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 import 'package:yuk_mancing/Repository/Api/providers/player.dart';
@@ -50,7 +51,10 @@ class MyApp extends StatelessWidget {
           create: (ctx) => DatabaseProvider(
             databaseHelper: DatabaseHelper(),
           ),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => AiPrediction(),
+        ),
       ],
       builder: (context, child) => MaterialApp(
         theme: ThemeData(
@@ -105,9 +109,11 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  Widget _getWidget() {
+  Widget _getWidget(bool isfocus) {
     if (_selectedItemPosition == 1) {
-      return const SearchPage();
+      return SearchPage(
+        isFocus: isfocus,
+      );
     } else if (_selectedItemPosition == 2) {
       return const HistoryPage();
     } else if (_selectedItemPosition == 3) {
@@ -143,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
         }
       },
       child: Scaffold(
-        body: _getWidget(),
+        body: widget.selectedPage == 1 ? _getWidget(true) : _getWidget(false),
         bottomNavigationBar: SnakeNavigationBar.color(
           // height: 80,
           backgroundColor: kPrimary,

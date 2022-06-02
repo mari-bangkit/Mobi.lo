@@ -17,22 +17,22 @@ class PlayersProviders with ChangeNotifier {
     notifyListeners();
   }
 
-  String urlmaster = "https://yukmancing-88624-default-rtdb.firebaseio.com/";
+  String urlmaster = "https://carpredictionapp-default-rtdb.firebaseio.com/";
 
-  addPlayer(String name, String noWa, String date, String time,
-      Bestplace tempat) async {
+  addPlayer(int age, String country, String customerEMail, String customerName,
+      String gender) async {
     var id = "";
 
-    Uri url = Uri.parse('$urlmaster/history.json?auth=$token');
+    Uri url = Uri.parse('$urlmaster/datauser.json?auth=$token');
 
     var data = Players(
-        id: id,
-        nama: name,
-        noWa: noWa,
-        date: date,
-        time: time,
-        datatempat: tempat,
-        userID: userid);
+      userID: userid,
+      age: age,
+      country: country,
+      customerEMail: customerEMail,
+      customerName: customerName,
+      gender: gender,
+    );
 
     try {
       final response = await http.post(
@@ -49,32 +49,32 @@ class PlayersProviders with ChangeNotifier {
     }
   }
 
-  Future<void> initialData() async {
-    Uri url = Uri.parse(
-        '$urlmaster/history.json?auth=$token&orderBy="userID"&equalTo="$userid"');
+  // Future<void> initialData() async {
+  //   Uri url = Uri.parse(
+  //       '$urlmaster/history.json?auth=$token&orderBy="userID"&equalTo="$userid"');
 
-    var hasilGetData = await http.get(url);
+  //   var hasilGetData = await http.get(url);
 
-    var dataResponse = json.decode(hasilGetData.body) as Map<String, dynamic>;
+  //   var dataResponse = json.decode(hasilGetData.body) as Map<String, dynamic>;
 
-    history.clear();
-    dataResponse.forEach(
-      (key, value) {
-        Players prod = Players(
-          id: key,
-          nama: value["nama"],
-          noWa: value["noWa"],
-          date: value["date"],
-          time: value["time"],
-          datatempat: Bestplace.fromJson(
-            value["datatempat"],
-          ),
-          userID: value["userID"],
-        );
-        history.add(prod);
-      },
-    );
+  //   history.clear();
+  //   dataResponse.forEach(
+  //     (key, value) {
+  //       Players prod = Players(
+  //         id: key,
+  //         nama: value["nama"],
+  //         noWa: value["noWa"],
+  //         date: value["date"],
+  //         time: value["time"],
+  //         datatempat: Bestplace.fromJson(
+  //           value["datatempat"],
+  //         ),
+  //         userID: value["userID"],
+  //       );
+  //       history.add(prod);
+  //     },
+  //   );
 
-    notifyListeners();
-  }
+  //   notifyListeners();
+  // }
 }

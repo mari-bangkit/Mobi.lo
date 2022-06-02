@@ -46,41 +46,41 @@ class _BookingPageState extends State<BookingPage> {
             var _date = DateFormat("dd-MM-yyyy").format(eventDate!).toString();
             var _time = eventTime!.format(context).toString();
 
-            players
-                .addPlayer(_name, _numberWA, _date, _time, widget.tempatPilih)
-                .then(
-              (response) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text("Berhasil ditambahkan"),
-                    duration: Duration(seconds: 4),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
-                      ),
-                    ),
-                  ),
-                );
-                Navigator.pop(context);
-              },
-            ).catchError(
-              (err) => showDialog(
-                context: context,
-                builder: (context) => AlertDialog(
-                  title: Text("TERJADI ERROR $err"),
-                  content: const Text("Tidak dapat menambahkan player."),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Text("OKAY"),
-                    ),
-                  ],
-                ),
-              ),
-            );
+            // players
+            //     .addPlayer(_name, _numberWA, _date, _time, widget.tempatPilih)
+            //     .then(
+            //   (response) {
+            //     ScaffoldMessenger.of(context).showSnackBar(
+            //       const SnackBar(
+            //         content: Text("Berhasil ditambahkan"),
+            //         duration: Duration(seconds: 4),
+            //         shape: RoundedRectangleBorder(
+            //           borderRadius: BorderRadius.only(
+            //             topLeft: Radius.circular(10),
+            //             topRight: Radius.circular(10),
+            //           ),
+            //         ),
+            //       ),
+            //     );
+            //     Navigator.pop(context);
+            //   },
+            // ).catchError(
+            //   (err) => showDialog(
+            //     context: context,
+            //     builder: (context) => AlertDialog(
+            //       title: Text("TERJADI ERROR $err"),
+            //       content: const Text("Tidak dapat menambahkan player."),
+            //       actions: [
+            //         TextButton(
+            //           onPressed: () {
+            //             Navigator.pop(context);
+            //           },
+            //           child: const Text("OKAY"),
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // );
           },
           child: const Text(
             "Booking now",

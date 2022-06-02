@@ -8,38 +8,36 @@ String playersToJson(Players data) => json.encode(data.toJson());
 
 class Players {
   Players({
-    required this.id,
-    required this.nama,
-    required this.noWa,
-    required this.date,
-    required this.time,
+    required this.customerName,
+    required this.customerEMail,
+    required this.country,
+    required this.gender,
+    required this.age,
     required this.userID,
-    required this.datatempat,
   });
 
-  String id;
-  String nama;
-  String noWa;
-  String date;
-  String time;
+  String customerName;
+  String customerEMail;
+  String country;
+  String gender;
+  int age;
   String userID;
-  Bestplace datatempat;
+
   factory Players.fromJson(Map<String, dynamic> json) => Players(
-        id: json["id"],
-        nama: json["nama"],
-        noWa: json["noWa"],
-        date: json["date"],
-        time: json["time"],
+        customerName: json["Customer Name"],
+        customerEMail: json["Customer e-mail"],
+        country: json["Country"],
+        gender: json["Gender"],
+        age: json["Age"],
         userID: json["userID"],
-        datatempat: Bestplace.fromJson(json["datatempat"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "nama": nama,
-        "noWa": noWa,
-        "date": date,
-        "time": time,
+        "Customer Name": customerName,
+        "Customer e-mail": customerEMail,
+        "Country": country,
+        "Gender": gender,
+        "Age": age,
         "userID": userID,
-        "datatempat": datatempat.toJson(),
       };
 }

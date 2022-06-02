@@ -25,7 +25,7 @@ class UsernameText extends StatelessWidget {
                 ? Text(
                     "Hi $data ,",
                     style: const TextStyle(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontFamily: "Monstserrat",
                         fontWeight: FontWeight.bold,
                         color: kBlack),
@@ -33,7 +33,7 @@ class UsernameText extends StatelessWidget {
                 : Text(
                     "Hi $username ,",
                     style: const TextStyle(
-                        fontSize: 30,
+                        fontSize: 25,
                         fontFamily: "Monstserrat",
                         fontWeight: FontWeight.bold,
                         color: kBlack),
@@ -41,7 +41,7 @@ class UsernameText extends StatelessWidget {
             const Text(
               "Good day For buying car",
               style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 16,
                   fontFamily: "Monstserrat",
                   fontWeight: FontWeight.w600,
                   color: kBlack),

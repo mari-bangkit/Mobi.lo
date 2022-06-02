@@ -28,7 +28,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      Provider.of<PlayersProviders>(context).initialData();
+      //Provider.of<PlayersProviders>(context).initialData();
     }
     Future.delayed(const Duration(seconds: 4));
     isInit = false;
@@ -110,15 +110,15 @@ class _HistoryPageState extends State<HistoryPage> {
                         itemBuilder: (context, index) {
                           return GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => DetailsPage(
-                                    pickplace:
-                                        playersdata.history[index].datatempat,
-                                  ),
-                                ),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => DetailsPage(
+                              //       pickplace:
+                              //           playersdata.history[index].datatempat,
+                              //     ),
+                              //   ),
+                              // );
                             },
                             child: HistoryData(
                               historyPlace: playersdata.history[index],

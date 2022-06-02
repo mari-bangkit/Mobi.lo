@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
+import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
 
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
@@ -48,88 +49,87 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
   }
 
   void _showAlert(BuildContext context) {
-    Timer.periodic(const Duration(seconds: 2), (t) {
-      showDialog(
-        context: context,
-        builder: (context) => SimpleDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
+    showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(10),
           ),
-          title: Text(
-            "Perbaharui profile",
-            style: redTextStyle.copyWith(
-              fontSize: 20,
-              fontWeight: bold,
-            ),
+        ),
+        title: Text(
+          "Perbaharui profile",
+          style: redTextStyle.copyWith(
+            fontSize: 20,
+            fontWeight: bold,
           ),
-          titlePadding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 10,
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  Text(
-                    "Tolong perbaharui profile untuk kemudahan anda dalam pencarian mobil yang diinginkan ",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 18,
-                    ),
+        ),
+        titlePadding: const EdgeInsets.symmetric(
+          horizontal: 10,
+          vertical: 10,
+        ),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: Column(
+              children: [
+                Text(
+                  "Tolong perbaharui profile untuk kemudahan anda dalam pencarian mobil yang diinginkan ",
+                  style: blackTextStyle.copyWith(
+                    fontSize: 18,
                   ),
-                  const SizedBox(
-                    height: 20,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  padding: const EdgeInsets.all(2),
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(5),
                   ),
-                  Container(
-                    padding: const EdgeInsets.all(2),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      color: Colors.red,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const MyHomePage(selectedPage: 3),
-                          ),
-                        );
-                      },
-                      child: Text(
-                        "Perbaharui data",
-                        style: blackTextStyle.copyWith(
-                          fontSize: 15,
-                          fontWeight: semiBold,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const MyHomePage(selectedPage: 3),
                         ),
+                      );
+                    },
+                    child: Text(
+                      "Perbaharui data",
+                      style: blackTextStyle.copyWith(
+                        fontSize: 15,
+                        fontWeight: semiBold,
                       ),
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      );
-      t.cancel(); //stops the timer
-    });
+          ),
+        ],
+      ),
+    );
   }
 
   void startTimer() {
     Timer.periodic(const Duration(seconds: 5), (t) {
-      setState(() {
-        _showwidget = const Center(
-          child: Text(
-            "Data tidak ditemukan",
-            style: TextStyle(
-              fontSize: 20,
+      if (mounted) {
+        setState(() {
+          _showwidget = const Center(
+            child: Text(
+              "Data tidak ditemukan",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
-          ),
-        ); //set loading to false
-      });
+          ); //set loading to false
+        });
+      }
       t.cancel(); //stops the timer
     });
   }
@@ -196,15 +196,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                     );
                   },
                   child: Container(
-                    height: 56,
+                    height: 40,
                     margin: const EdgeInsets.only(
-                      top: 30,
-                      left: 10,
-                      right: 10,
+                      top: 20,
+                      left: 5,
+                      right: 5,
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(10),
                       color: kWhite,
                       border: Border.all(
                         color: kBlack,
@@ -214,9 +214,9 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
-                          height: 42,
+                          height: 35,
                           width: MediaQuery.of(context).size.width / 1.8,
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(5),
                           child: Text(
                             "Cari Mobil ",
                             style: greyTextStyle.copyWith(
@@ -229,7 +229,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                           width: 10,
                         ),
                         const SizedBox(
-                          height: 44,
+                          height: 35,
                           width: 50,
                           child: Center(
                             child: Icon(
@@ -271,7 +271,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                           child: Text(
                             e.name,
                             style: const TextStyle(
-                              fontSize: 20,
+                              fontSize: 15,
                               fontFamily: "Monstserrat",
                             ),
                           ),

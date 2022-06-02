@@ -54,6 +54,10 @@ dependencies:
   firebase_auth: ^3.3.4
   firebase_core: ^1.10.6
   after_layout: ^1.1.1+1
+
+
+
+  
   
 
 

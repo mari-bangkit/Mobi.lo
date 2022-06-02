@@ -38,7 +38,7 @@ class HistoryData extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      historyPlace.date,
+                      " historyPlace.date",
                       style: const TextStyle(
                         fontSize: 18,
                         color: kBlack,
@@ -60,7 +60,7 @@ class HistoryData extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      historyPlace.time,
+                      "historyPlace.time",
                       style: const TextStyle(
                         fontSize: 18,
                         color: kBlack,
@@ -89,7 +89,7 @@ class HistoryData extends StatelessWidget {
                     width: 90,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(historyPlace.datatempat.imageUrl),
+                        image: NetworkImage("historyPlace.datatempat.imageUrl"),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: const BorderRadius.only(
@@ -114,7 +114,7 @@ class HistoryData extends StatelessWidget {
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 2,
                               child: Text(
-                                historyPlace.datatempat.name,
+                                "historyPlace.datatempat.name",
                                 style: const TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
@@ -139,7 +139,7 @@ class HistoryData extends StatelessWidget {
                               width: 2,
                             ),
                             Text(
-                              historyPlace.datatempat.rating,
+                              "historyPlace.datatempat.rating",
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Monstserrat",
