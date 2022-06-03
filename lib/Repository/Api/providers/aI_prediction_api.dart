@@ -9,24 +9,25 @@ class AiPrediction with ChangeNotifier {
   Uri urlMaster = Uri.parse(
       'http://f902266d-0271-4e20-bea5-43819609802c.southeastasia.azurecontainer.io/score');
 
-  Future<void> getResultApi(Customer customer) async {
+  Future<void> getResultApi() async {
     var data = {
       "Inputs": {
         "data": [
           {
-            "Customer Name": customer.customerName,
-            "Customer e-mail": customer.customerEMail,
-            "Country": customer.country,
-            "Gender": 0,
-            "Age": customer.age,
-            "Annual Salary": customer.annualSalary,
-            "Credit Card Debt": customer.annualSalary,
-            "Net Worth": customer.netWorth,
+            "Customer Name": "Alfridan Ripani",
+            "Customer e-mail": "alastair20@gmail.com",
+            "Country": "Indonesia",
+            "Gender": 1,
+            "Age": 24,
+            "Annual Salary": 120000000,
+            "Credit Card Debt": 12000000,
+            "Net Worth": 300000000,
           }
         ]
       },
       "GlobalParameters": 0.0
     };
+    print(data.toString());
 
     var response = await http.post(
       urlMaster,

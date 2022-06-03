@@ -21,6 +21,7 @@ class _SettingPageState extends State<SettingPage> {
   String name = '';
   String email = '';
   var selectedGender;
+  bool _isLoading = false;
   late List<String> gender;
   final emailController = TextEditingController(text: '');
 
@@ -449,15 +450,21 @@ class _SettingPageState extends State<SettingPage> {
                           ),
                           child: TextButton(
                             onPressed: () {
+                              setState(() {
+                                _isLoading = true;
+                              });
+
                               name = _nameChange.text;
                               if (_nameChange.text == '') {
                                 name = "User";
                               }
+
                               int age = int.parse(_ageChange.text);
                               String country = _countryChange.text;
                               String customerEMail = email;
                               String customerName = _nameChange.text;
                               String gender = selectedGender;
+
                               Future.delayed(changeTime).then(
                                 (value) async {
                                   String message = "in";
@@ -465,6 +472,7 @@ class _SettingPageState extends State<SettingPage> {
                                     await Provider.of<Auth>(context,
                                             listen: false)
                                         .update(name);
+
                                     await Provider.of<PlayersProviders>(context,
                                             listen: false)
                                         .addPlayer(
@@ -478,6 +486,10 @@ class _SettingPageState extends State<SettingPage> {
                                     message = e.toString();
                                     return message;
                                   } finally {
+                                    setState(() {
+                                      _isLoading = false;
+                                    });
+
                                     if (message != "in") {
                                       Fluttertoast.showToast(
                                         msg: message.toString(),
@@ -488,20 +500,25 @@ class _SettingPageState extends State<SettingPage> {
                                       Fluttertoast.showToast(
                                           msg: "Profile telah diubah",
                                           gravity: ToastGravity.BOTTOM);
-                                      setState(() {});
+
                                       Navigator.of(context).pop();
                                     }
                                   }
                                 },
                               );
                             },
-                            child: Text(
-                              "Change",
-                              style: blackTextStyle.copyWith(
-                                fontSize: 15,
-                                fontWeight: semiBold,
-                              ),
-                            ),
+                            child: (_isLoading == false)
+                                ? Text(
+                                    "Change",
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: 15,
+                                      fontWeight: semiBold,
+                                    ),
+                                  )
+                                : const CircularProgressIndicator(
+                                    color: kWhite,
+                                    backgroundColor: kBlack,
+                                  ),
                           ),
                         ),
                       ),

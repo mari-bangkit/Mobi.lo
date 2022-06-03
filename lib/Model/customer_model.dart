@@ -23,7 +23,7 @@ class Customer {
   String customerName;
   String customerEMail;
   String country;
-  String gender;
+  int gender;
   int age;
   int annualSalary;
   int creditCardDebt;

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
+import 'package:yuk_mancing/Model/customer_model.dart';
+import 'package:yuk_mancing/Model/players.dart';
+import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
 
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
+import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
 
@@ -20,9 +25,14 @@ class _SearchPageState extends State<SearchPage> {
   List<Brand> searchplaces = [];
   String query = "";
   bool isInit = true;
+  var selectedGender;
   late String nama, email;
 
-  final emailController = TextEditingController(text: '');
+  Duration get changeTime => const Duration(milliseconds: 200);
+
+  TextEditingController annualSalary = TextEditingController();
+  TextEditingController creditCardDebt = TextEditingController();
+  TextEditingController netWorth = TextEditingController();
 
   @override
   void didChangeDependencies() {
@@ -173,6 +183,8 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void filterDialog(BuildContext context) {
+    final playersdata =
+        Provider.of<PlayersProviders>(context, listen: false).history;
     showDialog(
       context: context,
       builder: (context) {
@@ -183,7 +195,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           title: Text(
-            "Filter",
+            "Masukan tambahan data: ",
             style: blackTextStyle.copyWith(
               fontSize: 20,
               fontWeight: bold,
@@ -196,21 +208,97 @@ class _SearchPageState extends State<SearchPage> {
             vertical: 10,
           ),
           children: [
-            namefield(),
+            annualsalary(),
+            creditdebit(),
+            networth(),
+            Container(
+              padding: const EdgeInsets.all(2),
+              decoration: BoxDecoration(
+                color: kPrimary,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: TextButton(
+                onPressed: () {
+                  if (playersdata[0].gender == "Laki-Laki") {
+                    selectedGender = 0;
+                  } else {
+                    selectedGender = 1;
+                  }
+
+                  Customer customer = Customer(
+                    customerName: playersdata[0].customerName,
+                    customerEMail: playersdata[0].customerEMail,
+                    country: playersdata[0].country,
+                    gender: selectedGender,
+                    age: playersdata[0].age,
+                    annualSalary: int.parse(annualSalary.text),
+                    creditCardDebt: int.parse(creditCardDebt.text),
+                    netWorth: int.parse(netWorth.text),
+                  );
+                  print(
+                    "${customer.age}" +
+                        "${customer.annualSalary}" +
+                        "${customer.creditCardDebt}" +
+                        "${customer.gender}" +
+                        "${customer.netWorth}",
+                  );
+                  print(customer.customerEMail +
+                      customer.customerName +
+                      customer.country);
+                  Future.delayed(changeTime).then(
+                    (value) async {
+                      String message = "in";
+                      try {
+                        await Provider.of<AiPrediction>(context, listen: false)
+                            .getResultApi();
+                      } catch (e) {
+                        message = e.toString();
+                        print(message);
+                        return message;
+                      } finally {
+                        if (message != "in") {
+                          Fluttertoast.showToast(
+                            msg: message.toString(),
+                            fontSize: 18,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Filter disesuaikan",
+                              gravity: ToastGravity.BOTTOM);
+                          setState(() {});
+                          Navigator.of(context).pop();
+                        }
+                      }
+                    },
+                  );
+                  print(
+                      annualSalary.text + netWorth.text + creditCardDebt.text);
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Filter",
+                  style: blackTextStyle.copyWith(
+                    fontSize: 15,
+                    fontWeight: semiBold,
+                  ),
+                ),
+              ),
+            ),
           ],
         );
       },
     );
   }
 
-  Widget namefield() {
+  Widget annualsalary() {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Name",
+            "Gaji Tahunan anda : ",
             style: blackTextStyle.copyWith(
               fontSize: 16,
               fontWeight: semiBold,
@@ -219,12 +307,122 @@ class _SearchPageState extends State<SearchPage> {
           const SizedBox(
             height: 5,
           ),
+          Container(
+            height: 80,
+            margin: const EdgeInsets.only(top: 5),
+            width: MediaQuery.of(context).size.width,
+            child: TextField(
+              controller: annualSalary,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 1.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                hintText: 'cth: 120000000',
+              ),
+              style: blackAccentTextStyle,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget creditdebit() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
           Text(
-            nama,
-            style: greyTextStyle.copyWith(
+            "Credit anda dibank : ",
+            style: blackTextStyle.copyWith(
               fontSize: 16,
               fontWeight: semiBold,
             ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            height: 80,
+            margin: const EdgeInsets.only(top: 5),
+            width: MediaQuery.of(context).size.width,
+            child: TextField(
+              controller: creditCardDebt,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 1.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                hintText: 'cth: 120000000',
+              ),
+              style: blackAccentTextStyle,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget networth() {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Total Kekayaan anda: ",
+            style: blackTextStyle.copyWith(
+              fontSize: 16,
+              fontWeight: semiBold,
+            ),
+          ),
+          const SizedBox(
+            height: 5,
+          ),
+          Container(
+            height: 80,
+            margin: const EdgeInsets.only(top: 5),
+            width: MediaQuery.of(context).size.width,
+            child: TextField(
+              controller: netWorth,
+              decoration: InputDecoration(
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                  borderSide: const BorderSide(
+                    color: Colors.black,
+                    width: 1.5,
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                hintText: 'cth: 120000000',
+              ),
+              style: blackAccentTextStyle,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       ),
