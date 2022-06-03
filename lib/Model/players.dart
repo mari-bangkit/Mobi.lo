@@ -8,6 +8,7 @@ String playersToJson(Players data) => json.encode(data.toJson());
 
 class Players {
   Players({
+    required this.id,
     required this.customerName,
     required this.customerEMail,
     required this.country,
@@ -16,6 +17,7 @@ class Players {
     required this.userID,
   });
 
+  String id;
   String customerName;
   String customerEMail;
   String country;
@@ -24,6 +26,7 @@ class Players {
   String userID;
 
   factory Players.fromJson(Map<String, dynamic> json) => Players(
+        id: json["id"],
         customerName: json["Customer Name"],
         customerEMail: json["Customer e-mail"],
         country: json["Country"],

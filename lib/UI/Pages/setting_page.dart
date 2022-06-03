@@ -222,286 +222,295 @@ class _SettingPageState extends State<SettingPage> {
 
   void _showsimpledialog(BuildContext context) {
     TextEditingController _nameChange = TextEditingController();
-
     TextEditingController _countryChange = TextEditingController();
-    TextEditingController _genderChange = TextEditingController();
     TextEditingController _ageChange = TextEditingController();
+    var Gender;
 
     showDialog(
       context: context,
       builder: (context) {
-        return SimpleDialog(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(10),
-            ),
-          ),
-          title: Text(
-            "Edit profile",
-            style: blackTextStyle.copyWith(
-              fontSize: 20,
-              fontWeight: bold,
-            ),
-          ),
-          titlePadding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 10,
-          ),
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Nama lengkap",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 15,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 80,
-                    margin: const EdgeInsets.only(top: 5),
-                    width: MediaQuery.of(context).size.width,
-                    child: TextField(
-                      controller: _nameChange,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                            width: 1.5,
+        return StatefulBuilder(
+          builder: (BuildContext context, setState) {
+            return SimpleDialog(
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              title: Text(
+                "Edit profile",
+                style: blackTextStyle.copyWith(
+                  fontSize: 20,
+                  fontWeight: bold,
+                ),
+              ),
+              titlePadding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 10,
+              ),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "Nama lengkap",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 80,
+                        margin: const EdgeInsets.only(top: 5),
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          controller: _nameChange,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            hintText: 'cth: Jhond Smith',
                           ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        hintText: 'cth: Jhond Smith',
-                      ),
-                      style: blackAccentTextStyle,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Email",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 15,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 30,
-                    margin: const EdgeInsets.only(
-                      right: 15,
-                      left: 15,
-                    ),
-                    width: MediaQuery.of(context).size.width,
-                    child: Text(
-                      email,
-                      style: blackAccentTextStyle.copyWith(
-                        fontSize: 16,
-                        fontWeight: semiBold,
-                      ),
-                    ),
-                  ),
-                  Text(
-                    "Negara",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 15,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 80,
-                    margin: const EdgeInsets.only(top: 5),
-                    width: MediaQuery.of(context).size.width,
-                    child: TextField(
-                      controller: _countryChange,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                            width: 1.5,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        hintText: 'cth: Amerika',
-                      ),
-                      style: blackAccentTextStyle,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Gender",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 15,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                      width: double.infinity,
-                      margin: const EdgeInsets.only(top: 5),
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: kBlack),
-                      ),
-                      child: DropdownButton(
-                        isExpanded: true,
-                        underline: const SizedBox(),
-                        borderRadius: BorderRadius.circular(10),
-                        hint: Text(
-                          "Gender",
                           style: blackAccentTextStyle,
                         ),
-                        items: gender.map((value) {
-                          return DropdownMenuItem(
-                            child: Text(
-                              value,
-                              style: blackTextStyle,
-                            ),
-                            value: value,
-                          );
-                        }).toList(),
-                        onChanged: (value) {
-                          if (value == "Laki-Laki") {
-                            setState(() {
-                              selectedGender = 0;
-                            });
-                          } else {
-                            setState(() {
-                              selectedGender = 1;
-                            });
-                          }
-                        },
-                      )),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Umur",
-                    style: blackTextStyle.copyWith(
-                      fontSize: 15,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Container(
-                    height: 80,
-                    margin: const EdgeInsets.only(top: 5),
-                    width: MediaQuery.of(context).size.width,
-                    child: TextField(
-                      controller: _ageChange,
-                      decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                          borderSide: const BorderSide(
-                            color: Colors.black,
-                            width: 1.5,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        hintText: 'cth: 20',
                       ),
-                      style: blackAccentTextStyle,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      padding: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        color: kBlueColor,
-                        borderRadius: BorderRadius.circular(5),
+                      const SizedBox(
+                        height: 10,
                       ),
-                      child: TextButton(
-                        onPressed: () {
-                          name = _nameChange.text;
-                          if (_nameChange.text == '') {
-                            name = "User";
-                          }
-                          int age = int.parse(_ageChange.text);
-                          String country = _countryChange.text;
-                          String customerEMail = email;
-                          String customerName = _nameChange.text;
-                          String gender = _genderChange.text;
-                          Future.delayed(changeTime).then(
-                            (value) async {
-                              String message = "in";
-                              try {
-                                await Provider.of<Auth>(context, listen: false)
-                                    .update(name);
-                                await Provider.of<PlayersProviders>(context,
-                                        listen: false)
-                                    .addPlayer(
-                                  age,
-                                  country,
-                                  customerEMail,
-                                  customerName,
-                                  gender,
-                                );
-                              } catch (e) {
-                                message = e.toString();
-                                return message;
-                              } finally {
-                                if (message != "in") {
-                                  Fluttertoast.showToast(
-                                    msg: message.toString(),
-                                    fontSize: 18,
-                                    gravity: ToastGravity.BOTTOM,
-                                  );
-                                } else {
-                                  Fluttertoast.showToast(
-                                      msg: "Profile telah diubah",
-                                      gravity: ToastGravity.BOTTOM);
-                                  setState(() {});
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                            },
-                          );
-                        },
+                      Text(
+                        "Email",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 30,
+                        margin: const EdgeInsets.only(
+                          right: 15,
+                          left: 15,
+                        ),
+                        width: MediaQuery.of(context).size.width,
                         child: Text(
-                          "Change",
-                          style: blackTextStyle.copyWith(
-                            fontSize: 15,
+                          email,
+                          style: blackAccentTextStyle.copyWith(
+                            fontSize: 16,
                             fontWeight: semiBold,
                           ),
                         ),
                       ),
-                    ),
+                      Text(
+                        "Negara",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 80,
+                        margin: const EdgeInsets.only(top: 5),
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          controller: _countryChange,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            hintText: 'cth: Amerika',
+                          ),
+                          style: blackAccentTextStyle,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Gender",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                          width: double.infinity,
+                          margin: const EdgeInsets.only(top: 5),
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(color: kBlack),
+                          ),
+                          child: DropdownButton(
+                            isExpanded: true,
+                            underline: const SizedBox(),
+                            borderRadius: BorderRadius.circular(10),
+                            hint: Text(
+                              "Gender",
+                              style: blackAccentTextStyle,
+                            ),
+                            value: Gender,
+                            items: gender.map((value) {
+                              return DropdownMenuItem(
+                                child: Text(
+                                  value,
+                                  style: blackTextStyle,
+                                ),
+                                value: value,
+                              );
+                            }).toList(),
+                            onChanged: (value) {
+                              setState(() {
+                                Gender = value;
+                                selectedGender = Gender;
+                              });
+                              // if (value == "Laki-Laki") {
+                              //   setState(() {
+                              //     selectedGender = 0;
+                              //   });
+                              // } else {
+                              //   setState(() {
+                              //     selectedGender = 1;
+                              //   });
+                              // }
+                            },
+                          )),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Umur",
+                        style: blackTextStyle.copyWith(
+                          fontSize: 15,
+                          fontWeight: semiBold,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Container(
+                        height: 80,
+                        margin: const EdgeInsets.only(top: 5),
+                        width: MediaQuery.of(context).size.width,
+                        child: TextField(
+                          controller: _ageChange,
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: const BorderSide(
+                                color: Colors.black,
+                                width: 1.5,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            hintText: 'cth: 20',
+                          ),
+                          style: blackAccentTextStyle,
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: Container(
+                          padding: const EdgeInsets.all(2),
+                          decoration: BoxDecoration(
+                            color: kBlueColor,
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          child: TextButton(
+                            onPressed: () {
+                              name = _nameChange.text;
+                              if (_nameChange.text == '') {
+                                name = "User";
+                              }
+                              int age = int.parse(_ageChange.text);
+                              String country = _countryChange.text;
+                              String customerEMail = email;
+                              String customerName = _nameChange.text;
+                              String gender = selectedGender;
+                              Future.delayed(changeTime).then(
+                                (value) async {
+                                  String message = "in";
+                                  try {
+                                    await Provider.of<Auth>(context,
+                                            listen: false)
+                                        .update(name);
+                                    await Provider.of<PlayersProviders>(context,
+                                            listen: false)
+                                        .addPlayer(
+                                      age,
+                                      country,
+                                      customerEMail,
+                                      customerName,
+                                      gender,
+                                    );
+                                  } catch (e) {
+                                    message = e.toString();
+                                    return message;
+                                  } finally {
+                                    if (message != "in") {
+                                      Fluttertoast.showToast(
+                                        msg: message.toString(),
+                                        fontSize: 18,
+                                        gravity: ToastGravity.BOTTOM,
+                                      );
+                                    } else {
+                                      Fluttertoast.showToast(
+                                          msg: "Profile telah diubah",
+                                          gravity: ToastGravity.BOTTOM);
+                                      setState(() {});
+                                      Navigator.of(context).pop();
+                                    }
+                                  }
+                                },
+                              );
+                            },
+                            child: Text(
+                              "Change",
+                              style: blackTextStyle.copyWith(
+                                fontSize: 15,
+                                fontWeight: semiBold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            )
-          ],
+                )
+              ],
+            );
+          },
         );
       },
     );

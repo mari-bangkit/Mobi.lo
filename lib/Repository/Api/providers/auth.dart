@@ -121,6 +121,7 @@ class Auth with ChangeNotifier {
       _username = responseData["displayName"];
       _email = responseData["email"];
 
+      print(_idToken);
       // _expirydate = DateTime.now().add(
       //   Duration(
       //     seconds: int.parse(responseData["expiresIn"]),

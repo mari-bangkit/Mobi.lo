@@ -7,6 +7,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
+import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 import 'package:yuk_mancing/UI/Pages/forgotpass_page.dart';
 import 'package:yuk_mancing/UI/Pages/signup_page.dart';
 import 'package:yuk_mancing/UI/Widget/SignWidget/title_widget.dart';

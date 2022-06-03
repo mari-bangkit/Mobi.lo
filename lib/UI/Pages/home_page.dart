@@ -8,6 +8,7 @@ import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/category.dart';
 import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
 import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
+import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 
 import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
@@ -30,6 +31,7 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   void didChangeDependencies() {
+    Provider.of<PlayersProviders>(context, listen: false).initialData();
     if (isInit) {
       Provider.of<Placesdata>(context).getdataplace();
       setState(() {
