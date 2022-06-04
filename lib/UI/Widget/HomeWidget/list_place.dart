@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Model/brand.dart';
+import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
 
 class ListPlace extends StatefulWidget {
   final Brand tempatdata;
@@ -16,111 +18,112 @@ class _ListPlaceState extends State<ListPlace> {
   bool _isFavorit = true;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 5, top: 5),
-      width: MediaQuery.of(context).size.width,
-      height: 150,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: kWhiteGreyColor,
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.black.withOpacity(0.2),
-        //     offset: const Offset(
-        //       2.0,
-        //       2.0,
-        //     ),
-        //     blurRadius: 5.0,
-        //     spreadRadius: 1.0,
-        //   ), //BoxShadow
-        // ],
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 117,
+    return Consumer<DatabaseProvider>(builder: (context, provider, child) {
+      return FutureBuilder<bool>(
+        future: provider.isBookmarked(widget.tempatdata.id),
+        builder: (context, snapshot) {
+          var isBookmarked = snapshot.data ?? false;
+          return Container(
             height: 150,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.tempatdata.imageUrl),
-                fit: BoxFit.cover,
-              ),
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(20),
-                bottomLeft: Radius.circular(20),
-              ),
-              color: kBlack.withOpacity(0.6),
-            ),
-          ),
-          Container(
-            height: 130,
-            width: MediaQuery.of(context).size.width - 117 - 25,
-            padding: const EdgeInsets.only(
-              left: 5,
-              right: 10,
-            ),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topRight: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+            width: MediaQuery.of(context).size.width,
+            margin: const EdgeInsets.only(bottom: 10),
+            child: Row(
+              children: <Widget>[
                 Container(
-                  padding: const EdgeInsets.only(
-                    left: 5,
-                    top: 10,
-                  ),
-                  child: Text(
-                    widget.tempatdata.varian,
-                    style: blackTextStyle.copyWith(
-                      fontSize: 18,
-                      fontWeight: semiBold,
-                    ),
-                  ),
-                ),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 5),
-                      width: MediaQuery.of(context).size.width / 2,
-                      child: Text(
-                        widget.tempatdata.model,
-                        style: blackAccentTextStyle.copyWith(
-                          fontSize: 18,
+                  height: 120,
+                  width: 100,
+                  margin: const EdgeInsets.only(top: 5, bottom: 10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          widget.tempatdata.imageUrl,
                         ),
-                      ),
-                    ),
-                  ],
+                        fit: BoxFit.cover),
+                  ),
                 ),
                 const SizedBox(
-                  height: 10,
+                  width: 10,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.only(left: 5),
-                      child: Text(
-                        NumberFormat.currency(
-                          locale: 'id-ID',
-                          symbol: 'IDR ',
-                          decimalDigits: 0,
-                        ).format(widget.tempatdata.harga),
+                Container(
+                  height: 130,
+                  width: MediaQuery.of(context).size.width - 117 - 25,
+                  padding: const EdgeInsets.only(
+                    left: 5,
+                    right: 10,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.tempatdata.varian,
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
+                          fontWeight: semiBold,
                         ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 1.66,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  widget.tempatdata.model,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: kLightGray,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            IconButton(
+                              onPressed: () {
+                                if (isBookmarked) {
+                                  provider.removeBookmark(widget.tempatdata.id);
+                                } else {
+                                  provider.addBookmark(widget.tempatdata);
+                                }
+                              },
+                              icon: (isBookmarked)
+                                  ? Icon(
+                                      CupertinoIcons.heart_fill,
+                                      color: Colors.redAccent.shade700,
+                                    )
+                                  : const Icon(
+                                      CupertinoIcons.heart,
+                                    ),
+                            )
+                          ],
+                        ),
+                      ),
+                      Row(
+                        children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text(
+                              NumberFormat.currency(
+                                locale: 'id-ID',
+                                symbol: 'IDR ',
+                                decimalDigits: 0,
+                              ).format(widget.tempatdata.harga),
+                              style: blackTextStyle.copyWith(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          )
-        ],
-      ),
-    );
+          );
+        },
+      );
+    });
   }
 }

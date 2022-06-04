@@ -1,5 +1,6 @@
 import 'package:sqflite/sqflite.dart';
-import 'package:yuk_mancing/Repository/local/db/local_brand.dart';
+
+import '../../../Model/brand.dart';
 
 class DatabaseHelper {
   static DatabaseHelper? _instance;
@@ -19,14 +20,14 @@ class DatabaseHelper {
       '$path/favorit.db',
       onCreate: (db, version) async {
         await db.execute('''CREATE TABLE $_tblBookmark (
-            id TEXT PRIMARY KEY,
+            id INTEGER PRIMARY KEY,
             brand TEXT,
             model TEXT,
             varian TEXT,
-            harga TEXT,
-            jumlahKursi TEXT,
-            cc TEXT,
-            dayaDorong TEXT,
+            harga INTEGER,
+            jumlah_kursi INTEGER,
+            CC INTEGER,
+            Daya_dorong INTEGER,
             imageUrl TEXT 
           )     
         ''');
@@ -44,8 +45,12 @@ class DatabaseHelper {
   }
 
   Future<void> insertBookmark(Brand restaurant) async {
+    print(restaurant);
+
     final db = await database;
     await db!.insert(_tblBookmark, restaurant.toJson());
+
+    print(db);
   }
 
   Future<List<Brand>> getBookmarks() async {
@@ -55,7 +60,7 @@ class DatabaseHelper {
     return results.map((res) => Brand.fromJson(res)).toList();
   }
 
-  Future<Map> getFavoritekById(String id) async {
+  Future<Map> getFavoritekById(int id) async {
     final db = await database;
 
     List<Map<String, dynamic>> results = await db!.query(
@@ -71,7 +76,7 @@ class DatabaseHelper {
     }
   }
 
-  Future<void> removeFavorite(String id) async {
+  Future<void> removeFavorite(int id) async {
     final db = await database;
 
     await db!.delete(

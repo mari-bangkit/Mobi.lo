@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:yuk_mancing/Constant/style.dart';
 import 'package:yuk_mancing/Repository/Api/providers/player.dart';
+import 'package:yuk_mancing/Repository/local/helper/result_state.dart';
+import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
 import 'package:yuk_mancing/UI/Pages/details_page.dart';
 import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
+import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -28,7 +32,7 @@ class _HistoryPageState extends State<HistoryPage> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      //Provider.of<PlayersProviders>(context).initialData();
+      Provider.of<PlayersProviders>(context).initialData();
     }
     Future.delayed(const Duration(seconds: 4));
     isInit = false;
@@ -77,14 +81,14 @@ class _HistoryPageState extends State<HistoryPage> {
                 width: MediaQuery.of(context).size.width / 1.4,
                 child: RichText(
                   text: const TextSpan(
-                    text: "Nih",
+                    text: "Here",
                     style: TextStyle(
                         color: kPrimary,
                         fontSize: 30,
                         fontWeight: FontWeight.w600),
                     children: <TextSpan>[
                       TextSpan(
-                        text: ', history booking tempat kamu',
+                        text: ', \n Your Dream Car',
                         style: TextStyle(
                           color: kBlack,
                           fontSize: 30,
@@ -103,27 +107,41 @@ class _HistoryPageState extends State<HistoryPage> {
                         alignment: Alignment.center,
                         child: _showwidget,
                       )
-                    : ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: playersdata.history.length,
-                        itemBuilder: (context, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              // Navigator.push(
-                              //   context,
-                              //   MaterialPageRoute(
-                              //     builder: (context) => DetailsPage(
-                              //       pickplace:
-                              //           playersdata.history[index].datatempat,
-                              //     ),
-                              //   ),
-                              // );
-                            },
-                            child: HistoryData(
-                              historyPlace: playersdata.history[index],
-                            ),
-                          );
+                    : Consumer<DatabaseProvider>(
+                        builder: (context, provider, child) {
+                          if (provider.state == ResultState.HasData) {
+                            return ListView.builder(
+                              itemCount: provider.bookmarks.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {},
+                                  child: ListPlace(
+                                    tempatdata: provider.bookmarks[index],
+                                  ),
+                                );
+                              },
+                            );
+                          } else {
+                            return Container(
+                              padding: const EdgeInsets.all(10),
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: const [
+                                    Text(
+                                      "Data tidak ditemukan",
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        color: kPrimary,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            );
+                          }
                         },
                       ),
               ),

@@ -188,9 +188,9 @@ class _MyHomePageState extends State<MyHomePage> {
             BottomNavigationBarItem(
                 icon: Icon(CupertinoIcons.search), label: 'Search'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.history), label: 'History'),
+                icon: Icon(CupertinoIcons.heart_fill), label: 'History'),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.settings), label: 'search')
+                icon: Icon(CupertinoIcons.settings_solid), label: 'search')
           ],
           selectedLabelStyle: const TextStyle(fontSize: 14),
           unselectedLabelStyle: const TextStyle(fontSize: 10),

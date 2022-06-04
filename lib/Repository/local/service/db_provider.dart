@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Repository/local/db/local_brand.dart';
+import 'package:yuk_mancing/Model/brand.dart';
 import 'package:yuk_mancing/Repository/local/helper/db_helper.dart';
 import 'package:yuk_mancing/Repository/local/helper/result_state.dart';
 
@@ -31,6 +31,7 @@ class DatabaseProvider extends ChangeNotifier {
   }
 
   void addBookmark(Brand article) async {
+    print(article);
     try {
       await databaseHelper.insertBookmark(article);
       _getFavorite();
@@ -41,12 +42,12 @@ class DatabaseProvider extends ChangeNotifier {
     }
   }
 
-  Future<bool> isBookmarked(String id) async {
+  Future<bool> isBookmarked(int id) async {
     final bookmarkedArticle = await databaseHelper.getFavoritekById(id);
     return bookmarkedArticle.isNotEmpty;
   }
 
-  void removeBookmark(String id) async {
+  void removeBookmark(int id) async {
     try {
       await databaseHelper.removeFavorite(id);
       _getFavorite();

@@ -16,13 +16,14 @@ class DataBrand {
   bool error;
   String message;
   int count;
-  List<Brand> brand;
+  List<localBrand> brand;
 
   factory DataBrand.fromJson(Map<String, dynamic> json) => DataBrand(
         error: json["error"],
         message: json["message"],
         count: json["count"],
-        brand: List<Brand>.from(json["brand"].map((x) => Brand.fromJson(x))),
+        brand: List<localBrand>.from(
+            json["brand"].map((x) => localBrand.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,8 +34,8 @@ class DataBrand {
       };
 }
 
-class Brand {
-  Brand({
+class localBrand {
+  localBrand({
     required this.id,
     required this.brand,
     required this.model,
@@ -56,7 +57,7 @@ class Brand {
   int dayaDorong;
   String imageUrl;
 
-  Brand copyWith({
+  localBrand copyWith({
     int? id,
     String? brand,
     String? model,
@@ -67,7 +68,7 @@ class Brand {
     int? dayaDorong,
     String? imageUrl,
   }) =>
-      Brand(
+      localBrand(
         id: id ?? this.id,
         brand: brand ?? this.brand,
         model: model ?? this.model,
@@ -79,7 +80,7 @@ class Brand {
         imageUrl: imageUrl ?? this.imageUrl,
       );
 
-  factory Brand.fromJson(Map<String, dynamic> json) => Brand(
+  factory localBrand.fromJson(Map<String, dynamic> json) => localBrand(
         id: json["id"],
         brand: json["brand"],
         model: json["model"],

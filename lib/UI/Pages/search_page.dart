@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
@@ -34,15 +37,34 @@ class _SearchPageState extends State<SearchPage> {
   TextEditingController creditCardDebt = TextEditingController();
   TextEditingController netWorth = TextEditingController();
 
+  Widget _showwidget = const CircularProgressIndicator();
+
   @override
   void didChangeDependencies() {
     if (isInit) {
       searchdata = searchplaces = Provider.of<Placesdata>(context).tempat;
     }
     isInit = false;
-    nama = Provider.of<Placesdata>(context).name;
-    email = Provider.of<Placesdata>(context).dataEmail;
+    startTimer();
     super.didChangeDependencies();
+  }
+
+  void startTimer() {
+    Timer.periodic(const Duration(seconds: 5), (t) {
+      if (mounted) {
+        setState(() {
+          _showwidget = const Center(
+            child: Text(
+              "Data tidak ditemukan",
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+          ); //set loading to false
+        });
+      }
+      t.cancel(); //stops the timer
+    });
   }
 
   @override
@@ -113,9 +135,9 @@ class _SearchPageState extends State<SearchPage> {
                   ],
                 ),
                 const SizedBox(height: 10),
-                (searchplaces.isNotEmpty)
-                    ? Expanded(
-                        child: ListView.builder(
+                Expanded(
+                  child: (searchplaces.isNotEmpty)
+                      ? ListView.builder(
                           itemCount: searchplaces.length,
                           shrinkWrap: true,
                           itemBuilder: (context, index) {
@@ -136,24 +158,15 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                             );
                           },
-                        ),
-                      )
-                    : Container(
-                        margin: const EdgeInsets.only(
-                          top: 30,
-                        ),
-                        height: 75,
-                        width: MediaQuery.of(context).size.width,
-                        child: Center(
-                          child: Text(
-                            "Data Tidak ditemukan",
-                            style: blackTextStyle.copyWith(
-                              fontSize: 20,
-                              fontWeight: semiBold,
-                            ),
+                        )
+                      : Container(
+                          margin: const EdgeInsets.only(
+                            top: 30,
                           ),
-                        ),
-                      ),
+                          height: 75,
+                          width: MediaQuery.of(context).size.width,
+                          child: _showwidget),
+                )
               ],
             ),
           ),
@@ -179,6 +192,18 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       this.query = query;
       searchplaces = books;
+    });
+  }
+
+  void refreshPage() {
+    final data = searchdata.where((data) {
+      final price = data.harga <= 247869483;
+      return price;
+    }).toList();
+
+    setState(() {
+      this.query = query;
+      searchplaces = data;
     });
   }
 
@@ -219,61 +244,52 @@ class _SearchPageState extends State<SearchPage> {
               ),
               child: TextButton(
                 onPressed: () {
-                  if (playersdata[0].gender == "Laki-Laki") {
-                    selectedGender = 0;
-                  } else {
-                    selectedGender = 1;
-                  }
+                  // if (playersdata[0].gender == "Laki-Laki") {
+                  //   selectedGender = 0;
+                  // } else {
+                  //   selectedGender = 1;
+                  // }
 
-                  Customer customer = Customer(
-                    customerName: playersdata[0].customerName,
-                    customerEMail: playersdata[0].customerEMail,
-                    country: playersdata[0].country,
-                    gender: selectedGender,
-                    age: playersdata[0].age,
-                    annualSalary: int.parse(annualSalary.text),
-                    creditCardDebt: int.parse(creditCardDebt.text),
-                    netWorth: int.parse(netWorth.text),
-                  );
-                  print(
-                    "${customer.age}" +
-                        "${customer.annualSalary}" +
-                        "${customer.creditCardDebt}" +
-                        "${customer.gender}" +
-                        "${customer.netWorth}",
-                  );
-                  print(customer.customerEMail +
-                      customer.customerName +
-                      customer.country);
-                  Future.delayed(changeTime).then(
-                    (value) async {
-                      String message = "in";
-                      try {
-                        await Provider.of<AiPrediction>(context, listen: false)
-                            .getResultApi();
-                      } catch (e) {
-                        message = e.toString();
-                        print(message);
-                        return message;
-                      } finally {
-                        if (message != "in") {
-                          Fluttertoast.showToast(
-                            msg: message.toString(),
-                            fontSize: 18,
-                            gravity: ToastGravity.BOTTOM,
-                          );
-                        } else {
-                          Fluttertoast.showToast(
-                              msg: "Filter disesuaikan",
-                              gravity: ToastGravity.BOTTOM);
-                          setState(() {});
-                          Navigator.of(context).pop();
-                        }
-                      }
-                    },
-                  );
-                  print(
-                      annualSalary.text + netWorth.text + creditCardDebt.text);
+                  // Customer customer = Customer(
+                  //   customerName: playersdata[0].customerName,
+                  //   customerEMail: playersdata[0].customerEMail,
+                  //   country: playersdata[0].country,
+                  //   gender: selectedGender,
+                  //   age: playersdata[0].age,
+                  //   annualSalary: int.parse(annualSalary.text),
+                  //   creditCardDebt: int.parse(creditCardDebt.text),
+                  //   netWorth: int.parse(netWorth.text),
+                  // );
+
+                  // Future.delayed(changeTime).then(
+                  //   (value) async {
+                  //     String message = "in";
+                  //     try {
+                  //       await Provider.of<AiPrediction>(context, listen: false)
+                  //           .getResultApi();
+                  //     } catch (e) {
+                  //       message = e.toString();
+                  //       print(message);
+                  //       return message;
+                  //     } finally {
+                  //       if (message != "in") {
+                  //         Fluttertoast.showToast(
+                  //           msg: message.toString(),
+                  //           fontSize: 18,
+                  //           gravity: ToastGravity.BOTTOM,
+                  //         );
+                  //       } else {
+                  //         Fluttertoast.showToast(
+                  //             msg: "Filter disesuaikan",
+                  //             gravity: ToastGravity.BOTTOM);
+                  //         refreshPage();
+                  //         Navigator.pop(context);
+                  //       }
+                  //     }
+                  //   },
+                  // );
+
+                  refreshPage();
                   Navigator.pop(context);
                 },
                 child: Text(
