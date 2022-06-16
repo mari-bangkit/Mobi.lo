@@ -21,14 +21,14 @@ class DatabaseHelper {
       onCreate: (db, version) async {
         await db.execute('''CREATE TABLE $_tblBookmark (
             id INTEGER PRIMARY KEY,
-            brand TEXT,
-            model TEXT,
-            varian TEXT,
-            harga INTEGER,
-            jumlah_kursi INTEGER,
-            CC INTEGER,
-            Daya_dorong INTEGER,
-            imageUrl TEXT 
+            merk TEXT,
+            type TEXT,
+            price INTEGER,
+            detail TEXT,
+            kursi INTEGER,
+            CC TEXT,
+            BBM TEXT,
+            link_img TEXT 
           )     
         ''');
       },

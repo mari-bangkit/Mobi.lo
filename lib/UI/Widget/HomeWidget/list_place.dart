@@ -1,10 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
+
+import '../../../Constant/style.dart';
+import '../../../Model/brand.dart';
+import '../../../Repository/local/service/db_provider.dart';
 
 class ListPlace extends StatefulWidget {
   final Brand tempatdata;
@@ -16,8 +18,11 @@ class ListPlace extends StatefulWidget {
 
 class _ListPlaceState extends State<ListPlace> {
   bool _isFavorit = true;
+  bool _isError = false;
+
   @override
   Widget build(BuildContext context) {
+    var imageprd = NetworkImage(widget.tempatdata.linkImg);
     return Consumer<DatabaseProvider>(builder: (context, provider, child) {
       return FutureBuilder<bool>(
         future: provider.isBookmarked(widget.tempatdata.id),
@@ -36,9 +41,13 @@ class _ListPlaceState extends State<ListPlace> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(15),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          widget.tempatdata.imageUrl,
-                        ),
+                        image: imageprd,
+                        onError: (error, stackTrace) {
+                          setState(() {
+                            imageprd = NetworkImage(
+                                "https://www.fairpriceautoparts.com/assets/images/no-image.png");
+                          });
+                        },
                         fit: BoxFit.cover),
                   ),
                 ),
@@ -56,7 +65,7 @@ class _ListPlaceState extends State<ListPlace> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.tempatdata.varian,
+                        widget.tempatdata.type,
                         style: blackTextStyle.copyWith(
                           fontSize: 18,
                           fontWeight: semiBold,
@@ -71,7 +80,7 @@ class _ListPlaceState extends State<ListPlace> {
                             Row(
                               children: [
                                 Text(
-                                  widget.tempatdata.model,
+                                  widget.tempatdata.merk.toString(),
                                   style: const TextStyle(
                                     fontSize: 18,
                                     color: kLightGray,
@@ -108,7 +117,7 @@ class _ListPlaceState extends State<ListPlace> {
                                 locale: 'id-ID',
                                 symbol: 'IDR ',
                                 decimalDigits: 0,
-                              ).format(widget.tempatdata.harga),
+                              ).format(widget.tempatdata.price),
                               style: blackTextStyle.copyWith(
                                 fontSize: 18,
                               ),

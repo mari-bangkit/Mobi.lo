@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Repository/local/helper/db_helper.dart';
-import 'package:yuk_mancing/Repository/local/helper/result_state.dart';
+
+import '../../../Model/brand.dart';
+import '../helper/db_helper.dart';
+import '../helper/result_state.dart';
 
 class DatabaseProvider extends ChangeNotifier {
   final DatabaseHelper databaseHelper;

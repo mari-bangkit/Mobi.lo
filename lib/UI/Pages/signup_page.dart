@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
-import 'package:yuk_mancing/UI/Pages/login_page.dart';
-import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
+
+import '../../Constant/style.dart';
+import '../../Repository/Api/providers/auth.dart';
+import '../Widget/GlobalWidget/appbar_costum.dart';
+import 'login_page.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -157,7 +158,8 @@ class _SignUpState extends State<SignUp> {
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    errorText: _passmatch ? "Password tidak sama" : null,
+                    errorText:
+                        _passmatch == true ? "Password tidak sama" : null,
                     hintText: "Password",
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -190,53 +192,56 @@ class _SignUpState extends State<SignUp> {
                 height: 50,
                 width: MediaQuery.of(context).size.width,
                 child: TextButton(
-                  onPressed: () {
-                    var email = _emailcontroller.text;
-                    var passworrd = _passwordcontroller.text;
-                    setState(() {
-                      _isloading = true;
-                    });
-                    Future.delayed(loginTime).then((value) async {
-                      String message = "in";
-                      try {
-                        await Provider.of<Auth>(context, listen: false)
-                            .signup(email, passworrd);
-                      } catch (e) {
-                        message = e.toString();
-                        return message;
-                      } finally {
-                        setState(() {
-                          _isloading = false;
-                        });
-                        if (message != "in") {
-                          Fluttertoast.showToast(
-                            msg: message.toString(),
-                            fontSize: 18,
-                            gravity: ToastGravity.BOTTOM,
-                          );
-                        } else {
-                          var msg = "akun telah ditambahkan";
-                          Fluttertoast.showToast(
-                            msg: msg.toString(),
-                            fontSize: 18,
-                            gravity: ToastGravity.BOTTOM,
-                          );
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Loginpage(),
-                            ),
-                          );
+                  onPressed: _passmatch == false
+                      ? () {
+                          var email = _emailcontroller.text;
+                          var passworrd = _passwordcontroller.text;
+                          setState(() {
+                            _isloading = true;
+                          });
+                          Future.delayed(loginTime).then((value) async {
+                            String message = "in";
+                            try {
+                              await Provider.of<Auth>(context, listen: false)
+                                  .signup(email, passworrd);
+                            } catch (e) {
+                              message = e.toString();
+                              return message;
+                            } finally {
+                              setState(() {
+                                _isloading = false;
+                              });
+                              if (message != "in") {
+                                Fluttertoast.showToast(
+                                  msg: message.toString(),
+                                  fontSize: 18,
+                                  gravity: ToastGravity.BOTTOM,
+                                );
+                              } else {
+                                var msg = "akun telah ditambahkan";
+                                Fluttertoast.showToast(
+                                  msg: msg.toString(),
+                                  fontSize: 18,
+                                  gravity: ToastGravity.BOTTOM,
+                                );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const Loginpage(),
+                                  ),
+                                );
+                              }
+                            }
+                          });
                         }
-                      }
-                    });
-                  },
+                      : null,
                   style: TextButton.styleFrom(
                     padding: const EdgeInsets.all(10),
                     minimumSize:
                         Size.fromWidth(MediaQuery.of(context).size.width / 3),
                     primary: kBlack,
-                    backgroundColor: kSecondary,
+                    backgroundColor:
+                        _passmatch == true ? kLightGray : kSecondary,
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(20),

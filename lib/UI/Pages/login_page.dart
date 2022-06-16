@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/UI/Pages/forgotpass_page.dart';
-import 'package:yuk_mancing/UI/Pages/signup_page.dart';
-import 'package:yuk_mancing/UI/Widget/SignWidget/title_widget.dart';
 
-import 'package:yuk_mancing/main.dart';
+import '../../Constant/style.dart';
+import '../../Repository/Api/providers/auth.dart';
+import '../../main.dart';
+import '../Widget/SignWidget/title_widget.dart';
+import 'forgotpass_page.dart';
+import 'signup_page.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({Key? key}) : super(key: key);

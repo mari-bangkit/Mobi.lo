@@ -13,72 +13,70 @@ String brandToJson(List<Brand> data) =>
 class Brand {
   Brand({
     required this.id,
-    required this.brand,
-    required this.model,
-    required this.varian,
-    required this.harga,
-    required this.jumlahKursi,
+    required this.merk,
+    required this.type,
+    required this.price,
+    required this.detail,
+    required this.kursi,
     required this.cc,
-    required this.dayaDorong,
-    required this.imageUrl,
+    required this.bbm,
+    required this.linkImg,
   });
 
   int id;
-  String brand;
-  String model;
-  String varian;
-  int harga;
-  int jumlahKursi;
-  int cc;
-  int dayaDorong;
-  String imageUrl;
+  String merk;
+  String type;
+  int price;
+  String detail;
+  String kursi;
+  String cc;
+  String bbm;
+  String linkImg;
 
   Brand copyWith({
     int? id,
-    String? brand,
-    String? model,
-    String? varian,
-    int? harga,
-    int? jumlahKursi,
-    int? cc,
-    int? dayaDorong,
-    String? imageUrl,
+    String? merk,
+    String? type,
+    int? price,
+    String? detail,
+    String? kursi,
+    String? cc,
+    String? bbm,
+    String? linkImg,
   }) =>
       Brand(
         id: id ?? this.id,
-        brand: brand ?? this.brand,
-        model: model ?? this.model,
-        varian: varian ?? this.varian,
-        harga: harga ?? this.harga,
-        jumlahKursi: jumlahKursi ?? this.jumlahKursi,
+        merk: merk ?? this.merk,
+        type: type ?? this.type,
+        price: price ?? this.price,
+        detail: detail ?? this.detail,
+        kursi: kursi ?? this.kursi,
         cc: cc ?? this.cc,
-        dayaDorong: dayaDorong ?? this.dayaDorong,
-        imageUrl: imageUrl ?? this.imageUrl,
+        bbm: bbm ?? this.bbm,
+        linkImg: linkImg ?? this.linkImg,
       );
 
   factory Brand.fromJson(Map<String, dynamic> json) => Brand(
         id: json["id"],
-        brand: json["brand"],
-        model: json["model"],
-        varian: json["varian"],
-        harga: json["harga"],
-        jumlahKursi: json["jumlah_kursi"],
+        merk: json["merk"],
+        type: json["type"],
+        price: json["price"],
+        detail: json["detail"],
+        kursi: json["kursi"],
         cc: json["CC"],
-        dayaDorong: json["Daya_dorong"],
-        imageUrl: json["imageUrl"],
+        bbm: json["BBM"],
+        linkImg: json["link_img"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "brand": brand,
-        "model": model,
-        "varian": varian,
-        "harga": harga,
-        "jumlah_kursi": jumlahKursi,
+        "merk": merk,
+        "type": type,
+        "price": price,
+        "detail": detail,
+        "kursi": kursi,
         "CC": cc,
-        "Daya_dorong": dayaDorong,
-        "imageUrl": imageUrl,
+        "BBM": bbm,
+        "link_img": linkImg,
       };
 }
-
-enum BrandEnum { TOYOTA, HONDA, MITSUBISHI, NISSAN, ISUZU }

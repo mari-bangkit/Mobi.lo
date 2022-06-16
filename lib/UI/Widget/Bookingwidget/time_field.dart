@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
+
+import '../../../Constant/style.dart';
 
 class TimeField extends StatelessWidget {
   const TimeField({

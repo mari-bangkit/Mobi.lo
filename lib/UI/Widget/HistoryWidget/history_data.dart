@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/players.dart';
+
+import '../../../Constant/style.dart';
+import '../../../Model/players.dart';
 
 class HistoryData extends StatelessWidget {
   final Players historyPlace;
@@ -28,8 +29,8 @@ class HistoryData extends StatelessWidget {
             children: [
               SizedBox(
                 child: Row(
-                  children: [
-                    const Text(
+                  children: const [
+                    Text(
                       "Tanggal : ",
                       style: TextStyle(
                         fontSize: 18,
@@ -39,7 +40,7 @@ class HistoryData extends StatelessWidget {
                     ),
                     Text(
                       " historyPlace.date",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         color: kBlack,
                         fontWeight: FontWeight.w400,
@@ -50,8 +51,8 @@ class HistoryData extends StatelessWidget {
               ),
               SizedBox(
                 child: Row(
-                  children: [
-                    const Text(
+                  children: const [
+                    Text(
                       "Jam : ",
                       style: TextStyle(
                         fontSize: 18,
@@ -61,7 +62,7 @@ class HistoryData extends StatelessWidget {
                     ),
                     Text(
                       "historyPlace.time",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 18,
                         color: kBlack,
                         fontWeight: FontWeight.w400,
@@ -88,7 +89,7 @@ class HistoryData extends StatelessWidget {
                     height: 100,
                     width: 90,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: NetworkImage("historyPlace.datatempat.imageUrl"),
                         fit: BoxFit.cover,
                       ),
@@ -113,9 +114,9 @@ class HistoryData extends StatelessWidget {
                           children: [
                             SizedBox(
                               width: MediaQuery.of(context).size.width / 2,
-                              child: Text(
+                              child: const Text(
                                 "historyPlace.datatempat.name",
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 17,
                                   fontWeight: FontWeight.w600,
                                   color: kBlack,
@@ -130,17 +131,17 @@ class HistoryData extends StatelessWidget {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            const Icon(
+                          children: const [
+                            Icon(
                               CupertinoIcons.star_fill,
                               color: Colors.yellow,
                             ),
-                            const SizedBox(
+                            SizedBox(
                               width: 2,
                             ),
                             Text(
                               "historyPlace.datatempat.rating",
-                              style: const TextStyle(
+                              style: TextStyle(
                                 fontSize: 18,
                                 fontFamily: "Monstserrat",
                                 color: kBlack,

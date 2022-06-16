@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/players.dart';
-import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
-import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/UI/Pages/login_page.dart';
-import 'package:yuk_mancing/UI/Widget/SettingWidget/profile_menu_item.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+import '../../Constant/style.dart';
+import '../../Repository/Api/providers/auth.dart';
+import '../../Repository/Api/providers/place_data.dart';
+import '../../Repository/Api/providers/player.dart';
+import 'login_page.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _SettingPageState extends State<SettingPage> {
   String email = '';
   var selectedGender;
   bool _isLoading = false;
-  late List<String> gender;
+  late List gender;
   final emailController = TextEditingController(text: '');
 
   Duration get changeTime => const Duration(milliseconds: 200);
@@ -30,7 +30,10 @@ class _SettingPageState extends State<SettingPage> {
   @override
   void initState() {
     super.initState();
-    gender = ["Laki-Laki", "Perempuan"];
+    gender = [
+      {"id": 1, "nama": "Laki-Laki"},
+      {"id": 2, "nama": "Perempuan"},
+    ];
   }
 
   @override
@@ -135,12 +138,9 @@ class _SettingPageState extends State<SettingPage> {
                       ),
                     ),
                   ),
-                  const ProfileMenuItem(
-                    title: 'Frequently Asked Questions',
-                  ),
                   GestureDetector(
                     onTap: () {
-                      _showsimpledialog(context);
+                      _launchURLApp();
                     },
                     child: Container(
                       margin: const EdgeInsets.only(
@@ -219,6 +219,15 @@ class _SettingPageState extends State<SettingPage> {
         ),
       ),
     );
+  }
+
+  Future<void> _launchURLApp() async {
+    Uri url = Uri.parse(
+        'https://web.powerva.microsoft.com/environments/Default-d7b95ec4-9a7f-4260-b2e3-eb53f0ac8401/bots/510a9b3d-e7d9-4056-b376-7af2256264b4/canvas');
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.platformDefault,
+    )) throw 'Could not launch $url';
   }
 
   void _showsimpledialog(BuildContext context) {
@@ -380,10 +389,10 @@ class _SettingPageState extends State<SettingPage> {
                             items: gender.map((value) {
                               return DropdownMenuItem(
                                 child: Text(
-                                  value,
+                                  value['nama'],
                                   style: blackTextStyle,
                                 ),
-                                value: value,
+                                value: value['nama'],
                               );
                             }).toList(),
                             onChanged: (value) {
@@ -453,10 +462,12 @@ class _SettingPageState extends State<SettingPage> {
                               setState(() {
                                 _isLoading = true;
                               });
-
-                              name = _nameChange.text;
-                              if (_nameChange.text == '') {
-                                name = "User";
+                              if (name == "User") {
+                                if (_nameChange.text == '') {
+                                  name = "User";
+                                } else {
+                                  name = _nameChange.text;
+                                }
                               }
 
                               int age = int.parse(_ageChange.text);

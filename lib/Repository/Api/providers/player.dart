@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/Model/players.dart';
+
+import '../../../Model/players.dart';
 
 class PlayersProviders with ChangeNotifier {
   List<Players> history = [];

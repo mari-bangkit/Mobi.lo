@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:yuk_mancing/Constant/style.dart';
+
+import '../../Constant/style.dart';
 
 class UnderConstructor extends StatelessWidget {
   const UnderConstructor({Key? key}) : super(key: key);

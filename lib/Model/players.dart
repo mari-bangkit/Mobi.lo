@@ -1,7 +1,5 @@
 import 'dart:convert';
 
-import 'package:yuk_mancing/Model/categorydata.dart';
-
 Players playersFromJson(String str) => Players.fromJson(json.decode(str));
 
 String playersToJson(Players data) => json.encode(data.toJson());

@@ -4,15 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:after_layout/after_layout.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/category.dart';
-import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
-import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 
-import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
-import 'package:yuk_mancing/UI/Widget/HomeWidget/username_text.dart';
-import 'package:yuk_mancing/main.dart';
+import '../../Constant/style.dart';
+import '../../Model/category.dart';
+import '../../Repository/Api/providers/place_data.dart';
+import '../../Repository/Api/providers/player.dart';
+import '../../main.dart';
+import '../Widget/HomeWidget/list_place.dart';
+import '../Widget/HomeWidget/username_text.dart';
+import 'details_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,16 +31,27 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
 
   @override
   void didChangeDependencies() {
-    Provider.of<PlayersProviders>(context, listen: false).initialData();
+    getPlayers();
+    print(isInit == true);
     if (isInit) {
-      Provider.of<Placesdata>(context).getdataplace();
-      setState(() {
-        _isloading = false;
-      });
+      getDatacar();
+      print(isInit);
     }
-    isInit = false;
+    print(isInit);
     startTimer();
     super.didChangeDependencies();
+  }
+
+  void getPlayers() {
+    Provider.of<PlayersProviders>(context, listen: false).initialData();
+  }
+
+  void getDatacar() {
+    Provider.of<Placesdata>(context, listen: false).getdataplace();
+    setState(() {
+      _isloading = false;
+      isInit = false;
+    });
   }
 
   @override
@@ -303,16 +314,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => DetailsPage(
-                                      //       pickplace: allPlaceProvider
-                                      //           .recommended[index],
-                                      //     ),
-                                      //   ),
-
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            brand:
+                                                allPlaceProvider.TOYOTA[index],
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: ListPlace(
                                       tempatdata:
@@ -329,16 +339,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => DetailsPage(
-                                      //       pickplace: allPlaceProvider
-                                      //           .recommended[index],
-                                      //     ),
-                                      //   ),
-
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            brand:
+                                                allPlaceProvider.HONDA[index],
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: ListPlace(
                                       tempatdata: allPlaceProvider.HONDA[index],
@@ -354,15 +363,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => DetailsPage(
-                                      //       pickplace: allPlaceProvider
-                                      //           .tempat[index],
-                                      //     ),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            brand: allPlaceProvider
+                                                .MITSUBISHI[index],
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: ListPlace(
                                       tempatdata:
@@ -379,15 +388,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => DetailsPage(
-                                      //       pickplace: allPlaceProvider
-                                      //           .tempat[index],
-                                      //     ),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            brand:
+                                                allPlaceProvider.NISSAN[index],
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: ListPlace(
                                       tempatdata:
@@ -404,15 +413,15 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
                                 itemBuilder: (context, index) {
                                   return GestureDetector(
                                     onTap: () {
-                                      // Navigator.push(
-                                      //   context,
-                                      //   MaterialPageRoute(
-                                      //     builder: (context) => DetailsPage(
-                                      //       pickplace: allPlaceProvider
-                                      //           .tempat[index],
-                                      //     ),
-                                      //   ),
-                                      // );
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DetailsPage(
+                                            brand:
+                                                allPlaceProvider.ISUZU[index],
+                                          ),
+                                        ),
+                                      );
                                     },
                                     child: ListPlace(
                                       tempatdata: allPlaceProvider.ISUZU[index],
@@ -430,5 +439,10 @@ class _HomePageState extends State<HomePage> with AfterLayoutMixin<HomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

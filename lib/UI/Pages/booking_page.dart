@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
 import 'package:intl/intl.dart';
-import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/UI/Pages/details_page.dart';
-import 'package:yuk_mancing/UI/Widget/Bookingwidget/date_field.dart';
-import 'package:yuk_mancing/UI/Widget/Bookingwidget/time_field.dart';
-import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
+
+import '../../Constant/style.dart';
+import '../../Model/categorydata.dart';
+import '../../Repository/Api/providers/player.dart';
+import '../Widget/Bookingwidget/date_field.dart';
+import '../Widget/Bookingwidget/time_field.dart';
 
 class BookingPage extends StatefulWidget {
   final Bestplace tempatPilih;
@@ -108,13 +107,13 @@ class _BookingPageState extends State<BookingPage> {
           ),
           child: ListView(
             children: [
-              AppbarCostum(
-                leftIcon: Icons.arrow_back,
-                nameappbar: "Isi dulu \npendaftarannya",
-                leftCallback: DetailsPage(
-                  pickplace: widget.tempatPilih,
-                ),
-              ),
+              // AppbarCostum(
+              //   leftIcon: Icons.arrow_back,
+              //   nameappbar: "Isi dulu \npendaftarannya",
+              //   leftCallback: DetailsPage(
+              //     pickplace: widget.tempatPilih,
+              //   ),
+              // ),
               const SizedBox(
                 height: 50,
               ),

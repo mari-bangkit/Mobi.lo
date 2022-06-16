@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/category.dart';
+
+import '../../../Constant/style.dart';
+import '../../../Model/category.dart';
 
 class Category extends StatelessWidget {
   const Category({Key? key}) : super(key: key);

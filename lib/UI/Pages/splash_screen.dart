@@ -1,7 +1,8 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/UI/Pages/login_page.dart';
+
+import '../../Constant/style.dart';
+import 'login_page.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class SplashScreen extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: const AssetImage("Assets/Images/SplashScreen.png"),
+              image: const AssetImage("Assets/Images/cars.jpg"),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
                 kBlack.withOpacity(0.4),
@@ -33,7 +34,7 @@ class SplashScreen extends StatelessWidget {
                     delay: const Duration(milliseconds: 100),
                     duration: const Duration(milliseconds: 800),
                     child: const Text(
-                      "Jika engkau menginginkan kebahagiaan selama satu hari, pergilah memancing.",
+                      "Carilah mobil impian mu dan berkendaralah dengannya.",
                       style: TextStyle(
                         fontFamily: "Monstserrat",
                         fontSize: 25,

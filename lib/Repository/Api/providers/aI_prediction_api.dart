@@ -3,29 +3,29 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:yuk_mancing/Model/customer_model.dart';
+
+import '../../../Model/customer_model.dart';
 
 class AiPrediction with ChangeNotifier {
-  Uri urlMaster = Uri.parse(
-      'http://f902266d-0271-4e20-bea5-43819609802c.southeastasia.azurecontainer.io/score');
+  var results;
 
-  Future<void> getResultApi() async {
+  Uri urlMaster =
+      Uri.parse('https://maribangkit.eastus.inference.ml.azure.com/score');
+
+  Future<void> getResultApi(
+    Customer customer,
+  ) async {
     var data = {
-      "Inputs": {
-        "data": [
-          {
-            "Customer Name": "Alfridan Ripani",
-            "Customer e-mail": "alastair20@gmail.com",
-            "Country": "Indonesia",
-            "Gender": 1,
-            "Age": 24,
-            "Annual Salary": 120000000,
-            "Credit Card Debt": 12000000,
-            "Net Worth": 300000000,
-          }
-        ]
-      },
-      "GlobalParameters": 0.0
+      "data": {
+        "Customer Name": customer.customerName,
+        "Customer e-mail": customer.customerEMail,
+        "Country": customer.country,
+        "Gender": customer.gender,
+        "Age": customer.age,
+        "Annual Salary": customer.annualSalary,
+        "Credit Card Debt": customer.creditCardDebt,
+        "Net Worth": customer.netWorth,
+      }
     };
     print(data.toString());
 
@@ -33,13 +33,15 @@ class AiPrediction with ChangeNotifier {
       urlMaster,
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer QOcTkikRDMuZHq1zGqtDAq4mxBBTu4iB"
+        "Authorization": "Bearer a7GOwkoSMRqCgBJP4WG4DgQ4f7cePXtb",
+        "azureml-model-deployment": "initial",
       },
       body: jsonEncode(data),
     );
 
+    print("proses selesai");
     var responData = jsonDecode(response.body);
-    List results = responData['Results'];
-    print(results[0]);
+    print("ini print respondata " + responData.toString());
+    results = responData['Result']['max_value'];
   }
 }

@@ -4,20 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
-import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
-import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
 
 import 'package:flutter_snake_navigationbar/flutter_snake_navigationbar.dart';
-import 'package:yuk_mancing/Repository/local/helper/db_helper.dart';
-import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
-import 'package:yuk_mancing/UI/Pages/history_page.dart';
-import 'package:yuk_mancing/UI/Pages/home_page.dart';
-import 'package:yuk_mancing/UI/Pages/search_page.dart';
-import 'package:yuk_mancing/UI/Pages/setting_page.dart';
-import 'package:yuk_mancing/UI/Pages/splash_screen.dart';
+
+import 'Constant/style.dart';
+import 'Repository/Api/providers/aI_prediction_api.dart';
+import 'Repository/Api/providers/auth.dart';
+import 'Repository/Api/providers/place_data.dart';
+import 'Repository/Api/providers/player.dart';
+import 'Repository/local/helper/db_helper.dart';
+import 'Repository/local/service/db_provider.dart';
+import 'UI/Pages/history_page.dart';
+import 'UI/Pages/home_page.dart';
+import 'UI/Pages/search_page.dart';
+import 'UI/Pages/setting_page.dart';
+import 'UI/Pages/splash_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

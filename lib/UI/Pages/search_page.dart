@@ -1,19 +1,17 @@
 import 'dart:async';
 
-import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Model/brand.dart';
-import 'package:yuk_mancing/Model/customer_model.dart';
-import 'package:yuk_mancing/Model/players.dart';
-import 'package:yuk_mancing/Repository/Api/providers/aI_prediction_api.dart';
 
-import 'package:yuk_mancing/Repository/Api/providers/place_data.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
-import 'package:yuk_mancing/UI/Widget/SearchWidget/search_widget.dart';
+import '../../Constant/style.dart';
+import '../../Model/brand.dart';
+import '../../Model/customer_model.dart';
+import '../../Repository/Api/providers/aI_prediction_api.dart';
+import '../../Repository/Api/providers/place_data.dart';
+import '../../Repository/Api/providers/player.dart';
+import '../Widget/HomeWidget/list_place.dart';
+import '../Widget/SearchWidget/search_widget.dart';
 
 class SearchPage extends StatefulWidget {
   final bool isFocus;
@@ -42,7 +40,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   void didChangeDependencies() {
     if (isInit) {
-      searchdata = searchplaces = Provider.of<Placesdata>(context).tempat;
+      searchdata =
+          searchplaces = Provider.of<Placesdata>(context, listen: false).tempat;
     }
     isInit = false;
     startTimer();
@@ -183,10 +182,11 @@ class _SearchPageState extends State<SearchPage> {
 
   void searchPlaces(String query) {
     final books = searchdata.where((book) {
-      final titleLower = book.model.toLowerCase();
+      final merkLower = book.merk.toLowerCase();
+      final typeLower = book.type.toLowerCase();
       final searchLower = query.toLowerCase();
 
-      return titleLower.contains(searchLower);
+      return merkLower.contains(searchLower) || typeLower.contains(searchLower);
     }).toList();
 
     setState(() {
@@ -196,8 +196,10 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void refreshPage() {
+    double max = double.parse(
+        Provider.of<AiPrediction>(context, listen: false).results.toString());
     final data = searchdata.where((data) {
-      final price = data.harga <= 247869483;
+      final price = data.price <= max;
       return price;
     }).toList();
 
@@ -244,53 +246,50 @@ class _SearchPageState extends State<SearchPage> {
               ),
               child: TextButton(
                 onPressed: () {
-                  // if (playersdata[0].gender == "Laki-Laki") {
-                  //   selectedGender = 0;
-                  // } else {
-                  //   selectedGender = 1;
-                  // }
+                  if (playersdata[0].gender == "Laki-Laki") {
+                    selectedGender = 1;
+                  } else {
+                    selectedGender = 0;
+                  }
 
-                  // Customer customer = Customer(
-                  //   customerName: playersdata[0].customerName,
-                  //   customerEMail: playersdata[0].customerEMail,
-                  //   country: playersdata[0].country,
-                  //   gender: selectedGender,
-                  //   age: playersdata[0].age,
-                  //   annualSalary: int.parse(annualSalary.text),
-                  //   creditCardDebt: int.parse(creditCardDebt.text),
-                  //   netWorth: int.parse(netWorth.text),
-                  // );
+                  Customer customer = Customer(
+                    customerName: playersdata[0].customerName,
+                    customerEMail: playersdata[0].customerEMail,
+                    country: playersdata[0].country,
+                    gender: selectedGender,
+                    age: playersdata[0].age,
+                    annualSalary: int.parse(annualSalary.text),
+                    creditCardDebt: int.parse(creditCardDebt.text),
+                    netWorth: int.parse(netWorth.text),
+                  );
 
-                  // Future.delayed(changeTime).then(
-                  //   (value) async {
-                  //     String message = "in";
-                  //     try {
-                  //       await Provider.of<AiPrediction>(context, listen: false)
-                  //           .getResultApi();
-                  //     } catch (e) {
-                  //       message = e.toString();
-                  //       print(message);
-                  //       return message;
-                  //     } finally {
-                  //       if (message != "in") {
-                  //         Fluttertoast.showToast(
-                  //           msg: message.toString(),
-                  //           fontSize: 18,
-                  //           gravity: ToastGravity.BOTTOM,
-                  //         );
-                  //       } else {
-                  //         Fluttertoast.showToast(
-                  //             msg: "Filter disesuaikan",
-                  //             gravity: ToastGravity.BOTTOM);
-                  //         refreshPage();
-                  //         Navigator.pop(context);
-                  //       }
-                  //     }
-                  //   },
-                  // );
-
-                  refreshPage();
-                  Navigator.pop(context);
+                  Future.delayed(changeTime).then(
+                    (value) async {
+                      String message = "in";
+                      try {
+                        await Provider.of<AiPrediction>(context, listen: false)
+                            .getResultApi(customer);
+                      } catch (e) {
+                        message = e.toString();
+                        print(message);
+                        return message;
+                      } finally {
+                        if (message != "in") {
+                          Fluttertoast.showToast(
+                            msg: message.toString(),
+                            fontSize: 18,
+                            gravity: ToastGravity.BOTTOM,
+                          );
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: "Filter disesuaikan",
+                              gravity: ToastGravity.BOTTOM);
+                          refreshPage();
+                        }
+                      }
+                      Navigator.pop(context);
+                    },
+                  );
                 },
                 child: Text(
                   "Filter",

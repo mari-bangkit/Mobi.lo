@@ -1,53 +1,44 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
+import 'package:intl/intl.dart';
 import 'package:readmore/readmore.dart';
-import 'package:yuk_mancing/Model/categorydata.dart';
-import 'package:yuk_mancing/UI/Pages/booking_page.dart';
-import 'package:yuk_mancing/UI/Pages/underconstructor_pages.dart';
 
+import '../../Constant/style.dart';
+import '../../Model/brand.dart';
+import 'underconstructor_pages.dart';
 
 class DetailsPage extends StatelessWidget {
-  final Bestplace pickplace;
-  const DetailsPage({Key? key, required this.pickplace}) : super(key: key);
+  final Brand brand;
+  const DetailsPage({Key? key, required this.brand}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Container(
-        height: 50,
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.only(
-          left: 10,
-          right: 10,
-        ),
-        child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BookingPage(
-                  tempatPilih: pickplace,
-                ),
-              ),
-            );
-          },
-          child: const Text(
-            "Booking",
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w700,
-              fontFamily: "Montserrat",
-            ),
-          ), //child widget inside this button
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(
-              Radius.circular(15.0),
-            ),
-          ),
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      // floatingActionButton: Container(
+      //   height: 50,
+      //   width: MediaQuery.of(context).size.width,
+      //   margin: const EdgeInsets.only(
+      //     left: 10,
+      //     right: 10,
+      //   ),
+      //   child: FloatingActionButton(
+      //     onPressed: () {},
+      //     child: const Text(
+      //       "Booking",
+      //       style: TextStyle(
+      //         fontSize: 15,
+      //         fontWeight: FontWeight.w700,
+      //         fontFamily: "Montserrat",
+      //       ),
+      //     ), //child widget inside this button
+      //     shape: const RoundedRectangleBorder(
+      //       borderRadius: BorderRadius.all(
+      //         Radius.circular(15.0),
+      //       ),
+      //     ),
+      //   ),
+      // ),
       body: SafeArea(
         child: SizedBox(
           width: MediaQuery.of(context).size.width,
@@ -61,7 +52,7 @@ class DetailsPage extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: NetworkImage(pickplace.imageUrl),
+                        image: NetworkImage(brand.linkImg),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -106,36 +97,19 @@ class DetailsPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              Text(
-                                pickplace.name,
-                                style: const TextStyle(
-                                  fontSize: 25,
-                                  fontFamily: "Montserrat",
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
                                   Row(
                                     children: [
-                                      const Icon(CupertinoIcons.star_fill,
-                                          color: Colors.yellow),
-                                      const SizedBox(
-                                        width: 3,
-                                      ),
                                       Text(
-                                        pickplace.rating,
-                                        style: const TextStyle(
-                                          fontSize: 18,
-                                          fontFamily: "Montserrat",
-                                          color: kLightGray,
+                                        brand.type.toString(),
+                                        style: blackTextStyle.copyWith(
+                                          fontWeight: FontWeight.w800,
+                                          fontSize: 23,
                                         ),
                                       ),
                                     ],
@@ -145,19 +119,29 @@ class DetailsPage extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      const Icon(
-                                        CupertinoIcons.location,
-                                        color: kGray,
-                                      ),
-                                      const SizedBox(
-                                        width: 3,
-                                      ),
                                       Text(
-                                        pickplace.alamat,
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: "Montserrat",
-                                          color: kLightGray,
+                                        brand.merk,
+                                        style: greyTextStyle.copyWith(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(
+                                    width: 20,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        NumberFormat.currency(
+                                          locale: 'id-ID',
+                                          symbol: 'IDR ',
+                                          decimalDigits: 0,
+                                        ).format(brand.price),
+                                        style: yellowTextStyle.copyWith(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.normal,
                                         ),
                                       ),
                                     ],
@@ -189,24 +173,17 @@ class DetailsPage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           const Icon(
-                                            CupertinoIcons.square,
+                                            Icons.local_gas_station,
                                             color: kWhite,
                                             size: 30,
                                           ),
-                                          const Text(
-                                            "Kolam",
-                                            style: TextStyle(
+                                          Text(
+                                            brand.bbm,
+                                            style: blackTextStyle.copyWith(
                                               fontSize: 15,
-                                              color: kGray,
+                                              fontWeight: semiBold,
                                             ),
                                           ),
-                                          Text(
-                                            pickplace.fasilitas.kolam,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              color: kBlack,
-                                            ),
-                                          )
                                         ],
                                       ),
                                     ),
@@ -225,24 +202,46 @@ class DetailsPage extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           const Icon(
-                                            Icons.house_outlined,
+                                            Icons.power,
                                             color: kWhite,
                                             size: 30,
                                           ),
-                                          const Text(
-                                            "Toilet",
-                                            style: TextStyle(
+                                          Text(
+                                            brand.cc.toString(),
+                                            style: blackTextStyle.copyWith(
                                               fontSize: 15,
-                                              color: kGray,
+                                              fontWeight: semiBold,
                                             ),
                                           ),
+                                        ],
+                                      ),
+                                    ),
+                                    Container(
+                                      width: 75,
+                                      height: 80,
+                                      margin: const EdgeInsets.only(
+                                        right: 20,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: kPrimary.withOpacity(0.6),
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            Icons.chair_alt,
+                                            color: kWhite,
+                                            size: 30,
+                                          ),
                                           Text(
-                                            pickplace.fasilitas.toilet,
-                                            style: const TextStyle(
-                                              fontSize: 13,
-                                              color: kBlack,
+                                            brand.kursi.toString(),
+                                            style: blackTextStyle.copyWith(
+                                              fontSize: 15,
+                                              fontWeight: semiBold,
                                             ),
-                                          )
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -299,48 +298,48 @@ class DetailsPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 200,
-                      ),
-                      Align(
-                        alignment: Alignment.centerLeft,
-                        child: Container(
-                          height: 70,
-                          width: 70,
-                          margin: const EdgeInsets.only(left: 20),
-                          child: TextButton(
-                            style: TextButton.styleFrom(
-                              padding: const EdgeInsets.all(10),
-                              primary: Colors.black26,
-                              backgroundColor: kSecondary,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(50),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const UnderConstructor(),
-                                ),
-                              );
-                            },
-                            child: const ImageIcon(
-                              AssetImage(
-                                "Assets/Icons/directions.png",
-                              ),
-                              color: kBlack,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  )
+                  // Column(
+                  //   children: [
+                  //     const SizedBox(
+                  //       height: 200,
+                  //     ),
+                  //     Align(
+                  //       alignment: Alignment.centerLeft,
+                  //       child: Container(
+                  //         height: 70,
+                  //         width: 70,
+                  //         margin: const EdgeInsets.only(left: 20),
+                  //         child: TextButton(
+                  //           style: TextButton.styleFrom(
+                  //             padding: const EdgeInsets.all(10),
+                  //             primary: Colors.black26,
+                  //             backgroundColor: kSecondary,
+                  //             shape: const RoundedRectangleBorder(
+                  //               borderRadius: BorderRadius.all(
+                  //                 Radius.circular(50),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           onPressed: () {
+                  //             Navigator.push(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                 builder: (context) =>
+                  //                     const UnderConstructor(),
+                  //               ),
+                  //             );
+                  //           },
+                  //           child: const ImageIcon(
+                  //             AssetImage(
+                  //               "Assets/Icons/directions.png",
+                  //             ),
+                  //             color: kBlack,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
                 ],
               ),
             ],

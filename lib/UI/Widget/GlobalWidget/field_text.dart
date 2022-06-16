@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:yuk_mancing/Constant/style.dart';
+
+import '../../../Constant/style.dart';
 
 class FieldText extends StatelessWidget {
   final TextEditingController _editingController = TextEditingController();

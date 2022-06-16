@@ -1,15 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Repository/Api/providers/player.dart';
-import 'package:yuk_mancing/Repository/local/helper/result_state.dart';
-import 'package:yuk_mancing/Repository/local/service/db_provider.dart';
-import 'package:yuk_mancing/UI/Pages/details_page.dart';
-import 'package:yuk_mancing/UI/Widget/HistoryWidget/history_data.dart';
-import 'package:yuk_mancing/UI/Widget/HomeWidget/list_place.dart';
+
+import '../../Constant/style.dart';
+import '../../Repository/Api/providers/player.dart';
+import '../../Repository/local/helper/result_state.dart';
+import '../../Repository/local/service/db_provider.dart';
+import '../Widget/HomeWidget/list_place.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({Key? key}) : super(key: key);
@@ -24,33 +22,31 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget _showwidget = const CircularProgressIndicator();
 
   @override
-  void initState() {
-    startTimer(); //start the timer on loading
-    super.initState();
-  }
-
-  @override
   void didChangeDependencies() {
     if (isInit) {
       Provider.of<PlayersProviders>(context).initialData();
     }
+    startTimer();
     Future.delayed(const Duration(seconds: 4));
     isInit = false;
+
     super.didChangeDependencies();
   }
 
   void startTimer() {
     Timer.periodic(const Duration(seconds: 5), (t) {
-      setState(() {
-        _showwidget = const Center(
-          child: Text(
-            "Data tidak ditemukan",
-            style: TextStyle(
-              fontSize: 20,
+      if (mounted) {
+        setState(() {
+          _showwidget = const Center(
+            child: Text(
+              "Data tidak ditemukan",
+              style: TextStyle(
+                fontSize: 20,
+              ),
             ),
-          ),
-        ); //set loading to false
-      });
+          ); //set loading to false
+        });
+      }
       t.cancel(); //stops the timer
     });
   }
@@ -150,6 +146,12 @@ class _HistoryPageState extends State<HistoryPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void deactivate() {
+    startTimer();
+    super.deactivate();
   }
 
   void deleteplayer(BuildContext context) {}

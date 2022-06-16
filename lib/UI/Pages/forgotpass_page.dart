@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:yuk_mancing/Constant/style.dart';
-import 'package:yuk_mancing/Repository/Api/providers/auth.dart';
-import 'package:yuk_mancing/UI/Pages/login_page.dart';
-import 'package:yuk_mancing/UI/Widget/GlobalWidget/appbar_costum.dart';
+
+import '../../Constant/style.dart';
+import '../../Repository/Api/providers/auth.dart';
+import '../Widget/GlobalWidget/appbar_costum.dart';
+import 'login_page.dart';
 
 class ForgotPass extends StatefulWidget {
   const ForgotPass({Key? key}) : super(key: key);

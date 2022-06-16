@@ -35,7 +35,6 @@ class _SearchWidgetState extends State<SearchWidget> {
       ),
       padding: const EdgeInsets.symmetric(horizontal: 8),
       child: TextField(
-        autofocus: true,
         controller: controller,
         decoration: InputDecoration(
           icon: Icon(Icons.search, color: style.color),
